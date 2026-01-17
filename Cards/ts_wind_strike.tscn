@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ditra7q8mmtqu"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_766vy"]
+[ext_resource type="Script" path="res://Cards/ts_wind_strike.gd" id="2_tfrej"]
+
+[node name="TS_WindStrike" instance=ExtResource("1_766vy")]
+script = ExtResource("2_tfrej")
+m_damage = 5
+
+[node name="cardName" parent="." index="3"]
+text = "WindStrike"
+
+[node name="cardText" parent="." index="4"]
+text = "Deal 5 dmg 
+to all enemies"

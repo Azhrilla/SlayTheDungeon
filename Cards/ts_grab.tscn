@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxmtb5pc7mb20"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_cvilb"]
+[ext_resource type="Script" path="res://Cards/ts_grab.gd" id="2_0sjnc"]
+
+[node name="TS_Grab" instance=ExtResource("1_cvilb")]
+script = ExtResource("2_0sjnc")
+
+[node name="cardName" parent="." index="3"]
+text = "Grab"
+
+[node name="cardText" parent="." index="4"]
+text = "The first enemy
+is pulled one slot
+closer
+"

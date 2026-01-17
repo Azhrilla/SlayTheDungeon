@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://2l8jq7mh7hip"]
+
+[ext_resource type="PackedScene" uid="uid://b3or1ncou622t" path="res://Game/character.tscn" id="1_w44hy"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6a2xg"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Enemy" instance=ExtResource("1_w44hy")]
+
+[node name="HealthBar" parent="." index="1"]
+offset_left = -79.0
+offset_top = -122.0
+offset_right = 80.0
+offset_bottom = -95.0
+
+[node name="HealthValue" parent="." index="2"]
+offset_left = -51.0
+offset_top = -119.0
+offset_right = 47.0
+offset_bottom = -96.0
+
+[node name="ArmorValue" parent="." index="3"]
+offset_left = -51.0
+offset_top = -162.0
+offset_right = 47.0
+offset_bottom = -139.0
+
+[node name="Intention" type="Label" parent="." index="4"]
+offset_left = -50.0
+offset_top = -200.0
+offset_right = 48.0
+offset_bottom = -177.0
+horizontal_alignment = 1
+
+[node name="AnimatedSpriteEnemy" type="AnimatedSprite2D" parent="." index="6"]
+sprite_frames = SubResource("SpriteFrames_6a2xg")
+animation = &"idle"

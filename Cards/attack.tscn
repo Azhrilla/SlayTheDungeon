@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw6oiydwjwb3e"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_6io0c"]
+[ext_resource type="Script" path="res://Cards/card_attack.gd" id="2_8ar8v"]
+
+[node name="CardAttack" instance=ExtResource("1_6io0c")]
+script = ExtResource("2_8ar8v")
+m_damage = 10
+
+[node name="cardName" parent="." index="3"]
+text = "Attack"
+
+[node name="cardText" parent="." index="4"]
+text = "Attack a random
+enemy for 10 dmg"

@@ -1,0 +1,241 @@
+[gd_scene load_steps=9 format=3 uid="uid://catd2nw28jgxi"]
+
+[ext_resource type="Script" path="res://UI/ui_level.gd" id="1_ntn5l"]
+[ext_resource type="PackedScene" uid="uid://b5lyxhlcfk2yq" path="res://UI/arrow.tscn" id="2_070cm"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Button Normal.png" id="2_qtc7g"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Button Hover.png" id="3_muh4u"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Button Disable.png" id="4_y5r26"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Button Active.png" id="5_pini3"]
+[ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="6_6x1on"]
+
+[sub_resource type="Theme" id="Theme_4dia8"]
+
+[node name="UI_Level" type="CanvasLayer"]
+script = ExtResource("1_ntn5l")
+
+[node name="PlayZone" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 683.0
+offset_bottom = 66.0
+
+[node name="EndTurnButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme = SubResource("Theme_4dia8")
+texture_normal = ExtResource("2_qtc7g")
+texture_pressed = ExtResource("5_pini3")
+texture_hover = ExtResource("3_muh4u")
+texture_disabled = ExtResource("4_y5r26")
+stretch_mode = 0
+
+[node name="Button" type="Label" parent="HBoxContainer/EndTurnButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -35.0
+offset_top = -11.5
+offset_right = 35.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_6x1on")
+text = "End Turn"
+
+[node name="DrawButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme = SubResource("Theme_4dia8")
+texture_normal = ExtResource("2_qtc7g")
+texture_pressed = ExtResource("5_pini3")
+texture_hover = ExtResource("3_muh4u")
+texture_disabled = ExtResource("4_y5r26")
+stretch_mode = 0
+
+[node name="Button" type="Label" parent="HBoxContainer/DrawButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -11.5
+offset_right = 57.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_6x1on")
+text = "Show DrawPile
+"
+
+[node name="DiscardButton" type="TextureButton" parent="HBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+theme = SubResource("Theme_4dia8")
+texture_normal = ExtResource("2_qtc7g")
+texture_pressed = ExtResource("5_pini3")
+texture_hover = ExtResource("3_muh4u")
+texture_disabled = ExtResource("4_y5r26")
+stretch_mode = 0
+
+[node name="Button" type="Label" parent="HBoxContainer/DiscardButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.5
+offset_top = -11.5
+offset_right = 52.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_6x1on")
+text = "Show Discard"
+
+[node name="HandLeft" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.1
+anchor_bottom = 0.9
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="HandRight" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.9
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.9
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Deck" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.2
+anchor_right = 0.1
+anchor_bottom = 0.2
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Discard" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.9
+anchor_top = 0.2
+anchor_right = 0.9
+anchor_bottom = 0.2
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerPos" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.29
+anchor_top = 0.58
+anchor_right = 0.295
+anchor_bottom = 0.58
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Arrow" parent="." instance=ExtResource("2_070cm")]
+
+[node name="Enemies" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.58
+anchor_top = 0.43
+anchor_right = 0.58
+anchor_bottom = 0.43
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MonsterBox" type="HBoxContainer" parent="Enemies"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Control4" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="ShowDeck" type="Control" parent="."]
+visible = false
+clip_children = 2
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 3
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.9
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="ShowDeck"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 5
+
+[connection signal="mouse_entered" from="PlayZone" to="." method="_on_play_zone_mouse_entered"]
+[connection signal="mouse_exited" from="PlayZone" to="." method="_on_play_zone_mouse_exited"]
+[connection signal="pressed" from="HBoxContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DrawButton" to="." method="_on_draw_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DiscardButton" to="." method="_on_discard_button_pressed"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control" to="." method="_on_control_mouse_exited"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control2" to="." method="_on_control_2_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control2" to="." method="_on_control_2_mouse_exited"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control3" to="." method="_on_control_3_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control3" to="." method="_on_control_3_mouse_exited"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control4" to="." method="_on_control_4_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control4" to="." method="_on_control_4_mouse_exited"]

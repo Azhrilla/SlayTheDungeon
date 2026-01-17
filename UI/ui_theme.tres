@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cd80bws3txap5"]
+
+[ext_resource type="FontFile" uid="uid://dpt21csggkrp7" path="res://Graphics/UI/Neospeed-Demo.otf" id="1_hcm15"]
+
+[resource]
+default_font = ExtResource("1_hcm15")
+default_font_size = 20

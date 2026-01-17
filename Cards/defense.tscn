@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dyq0lcnrhq6m6"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_ustye"]
+[ext_resource type="Script" path="res://Cards/defense.gd" id="2_nyirc"]
+
+[node name="Defense" instance=ExtResource("1_ustye")]
+script = ExtResource("2_nyirc")
+m_armor = 3
+
+[node name="cardName" parent="." index="3"]
+text = "Armor up"
+
+[node name="cardText" parent="." index="4"]
+text = "Add 3 armor
+to an ally"

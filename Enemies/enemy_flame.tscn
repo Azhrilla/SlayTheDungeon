@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdedftd4r01y6"]
+
+[ext_resource type="PackedScene" uid="uid://2l8jq7mh7hip" path="res://Game/enemy.tscn" id="1_6f836"]
+[ext_resource type="Script" path="res://Enemies/enemy_flame.gd" id="1_jjild"]
+[ext_resource type="Texture2D" uid="uid://bka0m3wcudjx7" path="res://Graphics/AlienBite/scifi_alien_bite_1.png" id="3_320ju"]
+
+[node name="Enemy_Flame" instance=ExtResource("1_6f836")]
+script = ExtResource("1_jjild")
+
+[node name="HealthValue" parent="." index="2"]
+horizontal_alignment = 0
+
+[node name="ArmorValue" parent="." index="3"]
+horizontal_alignment = 0
+
+[node name="Sprite2D" parent="." index="5"]
+position = Vector2(-2.38419e-07, 4.76837e-07)
+scale = Vector2(2, 2.155)
+texture = ExtResource("3_320ju")
+
+[node name="AnimatedSpriteEnemy" parent="." index="6"]
+visible = false

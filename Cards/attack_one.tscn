@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://kqkva0sk0kgr"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_m2f2b"]
+[ext_resource type="Script" path="res://Cards/attack_one.gd" id="2_ob6ar"]
+
+[node name="Attack_One" instance=ExtResource("1_m2f2b")]
+script = ExtResource("2_ob6ar")
+m_damage = 5
+
+[node name="cardName" parent="." index="3"]
+text = "Slash"
+
+[node name="cardText" parent="." index="4"]
+text = "One target
+suffers 5 dmg"

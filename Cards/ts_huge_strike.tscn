@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgsjxweas3i1y"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_mtlm7"]
+[ext_resource type="Script" path="res://Cards/ts_huge_strike.gd" id="2_o8mvr"]
+
+[node name="TS_HugeStrike" instance=ExtResource("1_mtlm7")]
+script = ExtResource("2_o8mvr")
+m_damage = 10
+
+[node name="cardName" parent="." index="3"]
+text = "Huge Strike"
+
+[node name="cardText" parent="." index="4"]
+text = "Deal 10 dmg to
+the enemies in 
+position 1 & 2"

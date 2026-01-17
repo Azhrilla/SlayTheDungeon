@@ -1,0 +1,168 @@
+[gd_scene load_steps=4 format=3 uid="uid://catd2nw28jgxi"]
+
+[ext_resource type="Script" path="res://UI/ui_level.gd" id="1_ntn5l"]
+[ext_resource type="PackedScene" uid="uid://b5lyxhlcfk2yq" path="res://UI/arrow.tscn" id="2_070cm"]
+[ext_resource type="Script" path="res://UI/color_rect.gd" id="3_7p3dt"]
+
+[node name="UI_Level" type="CanvasLayer"]
+script = ExtResource("1_ntn5l")
+
+[node name="PlayZone" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.7
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.1
+anchor_right = 0.5
+anchor_bottom = 0.102
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="EndTurnButton" type="Button" parent="Buttons"]
+layout_mode = 2
+offset_left = 23.5
+offset_right = 101.5
+offset_bottom = 40.0
+text = "End Turn"
+
+[node name="HandLeft" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.9
+anchor_right = 0.1
+anchor_bottom = 0.9
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="HandRight" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.9
+anchor_top = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.9
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Deck" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.2
+anchor_right = 0.1
+anchor_bottom = 0.2
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Discard" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchor_left = 0.9
+anchor_top = 0.2
+anchor_right = 0.9
+anchor_bottom = 0.2
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerPos" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.1
+anchor_top = 0.65
+anchor_right = 0.1
+anchor_bottom = 0.65
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Arrow" parent="." instance=ExtResource("2_070cm")]
+
+[node name="Enemies" type="Control" parent="."]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 0.4
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MonsterBox" type="HBoxContainer" parent="Enemies"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Enemies/MonsterBox/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_7p3dt")
+
+[node name="Control2" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="ColorRect2" type="ColorRect" parent="Enemies/MonsterBox/Control2"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("3_7p3dt")
+
+[node name="Control3" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Enemies/MonsterBox/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control4" type="Control" parent="Enemies/MonsterBox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Enemies/MonsterBox/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="mouse_entered" from="PlayZone" to="." method="_on_play_zone_mouse_entered"]
+[connection signal="mouse_exited" from="PlayZone" to="." method="_on_play_zone_mouse_exited"]
+[connection signal="pressed" from="Buttons/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control2" to="." method="_on_control_2_mouse_entered"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control3" to="." method="_on_control_3_mouse_entered"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control4" to="." method="_on_control_4_mouse_entered"]

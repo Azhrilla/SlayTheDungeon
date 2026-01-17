@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://3fxqcs2m533i"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_xy5uv"]
+[ext_resource type="Script" path="res://Cards/ts_quick_slash.gd" id="2_jmtuj"]
+
+[node name="TS_QuickSlash" instance=ExtResource("1_xy5uv")]
+script = ExtResource("2_jmtuj")
+m_damage = 10
+
+[node name="cardName" parent="." index="3"]
+text = "Quick Slash"
+
+[node name="cardText" parent="." index="4"]
+text = "Attack the enemy 
+in first position 
+for 10 dmgs"
