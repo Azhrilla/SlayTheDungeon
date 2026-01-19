@@ -164,9 +164,9 @@ grow_vertical = 2
 
 [node name="Enemies" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.58
+anchor_left = 0.476
 anchor_top = 0.43
-anchor_right = 0.58
+anchor_right = 0.476
 anchor_bottom = 0.43
 offset_left = -40.0
 offset_top = -20.0

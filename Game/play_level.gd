@@ -12,7 +12,7 @@ func createEnemies():
 		m_enemies.append(newEnemy)
 		$Enemies.add_child(newEnemy)
 		newEnemy.connect("OnDeath", onEnemyDeath)
-		positionEnemy += (1 as Globals.target)
+		positionEnemy = positionEnemy as int + 1
 
 func createCards():
 	for cardName in Globals.m_cards:
