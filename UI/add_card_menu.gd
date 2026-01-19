@@ -40,6 +40,9 @@ func _on_select_card_pressed() -> void:
 	if Globals.m_currentLevel == Globals.m_lvl1:
 		Globals.m_currentLevel = Globals.m_lvl2
 		TransitionLayer.switchLevel(Globals.nextLevel)
+	elif Globals.m_currentLevel == Globals.m_lvl2:
+		Globals.m_currentLevel = Globals.m_lvl3
+		TransitionLayer.switchLevel(Globals.nextLevel)
 	else:
 		TransitionLayer.switchLevel(Globals.m_victoryLevel)
 		

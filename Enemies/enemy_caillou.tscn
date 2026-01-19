@@ -7,9 +7,6 @@
 [node name="enemy_caillou" instance=ExtResource("1_3xy6u")]
 script = ExtResource("2_ji2lm")
 
-[node name="HealthBar" parent="." index="1"]
-show_percentage = false
-
 [node name="Sprite2D" parent="." index="5"]
 position = Vector2(-0.500005, -22)
 scale = Vector2(0.565385, 0.55)

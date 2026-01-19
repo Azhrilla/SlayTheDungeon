@@ -15,10 +15,10 @@ func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 func attack(_heroes:Array[Character]) -> void:
 	match m_currentIntention:
 		"Dmg4":
-			ATK_DMG = 3
+			ATK_DMG = 4
 			var target = _heroes.pick_random()
 			target.takeDmg(ATK_DMG,self)
 		"Dmg6":
-			ATK_DMG = 5
+			ATK_DMG = 6
 			var target = _heroes.pick_random()
 			target.takeDmg(ATK_DMG,self)

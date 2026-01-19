@@ -35,6 +35,17 @@ func useArmorAndGetDmg(_dmg:int) -> int:
 	m_currentArmor -= absorbedDmg
 	return effectiveDmg
 
+func increasePosition() -> void:
+	if m_currentPosition != Globals.target.ENEMY4:
+		moveTo(m_currentPosition + 1)
+
+func decreasePosition() -> void:
+	if m_currentPosition != Globals.target.ENEMY1:
+		moveTo(m_currentPosition - 1)
+
+func moveTo(_target:Globals.target)->void:
+	m_currentPosition = _target
+
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	_attacker.takeDmg(m_spikeDmg,self)
 
