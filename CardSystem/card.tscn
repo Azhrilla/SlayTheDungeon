@@ -1,27 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://baptagnhcl77s"]
+[gd_scene load_steps=4 format=3 uid="uid://baptagnhcl77s"]
 
 [ext_resource type="Script" path="res://CardSystem/card.gd" id="1_ostlh"]
 [ext_resource type="Texture2D" uid="uid://b20bruawalp7s" path="res://Graphics/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp" id="2_2abnw"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcrhc"]
-size = Vector2(150, 216)
 
 [sub_resource type="LabelSettings" id="LabelSettings_m7g5d"]
 font_size = 12
 font_color = Color(0, 0, 0, 1)
 
-[node name="Card" type="Sprite2D"]
+[node name="Card" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_ostlh")
 
-[node name="SpriteFront" type="Sprite2D" parent="."]
-position = Vector2(0, -5.96046e-08)
-scale = Vector2(0.355055, 0.371579)
+[node name="CardAppearance" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -115.5
+offset_right = 116.5
+offset_bottom = 127.5
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("2_2abnw")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_dcrhc")
+expand_mode = 1
+stretch_mode = 4
 
 [node name="cardName" type="Label" parent="."]
 offset_left = -40.0
@@ -53,5 +59,5 @@ radial_accel_max = 67.59
 scale_amount_max = 5.63
 color = Color(1, 1, 0.439216, 1)
 
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]
+[connection signal="mouse_entered" from="CardAppearance" to="." method="_on_card_appearance_mouse_entered"]
+[connection signal="mouse_exited" from="CardAppearance" to="." method="_on_card_appearance_mouse_exited"]

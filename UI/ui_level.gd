@@ -19,6 +19,9 @@ var m_currentTarget:Globals.target = Globals.target.NONE
 var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
 
 func _ready() -> void:
+	$ShowDeck/TextureRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$ShowDeck/TextureRect/ScrollContainer/GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$ShowDeck/TextureRect/ScrollContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	get_viewport().size_changed.connect(refreshUI)
 	refreshUI()
 	setDragMode(dragMod.NONE)
@@ -59,7 +62,7 @@ func setVisibilityAndPosition(_card:Card)->void:
 			_card.visible = false
 	
 	var cards = getCardsInPosition(m_currentlyShownDeck)
-	var controlNodes = $ShowDeck/GridContainer.get_children()
+	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
 	for index in range(cards.size()):
 		
 		#controlNodes[index].force_update_transform()
@@ -74,23 +77,27 @@ func setArrowToTarget(_origin,_target) -> void:
 
 func setDragMode(_dragMod:dragMod):
 	m_dragMode = _dragMod
+	$Enemies.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$Enemies/MonsterBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if m_dragMode == dragMod.TARGET:
-		$Enemies.mouse_filter = 0
-		$Enemies/MonsterBox.mouse_filter = 0
-		$Enemies/MonsterBox/Control.mouse_filter = 0
-		$Enemies/MonsterBox/Control2.mouse_filter = 0
-		$Enemies/MonsterBox/Control3.mouse_filter = 0
-		$Enemies/MonsterBox/Control4.mouse_filter = 0
+		for character in m_characters:
+			if character.m_currentPosition == Globals.target.ENEMY1:
+				$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_STOP
+			if character.m_currentPosition == Globals.target.ENEMY2:
+				$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_STOP
+			if character.m_currentPosition == Globals.target.ENEMY3:
+				$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_STOP
+			if character.m_currentPosition == Globals.target.ENEMY4:
+				$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP	
 	else:
-		$Enemies.mouse_filter = 2
-		$Enemies/MonsterBox.mouse_filter = 2
-		$Enemies/MonsterBox/Control.mouse_filter = 2
-		$Enemies/MonsterBox/Control2.mouse_filter = 2
-		$Enemies/MonsterBox/Control3.mouse_filter = 2
-		$Enemies/MonsterBox/Control4.mouse_filter = 2
+		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_IGNORE	
 		
 func handleDrag():
 	var currentPosMouse:Vector2 = get_viewport().get_mouse_position()
+	#m_cardHovered.mouse_filter = 0
 	if m_dragMode == dragMod.PLAY:
 		if m_mouseOnPlayZone:
 			m_hoveredLastPosition = currentPosMouse
@@ -115,7 +122,6 @@ func handleDrag():
 		m_cardPlayable = false
 		m_cardHovered.position = m_hoveredLastPosition
 
-		
 func _process(_delta: float) -> void:
 	reorganizeHandPositions()		
 	refreshUI()
@@ -139,16 +145,18 @@ func _process(_delta: float) -> void:
 		setDragMode(dragMod.NONE)
 	
 func addCard(_card:Card)->void:
+	$Cards.add_child(_card)
 	m_cards.append(_card)
 	_card.setVisibleSide(Globals.visibleSide.FRONT)
 	_card.connect("mouseHoveredEnter",cardHoveredEnter)
 	_card.connect("mouseHoveredExit",cardHoveredExit)
 	_card.connect("cardNeedUIRefresh",cardNeedUIRefresh)
-	if m_cards.size() > $ShowDeck/GridContainer.get_child_count():
+	if m_cards.size() > $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_child_count():
 		var newControl = Control.new()
-		newControl.custom_minimum_size = Vector2(150,200)
-		$ShowDeck/GridContainer.add_child(newControl)
-		newControl.force_update_transform()
+		#TextureRect.texture = "res://Graphics/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp"
+		newControl.custom_minimum_size = Vector2(150,220)
+		$ShowDeck/TextureRect/ScrollContainer/GridContainer.add_child(newControl)
+		newControl.mouse_filter = 2
 
 func getCardsInPosition(_position:Globals.cardPosition) -> Array[Card]:
 	var output:Array[Card] = []
@@ -257,7 +265,13 @@ func hideDeck(_zoneType:Globals.cardPosition)->void:
 		card.visible = true
 	
 	$ShowDeck.visible = false
-
+	
+	for card in getCardsInPosition(_zoneType):
+		card.visible = false
+		card.get_parent().remove_child(card)
+		$Cards.add_child(card)
+		card.mouse_filter = Control.MOUSE_FILTER_PASS
+	
 	var cardsArray = getCardsInPosition(_zoneType)
 	var cardCount:int = cardsArray.size()
 	for index in range(cardCount):
@@ -269,6 +283,14 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 		character.visible = false	
 	for card in getCardsInPosition(Globals.cardPosition.HAND):
 		card.visible = false
+	
+	var index = 0
+	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
+	for card in getCardsInPosition(_zoneType):
+		card.visible = false
+		card.get_parent().remove_child(card)
+		controlNodes[index].add_child(card)
+		index +=1
 
 func _on_draw_button_pressed() -> void:
 	if m_currentlyShownDeck == Globals.cardPosition.NONE:

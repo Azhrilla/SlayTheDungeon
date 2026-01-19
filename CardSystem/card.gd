@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Control
 class_name Card
 signal mouseHoveredEnter
 signal mouseHoveredExit
@@ -55,12 +55,12 @@ func setCardState(_state:Globals.cardState)->void:
 func updateVisibility():
 	if (m_visibleSide == Globals.visibleSide.BACK):
 		#$SpriteBack.visible = true
-		$SpriteFront.visible = false
+		$CardAppearance.visible = false
 		$cardName.visible = false
 		$cardText.visible = false
 	else:
 		#$SpriteBack.visible = false
-		$SpriteFront.visible = true
+		$CardAppearance.visible = true
 		$cardName.visible = true
 		$cardText.visible = true
 	
@@ -77,8 +77,8 @@ func stopParticles():
 func doWork(_enemies:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
 	push_error("Card does not have a doWork function")
 
-func _on_area_2d_mouse_entered() -> void:
+func _on_card_appearance_mouse_entered() -> void:
 	mouseHoveredEnter.emit(self)
 
-func _on_area_2d_mouse_exited() -> void:
+func _on_card_appearance_mouse_exited() -> void:
 	mouseHoveredExit.emit(self)
