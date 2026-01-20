@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://baptagnhcl77s"]
 
-[ext_resource type="Script" path="res://CardSystem/card.gd" id="1_ostlh"]
+[ext_resource type="Script" uid="uid://ctyhe7npsh5gi" path="res://CardSystem/card.gd" id="1_ostlh"]
 [ext_resource type="Texture2D" uid="uid://b20bruawalp7s" path="res://Graphics/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp" id="2_2abnw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m7g5d"]
