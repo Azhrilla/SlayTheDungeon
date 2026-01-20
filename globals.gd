@@ -11,6 +11,6 @@ var m_playLevel = "res://Game/play_level.tscn"
 var m_victoryLevel = "res://UI/victory.tscn"
 
 
-var m_lvl1:Array[String] = ["Sniper"]
+var m_lvl1:Array[String] = ["Flame","Flame","Flame"]
 var m_lvl2:Array[String] = ["Caillou","Caillou","Caillou"]
-var m_lvl3:Array[String] = ["Flame","Flame","Flame"]
+var m_lvl3:Array[String] = ["Sniper"]
