@@ -16,8 +16,9 @@ func choseIntention():
 	$Intention.text = "Intent: "+m_currentIntention
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	choseIntention()
+	super.startRound(_heroes,_monsters)
 	
 func endRound(_heroes:Array[Character],_monsters:Array[Character]):
-	attack(_heroes)
+	super.endRound(_heroes,_monsters)
+	choseIntention()
 	

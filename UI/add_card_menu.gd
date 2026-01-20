@@ -36,15 +36,11 @@ func cardHoveredExit(_card:Card):
 		_card.setCardState(Globals.cardState.DEFAULT)
 
 func _on_select_card_pressed() -> void:
-	Globals.m_cards.append(m_cardChosen.m_name)
-	if Globals.m_currentLevel == Globals.m_lvl1:
-		Globals.m_currentLevel = Globals.m_lvl2
-		TransitionLayer.switchLevel(Globals.nextLevel)
-	elif Globals.m_currentLevel == Globals.m_lvl2:
-		Globals.m_currentLevel = Globals.m_lvl3
-		TransitionLayer.switchLevel(Globals.nextLevel)
-	else:
-		TransitionLayer.switchLevel(Globals.m_victoryLevel)
+	if !m_cardChosen:
+		return
+	
+	GpState.m_cards.append(m_cardChosen.m_name)
+	TransitionLayer.goToNextLevel()
 		
 func _on_take_no_card_pressed() -> void:
-	TransitionLayer.switchLevel(Globals.nextLevel)
+	TransitionLayer.goToNextLevel()

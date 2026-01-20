@@ -51,11 +51,11 @@ func moveCard(_card:Card,_from:Globals.cardPosition,_to:Globals.cardPosition):
 	getCardContainer(_to).append(getCardContainer(_from).pop_at(indexCard))
 	_card.setPosition(_to)
 
-func drawCard():
+func drawCard(_cardDestination:Globals.cardPosition = Globals.cardPosition.HAND):
 	if (m_deck.is_empty()):
 		for card:Card in m_discard:
 			moveCard(card,Globals.cardPosition.DISCARD,Globals.cardPosition.DECK)
 		getCardContainer(Globals.cardPosition.DECK).shuffle()
 	if (m_deck.is_empty()):
 		return		
-	moveCard(getCardContainer(Globals.cardPosition.DECK)[0],Globals.cardPosition.DECK,Globals.cardPosition.HAND)
+	moveCard(getCardContainer(Globals.cardPosition.DECK)[0],Globals.cardPosition.DECK,_cardDestination)

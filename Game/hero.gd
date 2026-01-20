@@ -1,4 +1,5 @@
 extends Character
+class_name Hero
 
 func _ready() -> void:
 	m_currentHealth = 40

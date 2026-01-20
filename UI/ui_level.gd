@@ -264,6 +264,7 @@ func hideDeck(_zoneType:Globals.cardPosition)->void:
 	for card in getCardsInPosition(Globals.cardPosition.HAND):
 		card.visible = true
 	
+	$HBoxContainer/EndTurnButton.disabled = false
 	$ShowDeck.visible = false
 	
 	for card in getCardsInPosition(_zoneType):
@@ -283,6 +284,8 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 		character.visible = false	
 	for card in getCardsInPosition(Globals.cardPosition.HAND):
 		card.visible = false
+	
+	$HBoxContainer/EndTurnButton.disabled = true
 	
 	var index = 0
 	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()

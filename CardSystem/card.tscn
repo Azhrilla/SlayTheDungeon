@@ -30,6 +30,7 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="cardName" type="Label" parent="."]
+layout_mode = 0
 offset_left = -40.0
 offset_top = 65.0
 offset_right = 44.0
@@ -37,6 +38,7 @@ offset_bottom = 88.0
 horizontal_alignment = 1
 
 [node name="cardText" type="Label" parent="."]
+layout_mode = 0
 offset_left = -54.0
 offset_top = -74.0
 offset_right = 58.0

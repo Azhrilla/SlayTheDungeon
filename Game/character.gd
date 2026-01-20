@@ -11,7 +11,7 @@ var m_currentPosition = 0
 var m_spikeDmg:int = 0
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	pass
+	m_currentArmor = 0
 	
 func endRound(_heroes:Array[Character],_monsters:Array[Character]):
 	pass

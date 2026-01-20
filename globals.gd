@@ -7,12 +7,10 @@ enum type{HERO,MONSTER,NONE}
 enum target{NONE,ALLY1,ALLY2,ALLY3,ENEMY1,ENEMY2,ENEMY3,ENEMY4}
 enum cardState{DEFAULT,PLAYABLE,HOVERED}
 
-var nextLevel = "res://Game/play_level.tscn"
+var m_playLevel = "res://Game/play_level.tscn"
 var m_victoryLevel = "res://UI/victory.tscn"
-var m_cards:Array[String] = ["QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Grab","Grab","Defense","Defense","Defense"]
 
 
 var m_lvl1:Array[String] = ["Sniper"]
 var m_lvl2:Array[String] = ["Caillou","Caillou","Caillou"]
 var m_lvl3:Array[String] = ["Flame","Flame","Flame"]
-var m_currentLevel = m_lvl1
