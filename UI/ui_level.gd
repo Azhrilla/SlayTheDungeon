@@ -277,8 +277,14 @@ func hideDeck(_zoneType:Globals.cardPosition)->void:
 	var cardCount:int = cardsArray.size()
 	for index in range(cardCount):
 		cardsArray[index].visible = false
+	m_currentlyShownDeck = Globals.cardPosition.NONE
 		
 func showDeck(_zoneType:Globals.cardPosition)->void:
+	if m_currentlyShownDeck != Globals.cardPosition.NONE:
+		hideDeck(m_currentlyShownDeck)
+	
+	m_currentlyShownDeck = _zoneType
+	
 	$ShowDeck.visible = true
 	for character in m_characters:
 		character.visible = false	
@@ -296,17 +302,14 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 		index +=1
 
 func _on_draw_button_pressed() -> void:
-	if m_currentlyShownDeck == Globals.cardPosition.NONE:
-		m_currentlyShownDeck = Globals.cardPosition.DECK
-		showDeck(Globals.cardPosition.DECK)
-	elif m_currentlyShownDeck == Globals.cardPosition.DECK:
+	if m_currentlyShownDeck == Globals.cardPosition.DECK:
 		hideDeck(Globals.cardPosition.DECK)
-		m_currentlyShownDeck = Globals.cardPosition.NONE
+	else:
+		showDeck(Globals.cardPosition.DECK)
+
 
 func _on_discard_button_pressed() -> void:
-	if m_currentlyShownDeck == Globals.cardPosition.NONE:
-		m_currentlyShownDeck = Globals.cardPosition.DISCARD
-		showDeck(Globals.cardPosition.DISCARD)
-	elif m_currentlyShownDeck == Globals.cardPosition.DISCARD:
+	if m_currentlyShownDeck == Globals.cardPosition.DISCARD:
 		hideDeck(Globals.cardPosition.DISCARD)
-		m_currentlyShownDeck = Globals.cardPosition.NONE
+	else:
+		showDeck(Globals.cardPosition.DISCARD)
