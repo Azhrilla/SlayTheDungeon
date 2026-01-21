@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmww6digmsao3"]
+
+[ext_resource type="PackedScene" uid="uid://c8lxcjexkeo5q" path="res://UI/Icons/icon_status.tscn" id="1_legbl"]
+[ext_resource type="Texture2D" uid="uid://wei22wbkqf68" path="res://Graphics/UI/Icons/shield.png" id="2_r4iid"]
+
+[node name="Icon_Armor" instance=ExtResource("1_legbl")]
+texture = ExtResource("2_r4iid")

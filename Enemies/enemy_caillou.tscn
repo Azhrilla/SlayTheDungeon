@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckgf8vpe4io37"]
+[gd_scene load_steps=4 format=3 uid="uid://dakepv5v8j14s"]
 
-[ext_resource type="PackedScene" uid="uid://2l8jq7mh7hip" path="res://Game/enemy.tscn" id="1_3xy6u"]
-[ext_resource type="Texture2D" uid="uid://t6lbuvj4aw0i" path="res://Graphics/caillou.webp" id="2_008xq"]
-[ext_resource type="Script" path="res://Enemies/enemy_caillou.gd" id="2_ji2lm"]
+[ext_resource type="PackedScene" uid="uid://dsjhyxievg8pq" path="res://Game/enemy.tscn" id="1_3xy6u"]
+[ext_resource type="Texture2D" uid="uid://t6lbuvj4aw0i" path="res://Graphics/Bordel/caillou.webp" id="2_008xq"]
+[ext_resource type="Script" uid="uid://cvh2n13ggdyhb" path="res://Enemies/enemy_caillou.gd" id="2_ji2lm"]
 
-[node name="enemy_caillou" instance=ExtResource("1_3xy6u")]
+[node name="EnemyCaillou" instance=ExtResource("1_3xy6u")]
 script = ExtResource("2_ji2lm")
 
-[node name="Sprite2D" parent="." index="5"]
-position = Vector2(-0.500005, -22)
-scale = Vector2(0.565385, 0.55)
+[node name="Sprite2D" parent="." index="1"]
+position = Vector2(-0.9999999, 18)
+scale = Vector2(-0.3733052, 0.40041056)
 texture = ExtResource("2_008xq")

@@ -8,7 +8,12 @@ func _ready() -> void:
 	m_spikeDmg = 1
 	m_intentions = ["Dmg3","Dmg3","Dmg3","Dmg5","Dmg5","Spike+2"]
 	super._ready()
-	
+
+func updateIntentionStatus(_str:String):
+	super.updateIntentionStatus(_str)
+	if _str.contains("Spike+2"):
+		$CharUI/UIContainer/Control/Icon_Status.setStatus(2,Globals.statusType.SPIKE)
+
 func attack(_heroes:Array[Character]) -> void:
 	match m_currentIntention:
 		"Dmg3":

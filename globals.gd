@@ -6,6 +6,7 @@ enum cardPosition{DECK,HAND,DISCARD,NONE,POWER}
 enum type{HERO,MONSTER,NONE}
 enum target{NONE,ALLY1,ALLY2,ALLY3,ENEMY1,ENEMY2,ENEMY3,ENEMY4}
 enum cardState{DEFAULT,PLAYABLE,HOVERED}
+enum statusType{NONE,ARMOR,SPIKE,DMG}
 
 var m_playLevel = "res://Game/play_level.tscn"
 var m_victoryLevel = "res://UI/victory.tscn"

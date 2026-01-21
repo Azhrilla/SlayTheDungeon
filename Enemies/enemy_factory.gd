@@ -6,6 +6,7 @@ const flame:PackedScene = preload("res://Enemies/enemy_flame.tscn")
 const sniper:PackedScene = preload("res://Enemies/enemy_sniper.tscn")
 
 
+
 static func createEnemy(_id:String)->Enemy:
 	var newEnemy:Enemy = null
 	match _id:

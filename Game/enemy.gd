@@ -11,9 +11,14 @@ func _ready() -> void:
 func attack(_heroes:Array[Character]) -> void:
 	pass
 
+func updateIntentionStatus(_str:String):
+	if _str.contains("Dmg"):
+		_str.remove_chars("Dmg")
+		$CharUI/UIContainer/Control/Icon_Status.setStatus(_str.to_int(),Globals.statusType.DMG)
+
 func choseIntention():
 	m_currentIntention = m_intentions.pick_random()
-	$Intention.text = "Intent: "+m_currentIntention
+	updateIntentionStatus(m_currentIntention)
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)
