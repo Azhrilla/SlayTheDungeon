@@ -130,7 +130,7 @@ texture_normal = ExtResource("6_j261a")
 texture_pressed = ExtResource("7_1781y")
 texture_hover = ExtResource("8_yp4m7")
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/QuitButton"]
+[node name="QuitLabel" type="Label" parent="Control/VBoxContainer/QuitButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -144,8 +144,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("9_f4yia")
-text = "Quit
-"
+text = "Quit"
 
 [node name="Camera2D" type="Camera2D" parent="Control/VBoxContainer"]
 position = Vector2(59, 60)

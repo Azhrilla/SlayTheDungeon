@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://catd2nw28jgxi"]
 
-[ext_resource type="Script" path="res://UI/ui_level.gd" id="1_ntn5l"]
+[ext_resource type="Script" uid="uid://cf8xtsxrjtq34" path="res://UI/ui_level.gd" id="1_ntn5l"]
 [ext_resource type="PackedScene" uid="uid://b5lyxhlcfk2yq" path="res://UI/arrow.tscn" id="2_070cm"]
-[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Button Normal.png" id="2_qtc7g"]
-[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Button Hover.png" id="3_muh4u"]
-[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Button Disable.png" id="4_y5r26"]
-[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Button Active.png" id="5_pini3"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Buttons/Button Normal.png" id="2_qtc7g"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="3_muh4u"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="4_y5r26"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="5_pini3"]
 [ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="6_6x1on"]
-[ext_resource type="Texture2D" uid="uid://c6j5ii3ul2ok6" path="res://Graphics/Card X1.png" id="8_fyvf8"]
+[ext_resource type="Texture2D" uid="uid://c6j5ii3ul2ok6" path="res://Graphics/Bordel/Card X1.png" id="8_fyvf8"]
 
 [sub_resource type="Theme" id="Theme_4dia8"]
 
@@ -67,7 +67,7 @@ texture_hover = ExtResource("3_muh4u")
 texture_disabled = ExtResource("4_y5r26")
 stretch_mode = 0
 
-[node name="Button" type="Label" parent="HBoxContainer/DrawButton"]
+[node name="ButtonLabel" type="Label" parent="HBoxContainer/DrawButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -81,8 +81,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("6_6x1on")
-text = "Show DrawPile
-"
+text = "Show DrawPile"
 
 [node name="DiscardButton" type="TextureButton" parent="HBoxContainer"]
 custom_minimum_size = Vector2(180, 0)
