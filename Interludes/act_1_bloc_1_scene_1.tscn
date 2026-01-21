@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0xggmt28dhm3"]
+
+[ext_resource type="PackedScene" uid="uid://54escbuu8bro" path="res://Interludes/interlude_scene.tscn" id="1_rwfia"]
+[ext_resource type="Texture2D" uid="uid://dksv6fuplfpci" path="res://Graphics/Bordel/interludes/station.webp" id="2_1r1ou"]
+
+[node name="Act1_Bloc1_Scene1" instance=ExtResource("1_rwfia")]
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("2_1r1ou")
+
+[node name="TextureRect2" parent="." index="1"]
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Label" parent="TextureRect2" index="0"]
+offset_left = -225.0
+offset_top = -150.0
+offset_right = 225.0
+offset_bottom = 150.0
+text = "Dans les couloirs étouffants de New Grenoble, la station spatiale qui n’aurait jamais dû survivre aussi longtemps, l’air est aussi usé que les gens qui la respirent. 
+Trop pleine, trop vieille, toujours sur le point de céder, elle est devenue une cage suspendue dans le vide.
+Lui n’y voit plus qu’un compte à rebours.  Alors, pour s’acheter un billet de sortie, il accepte ce que les autres refusent : des missions discrètes, sales, pour la mafia locale. Chaque contrat le rapproche d’un avenir loin de New Grenoble… 
+à condition que la station, ou ses criminels, ne l’engloutissent pas avant."
+
+[node name="ButtonNext" parent="TextureRect2" index="1"]
+offset_left = -57.0
+offset_right = 57.0
+
+[connection signal="pressed" from="TextureRect2/ButtonNext" to="." method="_on_button_next_pressed"]

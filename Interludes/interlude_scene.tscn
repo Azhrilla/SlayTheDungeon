@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://54escbuu8bro"]
+
+[ext_resource type="Texture2D" uid="uid://unk678wwkvuo" path="res://Graphics/UI/Card X1.png" id="1_7e63x"]
+[ext_resource type="Script" uid="uid://b0p0ukmcojf23" path="res://Interludes/interlude_scene.gd" id="1_f665n"]
+[ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="1_kl1j2"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Buttons/Button Normal.png" id="3_iibug"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="4_f665n"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="5_ljedp"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="6_neoe5"]
+
+[node name="InterludeScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f665n")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.15
+anchor_right = 1.0
+anchor_bottom = 0.85
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("1_7e63x")
+expand_mode = 4
+
+[node name="Label" type="Label" parent="TextureRect2"]
+custom_minimum_size = Vector2(450, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kl1j2")
+theme_override_font_sizes/font_size = 12
+autowrap_mode = 3
+
+[node name="ButtonNext" type="TextureButton" parent="TextureRect2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_iibug")
+texture_pressed = ExtResource("4_f665n")
+texture_hover = ExtResource("5_ljedp")
+texture_disabled = ExtResource("6_neoe5")
+
+[node name="Label" type="Label" parent="TextureRect2/ButtonNext"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = -11.5
+offset_right = 45.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kl1j2")
+text = "Continue"
+
+[connection signal="pressed" from="TextureRect2/ButtonNext" to="." method="_on_button_next_pressed"]

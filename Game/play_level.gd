@@ -1,6 +1,5 @@
 extends Node2D
 
-var enemyScene:PackedScene = preload("res://Enemies/enemy_flame.tscn")
 var m_enemies:Array[Character] = []
 var m_turnOver:bool = false
 enum turnState{ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE}

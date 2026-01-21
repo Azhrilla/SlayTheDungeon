@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dog84ky2abu2p"]
+
+[ext_resource type="PackedScene" uid="uid://54escbuu8bro" path="res://Interludes/interlude_scene.tscn" id="1_4ij84"]
+[ext_resource type="Texture2D" uid="uid://dmyysds7fch78" path="res://Graphics/Bordel/interludes/entrepot.webp" id="2_w4o4e"]
+
+[node name="Act1_Bloc1_Scene2" instance=ExtResource("1_4ij84")]
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("2_w4o4e")
+
+[node name="Label" parent="TextureRect2" index="0"]
+text = "La première mission est tombée sans cérémonie, griffonnée sur un message crypté qui clignotait à peine sur son implant.
+Des entrepôts abandonnés, coincés dans un vieux module de fret de New Grenoble, squattés par des junkies oubliés de tous. Officiellement, personne n’y vivait. Officieusement, ils gênaient les affaires de la mafia locale.
+
+Il n’était pas là pour négocier. Juste pour nettoyer, faire peur, chasser les silhouettes tremblantes qui se cachaient entre les caisses rouillées et les tuyaux qui fuyaient. Une mission simple, disait-on. Mais sur une station aussi vieille que New Grenoble, rien n’était jamais vraiment vide… ni vraiment sans conséquences."
