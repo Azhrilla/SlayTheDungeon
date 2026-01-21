@@ -17,13 +17,14 @@ offset_left = -225.0
 offset_top = -150.0
 offset_right = 225.0
 offset_bottom = 150.0
-text = "Dans les couloirs étouffants de New Grenoble, la station spatiale qui n’aurait jamais dû survivre aussi longtemps, l’air est aussi usé que les gens qui la respirent. 
-Trop pleine, trop vieille, toujours sur le point de céder, elle est devenue une cage suspendue dans le vide.
-Lui n’y voit plus qu’un compte à rebours.  Alors, pour s’acheter un billet de sortie, il accepte ce que les autres refusent : des missions discrètes, sales, pour la mafia locale. Chaque contrat le rapproche d’un avenir loin de New Grenoble… 
-à condition que la station, ou ses criminels, ne l’engloutissent pas avant."
+text = "La station spatiale New Grenoble n’avait pas été conçue pour durer aussi longtemps. À l’origine, elle devait être un tremplin, une vitrine du progrès humain en orbite lointaine. Aujourd’hui, elle n’était plus qu’une carcasse saturée d’âmes, un enchevêtrement de coursives étroites, de niveaux surpeuplés et de systèmes recyclés jusqu’à l’épuisement. L’air y avait un goût métallique permanent, et chaque panne rappelait que la station survivait davantage par habitude que par ingénierie.
+
+Il avait grandi ici, coincé entre des parois trop fines et des rêves trop grands. Partir était devenu une obsession. Pas pour explorer les étoiles, mais simplement pour respirer ailleurs, loin des alarmes défaillantes, des foules compressées et de cette impression constante que New Grenoble finirait par mourir en entraînant tout le monde avec elle. Le problème, comme toujours, était l’argent. Quitter la station coûtait plus cher que d’y survivre.
+
+Alors, pour s’acheter un billet de sortie, il accepte ce que les autres refusent : des missions discrètes, sales, pour la mafia locale. Chaque contrat le rapproche d’un avenir loin de New Grenoble… 
+à condition que la station, ou ses criminels, ne l’engloutissent pas avant.
+"
 
 [node name="ButtonNext" parent="TextureRect2" index="1"]
 offset_left = -57.0
 offset_right = 57.0
-
-[connection signal="pressed" from="TextureRect2/ButtonNext" to="." method="_on_button_next_pressed"]
