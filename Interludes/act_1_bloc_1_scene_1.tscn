@@ -17,13 +17,16 @@ offset_left = -225.0
 offset_top = -150.0
 offset_right = 225.0
 offset_bottom = 150.0
-text = "La station spatiale New Grenoble n’avait pas été conçue pour durer aussi longtemps. À l’origine, elle devait être un tremplin, une vitrine du progrès humain en orbite lointaine. Aujourd’hui, elle n’était plus qu’une carcasse saturée d’âmes, un enchevêtrement de coursives étroites, de niveaux surpeuplés et de systèmes recyclés jusqu’à l’épuisement. L’air y avait un goût métallique permanent, et chaque panne rappelait que la station survivait davantage par habitude que par ingénierie.
+text = "New Grenoble StarDate 2041.4 journal d'une détective ratée
+Il était temps que je me remette au boulot, pas une seule de mes enquêtes n'avancaient et le prix de la techno chartruse n'arretait pas de monter.
 
-Il avait grandi ici, coincé entre des parois trop fines et des rêves trop grands. Partir était devenu une obsession. Pas pour explorer les étoiles, mais simplement pour respirer ailleurs, loin des alarmes défaillantes, des foules compressées et de cette impression constante que New Grenoble finirait par mourir en entraînant tout le monde avec elle. Le problème, comme toujours, était l’argent. Quitter la station coûtait plus cher que d’y survivre.
+J'étais principalement sur trois affaires:
+_un vol de marchandises près de newPPM
+_un meurtre près du starport
+_une vieille dame qui me payait pour retrouver un chat probablement déjà transformé en soupe
 
-Alors, pour s’acheter un billet de sortie, il accepte ce que les autres refusent : des missions discrètes, sales, pour la mafia locale. Chaque contrat le rapproche d’un avenir loin de New Grenoble… 
-à condition que la station, ou ses criminels, ne l’engloutissent pas avant.
-"
+
+(Note : on peut lancer que la 1ere pour l'instant)"
 
 [node name="ButtonNext" parent="TextureRect2" index="1"]
 offset_left = -57.0
