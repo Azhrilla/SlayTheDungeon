@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=3 uid="uid://dn1jbl81ah1t7"]
+
+[ext_resource type="PackedScene" uid="uid://54escbuu8bro" path="res://Interludes/interlude_scene.tscn" id="1_b4g8v"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Buttons/Button Normal.png" id="2_b0lk2"]
+[ext_resource type="Script" uid="uid://cox8bt338jy1o" path="res://Interludes/act_1_bloc_1_scene_3.gd" id="2_gpiym"]
+[ext_resource type="Texture2D" uid="uid://bnkxixs7c6lwa" path="res://Graphics/Bordel/interludes/workshop.jpg" id="3_fd3bo"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="3_gpiym"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="4_fd3bo"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="5_mv046"]
+[ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="6_b2qkj"]
+
+[node name="InterludeScene" instance=ExtResource("1_b4g8v")]
+script = ExtResource("2_gpiym")
+
+[node name="TextureRect" parent="." index="0"]
+texture = ExtResource("3_fd3bo")
+
+[node name="Label" parent="TextureRect2" index="0"]
+text = "Les informations de mon indic sont inquietantes et j'ai besoin d'aller chercher du matos:
+_ 100 dolls : remove card
+_ 100 dolls : add random basic chip"
+
+[node name="Label" parent="TextureRect2/ButtonNext" index="0"]
+text = "Pass"
+horizontal_alignment = 1
+
+[node name="ChipButton" type="TextureButton" parent="TextureRect2" index="2"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.229
+anchor_top = 1.0
+anchor_right = 0.229
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -40.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("2_b0lk2")
+texture_pressed = ExtResource("3_gpiym")
+texture_hover = ExtResource("4_fd3bo")
+texture_disabled = ExtResource("5_mv046")
+
+[node name="Label" type="Label" parent="TextureRect2/ChipButton" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.5
+offset_top = -11.5
+offset_right = 31.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_b2qkj")
+text = "Chip"
+horizontal_alignment = 1
+
+[node name="RemoveCardButton" type="TextureButton" parent="TextureRect2" index="3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.746
+anchor_top = 1.0
+anchor_right = 0.746
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -40.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("2_b0lk2")
+texture_pressed = ExtResource("3_gpiym")
+texture_hover = ExtResource("4_fd3bo")
+texture_disabled = ExtResource("5_mv046")
+
+[node name="Label" type="Label" parent="TextureRect2/RemoveCardButton" index="0"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_b2qkj")
+text = "Remove"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TextureRect2/ChipButton" to="." method="_on_chip_button_pressed"]
+[connection signal="pressed" from="TextureRect2/RemoveCardButton" to="." method="_on_remove_card_button_pressed"]

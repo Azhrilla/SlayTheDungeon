@@ -1,5 +1,5 @@
 extends Chip
-class_name chip_healtPack
+class_name chip_healthPack
 
 
 func startCombat():

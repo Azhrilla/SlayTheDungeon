@@ -5,6 +5,12 @@ var m_UIReady = false
 var m_cardHovered = null
 var m_cardChosen = null
 
+
+func _ready() -> void:
+	if GpState.m_currentLevel.m_lootDollars > 0:
+		GpState.m_currentDollars += GpState.m_currentLevel.m_lootDollars
+	GpState.m_currentLevel.m_goToLoot = false
+	
 func setUpLevel():
 	if !m_UIReady:
 			var boxSet = $VBoxContainer/HBoxContainer.get_children()

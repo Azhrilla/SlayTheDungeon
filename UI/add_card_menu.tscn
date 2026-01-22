@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://81tv21mrg0cf"]
 
-[ext_resource type="Script" path="res://UI/add_card_menu.gd" id="1_oiy75"]
+[ext_resource type="Script" uid="uid://geimwxiri26a" path="res://UI/add_card_menu.gd" id="1_oiy75"]
 
 [node name="AddCardMenu" type="Control"]
 custom_minimum_size = Vector2(0, 40)

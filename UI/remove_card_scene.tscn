@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://sby1jgg4ua82"]
+
+[ext_resource type="Script" uid="uid://b5bk4vgokl5ca" path="res://UI/remove_card_scene.gd" id="1_hfuao"]
+[ext_resource type="Texture2D" uid="uid://c6j5ii3ul2ok6" path="res://Graphics/Bordel/Card X1.png" id="1_phtg8"]
+[ext_resource type="Texture2D" uid="uid://dksv6fuplfpci" path="res://Graphics/Bordel/interludes/station.webp" id="2_pmfx6"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Buttons/Button Normal.png" id="3_kwma4"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="4_pmfx6"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="5_ma8np"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="6_6r3bb"]
+[ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="7_o8up8"]
+
+[node name="RemoveCardScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hfuao")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pmfx6")
+expand_mode = 2
+
+[node name="ShowDeck" type="Control" parent="."]
+clip_children = 1
+custom_minimum_size = Vector2(400, 400)
+layout_mode = 1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.9
+offset_left = -105.0
+offset_top = -65.0
+offset_right = 116.0
+offset_bottom = 20.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="ShowDeck"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_phtg8")
+expand_mode = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="ShowDeck/TextureRect"]
+clip_children = 2
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.276
+anchor_right = 0.9
+anchor_bottom = 0.728
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="ShowDeck/TextureRect/ScrollContainer"]
+layout_mode = 2
+columns = 4
+
+[node name="TextureButton" type="TextureButton" parent="ShowDeck"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -57.0
+offset_top = -40.0
+offset_right = 57.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("3_kwma4")
+texture_pressed = ExtResource("4_pmfx6")
+texture_hover = ExtResource("5_ma8np")
+texture_disabled = ExtResource("6_6r3bb")
+
+[node name="Label" type="Label" parent="ShowDeck/TextureButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -11.5
+offset_right = 38.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("7_o8up8")
+text = "Remove"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="ShowDeck/TextureButton" to="." method="_on_texture_button_pressed"]

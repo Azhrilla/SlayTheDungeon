@@ -22,6 +22,10 @@ func cardPlayed(_card:Card):
 	for chip in m_chips:
 		chip.cardPlayed(_card)
 
+func addChip(_chip:Chip)->void:
+	_chip.m_hero = self
+	m_chips.append(_chip)
+
 func _ready() -> void:
 	m_currentHealth = 40
 	m_startingHealth = 40

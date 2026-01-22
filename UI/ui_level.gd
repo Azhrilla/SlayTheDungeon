@@ -67,7 +67,7 @@ func setVisibilityAndPosition(_card:Card)->void:
 		
 		#controlNodes[index].force_update_transform()
 		cards[index].visible = true
-		cards[index].global_position = controlNodes[index].global_position + controlNodes[index].custom_minimum_size/2
+		cards[index].global_position = controlNodes[index].global_position #+ controlNodes[index].custom_minimum_size/2
 	
 
 func setArrowToTarget(_origin,_target) -> void:
@@ -96,7 +96,7 @@ func setDragMode(_dragMod:dragMod):
 		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_IGNORE	
 		
 func handleDrag():
-	var currentPosMouse:Vector2 = get_viewport().get_mouse_position()
+	var currentPosMouse:Vector2 = get_viewport().get_mouse_position() - m_cardHovered.custom_minimum_size/2
 	#m_cardHovered.mouse_filter = 0
 	if m_dragMode == dragMod.PLAY:
 		if m_mouseOnPlayZone:
@@ -153,7 +153,6 @@ func addCard(_card:Card)->void:
 	_card.connect("cardNeedUIRefresh",cardNeedUIRefresh)
 	if m_cards.size() > $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_child_count():
 		var newControl = Control.new()
-		#TextureRect.texture = "res://Graphics/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp"
 		newControl.custom_minimum_size = Vector2(150,220)
 		$ShowDeck/TextureRect/ScrollContainer/GridContainer.add_child(newControl)
 		newControl.mouse_filter = 2

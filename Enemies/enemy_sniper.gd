@@ -28,18 +28,29 @@ func moveTo(_target:Globals.target):
 		m_isAiming = false
 	updateIntentionText()
 
+func updateIntentionStatus(_str:String):
+	super.updateIntentionStatus(_str)
+	if _str.is_empty():
+		$CharUI/UIContainer/Control/Icon_Status.setStatus(0,Globals.statusType.INTERRO)
+	if _str.contains("Jump"):
+		_str.remove_chars("Jump")
+		$CharUI/UIContainer/Control/Icon_Status.setStatus(_str.to_int(),Globals.statusType.JUMP)
+	
+	
 func updateIntentionText():
 	match m_currentIntention:
 		"Fire at will":
-			$Intention.text = "Intent: dmg 30"
+			updateIntentionStatus("Dmg30")
 		"Aim":
-			$Intention.text = "Intent: "+m_currentIntention
+			updateIntentionStatus("Dmg0")
 		"JumpShot":
-			$Intention.text = "Intent: jump + dmg{dmg}".format({"dmg": str(m_baseDmg*getMult())})
+			var newStr	= "Jump{dmg}".format({"dmg": str(m_baseDmg*getMult())})
+			updateIntentionStatus(newStr)
 		"Fire":
-			$Intention.text = "Intent: dmg{dmg}".format({"dmg": str(2*m_baseDmg*getMult())})
-		"None":
-			$Intention.text = "N/A"
+			var newStr	= "Dmg{dmg}".format({"dmg": str(2*m_baseDmg*getMult())})
+			updateIntentionStatus(newStr)
+		_:
+			updateIntentionStatus("")
 
 func choseIntention():
 	if m_isAiming:

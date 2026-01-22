@@ -1,15 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://baptagnhcl77s"]
 
 [ext_resource type="Script" uid="uid://ctyhe7npsh5gi" path="res://CardSystem/card.gd" id="1_ostlh"]
-[ext_resource type="Texture2D" uid="uid://b20bruawalp7s" path="res://Graphics/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp" id="2_2abnw"]
+[ext_resource type="Texture2D" uid="uid://b20bruawalp7s" path="res://Graphics/Bordel/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp" id="2_2abnw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m7g5d"]
 font_size = 12
 font_color = Color(0, 0, 0, 1)
 
 [node name="Card" type="Control"]
+custom_minimum_size = Vector2(150, 220)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 150.0
+offset_bottom = 220.0
 script = ExtResource("1_ostlh")
 
 [node name="CardAppearance" type="TextureRect" parent="."]
@@ -30,24 +33,38 @@ expand_mode = 1
 stretch_mode = 4
 
 [node name="cardName" type="Label" parent="."]
-layout_mode = 0
-offset_left = -40.0
-offset_top = 65.0
-offset_right = 44.0
-offset_bottom = 88.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.9
+anchor_right = 0.5
+anchor_bottom = 0.9
+offset_left = -42.0
+offset_top = -23.0
+offset_right = 42.0
+grow_horizontal = 2
+grow_vertical = 0
 horizontal_alignment = 1
 
 [node name="cardText" type="Label" parent="."]
-layout_mode = 0
-offset_left = -54.0
-offset_top = -74.0
-offset_right = 58.0
-offset_bottom = -15.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.0
+offset_top = -29.5
+offset_right = 56.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
 label_settings = SubResource("LabelSettings_m7g5d")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(74, 113)
 emitting = false
 amount = 20
 emission_shape = 3

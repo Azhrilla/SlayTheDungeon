@@ -8,7 +8,7 @@ var m_nextTurnState
 
 func createEnemies():
 	var positionEnemy = Globals.target.ENEMY1
-	for enemyName in GpState.m_currentLevel:
+	for enemyName in GpState.m_currentLevel.m_enemies:
 		var newEnemy:Character = EnemyFactory.createEnemy(enemyName)
 		newEnemy.m_currentPosition = positionEnemy
 		m_enemies.append(newEnemy)
@@ -67,8 +67,9 @@ func endRound():
 func endCombat()->void:
 	$Player.endCombat()
 	$Player.detachHeroes()
-	TransitionLayer.switchLevel("res://UI/add_card_menu.tscn")
-
+	TransitionLayer.goToNextLevel()
+	m_nextTurnState = turnState.NONE
+	
 func _ready() -> void:
 	createEnemies()
 	var characters:Array[Character] = []
