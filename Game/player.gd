@@ -8,6 +8,8 @@ var m_currentHandSize:int = 7
 var m_currentDrawCount:int = 5
 var m_heroes: Array[Character] = []
 
+
+
 #Accessors
 func getHeroes() -> Array[Character]:
 	return m_heroes
@@ -50,6 +52,10 @@ func shuffle():
 func discardCard(_card:Card):
 	$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)
 
+func startCombat():
+	for hero in m_heroes:
+		hero.startCombat()
+
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	for cardCount in range(m_currentDrawCount):
 		drawCard()
@@ -61,13 +67,22 @@ func endRound(_heroes:Array[Character],_monsters:Array[Character]):
 		discardCard($CardHolder.getCardContainer(Globals.cardPosition.HAND)[0])
 
 func playCard(_card:Card,_targets:Array[Character],_targetPosition:Globals.target):
+	for hero in m_heroes:
+		hero.cardPlayed(_card)
+	
 	_card.doWork(_targets,m_heroes,_targetPosition)
 	if _card.m_cardType == Globals.cardType.NORMAL:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)
 	elif _card.m_cardType == Globals.cardType.POWER:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.POWER)
 
+func endCombat():
+	for hero in m_heroes:
+		hero.endCombat()
+
 func processPowersWhenAttacking(_attack:atkObject) -> void:
 	for card:Card in $CardHolder.getCardContainer(Globals.cardPosition.POWER):
 		if card.has_method( "processPowersWhenAttacking"):
 			card.processPowersWhenAttacking(_attack)
+	for hero in m_heroes:
+		hero.processAttacks(_attack)

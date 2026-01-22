@@ -2,8 +2,8 @@ extends Node2D
 
 var m_enemies:Array[Character] = []
 var m_turnOver:bool = false
-enum turnState{ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE}
-var m_currentTurnState = turnState.NONE
+enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE,END_COMBAT}
+var m_currentTurnState = turnState.START_COMBAT
 var m_nextTurnState
 
 func createEnemies():
@@ -22,6 +22,10 @@ func createCards():
 		$UI_Level.addCard(newCard)
 		$Player.addCard(newCard)
 	$Player.shuffle()
+
+func startCombat():
+	m_nextTurnState = turnState.MONSTER_END
+	$Player.startCombat()
 
 func startRound():
 	m_currentTurnState = turnState.ROUND_START
@@ -60,6 +64,10 @@ func endRound():
 	m_currentTurnState = turnState.ROUND_END
 	m_nextTurnState = turnState.ROUND_START
 
+func endCombat()->void:
+	$Player.endCombat()
+	$Player.detachHeroes()
+	TransitionLayer.switchLevel("res://UI/add_card_menu.tscn")
 
 func _ready() -> void:
 	createEnemies()
@@ -70,21 +78,19 @@ func _ready() -> void:
 		characters.append(enemy)
 	$UI_Level.setCharacters(characters)
 	createCards()
-	m_nextTurnState = turnState.MONSTER_END
-
-func endCombat()->void:
-	$Player.detachHeroes()
-	TransitionLayer.switchLevel("res://UI/add_card_menu.tscn")
+	m_nextTurnState = turnState.START_COMBAT
 
 func onEnemyDeath(_enemy:Character):
 	m_enemies.erase(_enemy)
 	$Enemies.remove_child(_enemy)
 	
 	if m_enemies.is_empty():
-		endCombat()
+		m_nextTurnState = turnState.END_COMBAT
 
 func _process(_delta: float) -> void:
 	match m_nextTurnState:
+		turnState.START_COMBAT:
+			startCombat()
 		turnState.ROUND_START:
 			startRound()
 		turnState.PLAYER_START:
@@ -99,7 +105,8 @@ func _process(_delta: float) -> void:
 			monsterEndRound()
 		turnState.ROUND_END:
 			endRound()
-	
+		turnState.END_COMBAT:
+			endCombat()
 	
 
 func _on_button_mouse_entered() -> void:

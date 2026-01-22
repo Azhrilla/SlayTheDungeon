@@ -1,11 +1,14 @@
 extends Node
 
 class_name Character
+var m_startingHealth = 40
 var m_currentHealth = 0
 var m_currentArmor = 0
 var m_type = Globals.type.NONE
 var m_currentPosition = 0
 var m_spikeDmg:int = 0
+var m_strength:int = 0
+
 
 signal OnDeath
 signal mouseOver(_char:Character)
@@ -27,6 +30,9 @@ func getStatusCount() -> int:
 		statusCount+=1
 	if m_spikeDmg > 0:
 		statusCount+=1
+		
+	if m_strength > 0:
+		statusCount+=1
 	return statusCount
 
 func setArmor(indexStatusInput:int) -> int:
@@ -34,6 +40,13 @@ func setArmor(indexStatusInput:int) -> int:
 		return indexStatusInput
 	var statusIcon = $CharUI/UIContainer/StatusContainer.get_child(indexStatusInput)
 	statusIcon.setStatus(m_currentArmor,Globals.statusType.ARMOR)
+	return indexStatusInput + 1
+
+func setStr(indexStatusInput:int) -> int:
+	if m_strength == 0:
+		return indexStatusInput
+	var statusIcon = $CharUI/UIContainer/StatusContainer.get_child(indexStatusInput)
+	statusIcon.setStatus(m_strength,Globals.statusType.STR)
 	return indexStatusInput + 1
 
 func setSpike(indexStatusInput:int) -> int:
@@ -53,6 +66,7 @@ func updateStatusGUI():
 	var statusIndex = 0
 	statusIndex = setArmor(statusIndex)
 	statusIndex = setSpike(statusIndex)
+	statusIndex = setStr(statusIndex)
 	
 func _process(_delta: float) -> void:
 	updateStatusGUI()
@@ -78,6 +92,12 @@ func moveTo(_target:Globals.target)->void:
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	_attacker.takeDmg(m_spikeDmg,self)
+
+
+func heal(_value:int)->void:
+	m_currentHealth += _value
+	if m_currentHealth > m_startingHealth:
+		m_currentHealth = m_startingHealth
 
 func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true):
 	var effectiveDmg:int =useArmorAndGetDmg(_dmg)

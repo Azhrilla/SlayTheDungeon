@@ -1,8 +1,30 @@
 extends Character
 class_name Hero
+var m_chips: Array[Chip]
+
+
+func processAttacks(_attack:atkObject) -> void:
+	_attack.m_baseDmg += m_strength
+	for chip in m_chips:
+		chip.processChipsWhileAttacking(_attack)
+
+func startCombat():
+	for chip in m_chips:
+		chip.startCombat()
+	
+func endCombat():
+	m_strength = 0
+	m_currentArmor = 0
+	for chip in m_chips:
+		chip.endCombat()
+
+func cardPlayed(_card:Card):
+	for chip in m_chips:
+		chip.cardPlayed(_card)
 
 func _ready() -> void:
 	m_currentHealth = 40
+	m_startingHealth = 40
 	super._ready()
 	m_type = Globals.type.HERO
 	$Sprite2D2/AnimationPlayer.play("idle")
