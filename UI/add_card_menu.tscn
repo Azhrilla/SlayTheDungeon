@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://81tv21mrg0cf"]
+[gd_scene load_steps=9 format=3 uid="uid://81tv21mrg0cf"]
 
 [ext_resource type="Script" uid="uid://geimwxiri26a" path="res://UI/add_card_menu.gd" id="1_oiy75"]
+[ext_resource type="Texture2D" uid="uid://dksv6fuplfpci" path="res://Graphics/Bordel/interludes/station.webp" id="2_cg71p"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Buttons/Button Normal.png" id="2_gt5u3"]
+[ext_resource type="Texture2D" uid="uid://c6j5ii3ul2ok6" path="res://Graphics/Bordel/Card X1.png" id="3_0djg1"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="3_k8e41"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="4_cg71p"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="5_0djg1"]
+[ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="6_hgdsl"]
 
 [node name="AddCardMenu" type="Control"]
 custom_minimum_size = Vector2(0, 40)
@@ -13,7 +20,33 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_oiy75")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="BackGround" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cg71p")
+expand_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="BackGround"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_0djg1")
+expand_mode = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BackGround/TextureRect"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 1
 anchors_preset = 8
@@ -22,50 +55,92 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -304.0
-offset_top = -106.0
+offset_top = -271.0
 offset_right = 304.0
-offset_bottom = 106.0
+offset_bottom = 271.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="BackGround/TextureRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
-text = "Chose wisely"
+theme = ExtResource("6_hgdsl")
+text = "A new card appears"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BackGround/TextureRect/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
 mouse_filter = 2
 
-[node name="Card1" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="Card1" type="Control" parent="BackGround/TextureRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 250)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Card2" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="Card2" type="Control" parent="BackGround/TextureRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 250)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Card3" type="Control" parent="VBoxContainer/HBoxContainer"]
+[node name="Card3" type="Control" parent="BackGround/TextureRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(200, 250)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Control" type="Control" parent="VBoxContainer"]
+[node name="Control" type="Control" parent="BackGround/TextureRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="SelectCard" type="Button" parent="VBoxContainer"]
+[node name="SelectCard" type="TextureButton" parent="BackGround/TextureRect/VBoxContainer"]
 layout_mode = 2
-text = "Select Card"
+texture_normal = ExtResource("2_gt5u3")
+texture_pressed = ExtResource("3_k8e41")
+texture_hover = ExtResource("4_cg71p")
+texture_disabled = ExtResource("5_0djg1")
+stretch_mode = 0
 
-[node name="TakeNoCard" type="Button" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="BackGround/TextureRect/VBoxContainer/SelectCard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_hgdsl")
+text = "Take Card"
+
+[node name="TakeNoCard" type="TextureButton" parent="BackGround/TextureRect/VBoxContainer"]
 layout_mode = 2
-text = "I dont want this shit
-"
+texture_normal = ExtResource("2_gt5u3")
+texture_pressed = ExtResource("3_k8e41")
+texture_hover = ExtResource("4_cg71p")
+texture_disabled = ExtResource("5_0djg1")
+stretch_mode = 0
 
-[connection signal="pressed" from="VBoxContainer/SelectCard" to="." method="_on_select_card_pressed"]
-[connection signal="pressed" from="VBoxContainer/TakeNoCard" to="." method="_on_take_no_card_pressed"]
+[node name="Label" type="Label" parent="BackGround/TextureRect/VBoxContainer/TakeNoCard"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("6_hgdsl")
+text = "Pass"
+
+[connection signal="pressed" from="BackGround/TextureRect/VBoxContainer/SelectCard" to="." method="_on_select_card_pressed"]
+[connection signal="pressed" from="BackGround/TextureRect/VBoxContainer/TakeNoCard" to="." method="_on_take_no_card_pressed"]

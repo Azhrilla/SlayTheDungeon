@@ -13,12 +13,11 @@ func _ready() -> void:
 	
 func setUpLevel():
 	if !m_UIReady:
-			var boxSet = $VBoxContainer/HBoxContainer.get_children()
+			var boxSet = $BackGround/TextureRect/VBoxContainer/HBoxContainer.get_children()
 			for index in range(m_cardNames.size()):
 				var newCard = CardFactory.createCard(m_cardNames[index])
 				newCard.setVisibleSide(Globals.visibleSide.FRONT)
-				add_child(newCard)
-				newCard.position = boxSet[index].global_position +  boxSet[index].custom_minimum_size/2
+				boxSet[index].add_child(newCard)
 				newCard.connect("mouseHoveredEnter",cardHoveredEnter)
 				newCard.connect("mouseHoveredExit",cardHoveredExit)
 			m_UIReady = true
