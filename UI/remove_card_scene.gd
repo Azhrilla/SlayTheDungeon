@@ -11,6 +11,7 @@ func _ready() -> void:
 		$ShowDeck/TextureRect/ScrollContainer/GridContainer.add_child(newCard)
 		newCard.connect("mouseHoveredEnter",cardHoveredEnter)
 		newCard.connect("mouseHoveredExit",cardHoveredExit)
+		newCard.set_anchors_and_offsets_preset(Control.LayoutPreset.PRESET_CENTER)
 
 func _on_texture_button_pressed() -> void:
 	if !m_selectedCard:
@@ -23,7 +24,7 @@ func _process(_delta: float) -> void:
 		if m_selectedCard:
 			m_selectedCard.setCardState(Globals.cardState.DEFAULT)
 		m_selectedCard = m_cardHovered
-		m_cardHovered.setCardState(Globals.cardState.HOVERED)		
+		m_cardHovered.setCardState(Globals.cardState.HOVERED)
 
 func cardHoveredEnter(_card:Card):
 	if _card != m_selectedCard:

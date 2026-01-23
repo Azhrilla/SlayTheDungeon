@@ -64,8 +64,6 @@ func setVisibilityAndPosition(_card:Card)->void:
 	var cards = getCardsInPosition(m_currentlyShownDeck)
 	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
 	for index in range(cards.size()):
-		
-		#controlNodes[index].force_update_transform()
 		cards[index].visible = true
 		cards[index].global_position = controlNodes[index].global_position #+ controlNodes[index].custom_minimum_size/2
 	
@@ -164,8 +162,8 @@ func getCardsInPosition(_position:Globals.cardPosition) -> Array[Card]:
 			output.append(card)
 	return output
 
-func reorganizeHandPositions(_processHovered:bool=false):
-	var cardsInHand = getCardsInPosition(Globals.cardPosition.HAND)
+func reorganizeHandPositions(_processHovered:bool=false):	
+	var cardsInHand = getCardsInPosition(Globals.cardPosition.HAND)	
 	var cardCount = cardsInHand.size()
 	var leftCardMarkerPos = $HandLeft.position
 	var rightCardMarkerPos = $HandRight.position
@@ -183,7 +181,7 @@ func reorganizeHandPositions(_processHovered:bool=false):
 				modifiedIndex+=1
 				hoveredCardSeen = true
 
-		currentCard.position = leftCardMarkerPos + (modifiedIndex+1)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3))
+		currentCard.position = leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3))
 
 func cardHoveredEnter(_card:Card):
 	var cardsInHand = getCardsInPosition(Globals.cardPosition.HAND)

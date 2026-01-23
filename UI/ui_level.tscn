@@ -111,17 +111,15 @@ text = "Show Discard"
 
 [node name="HandLeft" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.1
 anchor_top = 0.7
-anchor_right = 0.1
 anchor_bottom = 0.7
 grow_vertical = 0
 
 [node name="HandRight" type="Control" parent="."]
 layout_mode = 3
-anchor_left = 0.9
+anchor_left = 1.0
 anchor_top = 0.7
-anchor_right = 0.9
+anchor_right = 1.0
 anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 0
@@ -236,6 +234,16 @@ horizontal_scroll_mode = 0
 [node name="GridContainer" type="GridContainer" parent="ShowDeck/TextureRect/ScrollContainer"]
 layout_mode = 2
 columns = 5
+
+[node name="Hand" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -211.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [connection signal="mouse_entered" from="PlayZone" to="." method="_on_play_zone_mouse_entered"]
 [connection signal="mouse_exited" from="PlayZone" to="." method="_on_play_zone_mouse_exited"]

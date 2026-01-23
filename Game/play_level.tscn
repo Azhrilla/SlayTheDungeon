@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=4 uid="uid://dmoiukgdhv7f7"]
 
-[ext_resource type="Script" path="res://Game/play_level.gd" id="1_x1jox"]
-[ext_resource type="Texture2D" uid="uid://by0m4cwgrllkt" path="res://Graphics/UI/tests/back.png" id="2_wd32h"]
+[ext_resource type="Script" uid="uid://d3juiyvdhk62o" path="res://Game/play_level.gd" id="1_x1jox"]
+[ext_resource type="Texture2D" uid="uid://by0m4cwgrllkt" path="res://Graphics/Bordel/tests/back.png" id="2_wd32h"]
 [ext_resource type="PackedScene" uid="uid://catd2nw28jgxi" path="res://UI/ui_level.tscn" id="3_2slge"]
 [ext_resource type="PackedScene" uid="uid://bxg7554iequp8" path="res://Game/player.tscn" id="4_lcbj5"]
 [ext_resource type="TileSet" uid="uid://ce22gsyr1i1cv" path="res://Graphics/UI/tilemap.tres" id="4_u13sh"]
-[ext_resource type="Texture2D" uid="uid://pjxtl4oh50ur" path="res://Graphics/UI/tests/Sidescroller Shooter - Central City/Assets/Tiles.png" id="5_qyv7g"]
+[ext_resource type="Texture2D" uid="uid://pjxtl4oh50ur" path="res://Graphics/Bordel/tests/Sidescroller Shooter - Central City/Assets/Tiles.png" id="5_qyv7g"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_685or"]
 texture = ExtResource("5_qyv7g")

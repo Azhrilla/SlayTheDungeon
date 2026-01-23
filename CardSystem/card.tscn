@@ -13,6 +13,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 150.0
 offset_bottom = 220.0
+pivot_offset = Vector2(75, 110)
 script = ExtResource("1_ostlh")
 
 [node name="CardAppearance" type="TextureRect" parent="."]
