@@ -29,7 +29,7 @@ func _ready() -> void:
 	
 	var combat1 = levelInfos.new()
 	combat1.m_lvlFile = m_playLevel
-	combat1.m_enemies.append_array(["Flame"]) #,"Flame","Flame"
+	combat1.m_enemies.append_array(["Flame"])#,"Flame","Flame"
 	combat1.m_lootDollars = 100
 	combat1.m_lootCardQuality = Globals.cardQuality.NORMAL
 	combat1.m_goToLoot = true
@@ -49,11 +49,14 @@ func _ready() -> void:
 	combat3.m_enemies.append("Sniper")
 	combat3.m_goToLoot = true
 	
+	var victory = levelInfos.new()
+	victory.m_lvlFile = Globals.m_victoryLevel
+	
 	mainMenu.m_nextLevel = interlude1
 	interlude1.m_nextLevel = interlude2
 	interlude2.m_nextLevel = combat1
 	combat1.m_nextLevel = interlude3
 	interlude3.m_nextLevel = combat2
 	combat2.m_nextLevel = combat3
-	
+	combat3.m_nextLevel = victory
 	GpState.m_currentLevel = mainMenu

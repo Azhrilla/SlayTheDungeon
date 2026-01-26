@@ -3,4 +3,9 @@ extends Node
 var m_hero:Hero = null
 var m_cards:Array[String] = ["QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Grab","Grab","Defense","Defense","Defense"]
 var m_currentLevel:levelInfos = null
-var m_currentDollars:int = 100
+var m_currentDollars:int:
+	set = setDollars
+
+func setDollars(_value:int)->void:
+	UIGlobal.setDollars(_value)
+	m_currentDollars = _value

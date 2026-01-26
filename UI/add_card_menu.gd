@@ -9,6 +9,8 @@ var m_cardChosen = null
 func _ready() -> void:
 	if GpState.m_currentLevel.m_lootDollars > 0:
 		GpState.m_currentDollars += GpState.m_currentLevel.m_lootDollars
+		var text = "You found {dolls} dollars and can add a new card.".format({"dolls": str(GpState.m_currentLevel.m_lootDollars)})
+		$BackGround/TextureRect/VBoxContainer/Label.text = text
 	GpState.m_currentLevel.m_goToLoot = false
 	
 func setUpLevel():
