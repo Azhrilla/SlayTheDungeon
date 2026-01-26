@@ -29,7 +29,7 @@ func _ready() -> void:
 	
 	var combat1 = levelInfos.new()
 	combat1.m_lvlFile = m_playLevel
-	combat1.m_enemies.append_array(["Flame","Flame","Flame"])#
+	combat1.m_enemies.append_array(["Drone","Drone","Drone","Drone"])#
 	combat1.m_lootDollars = 100
 	combat1.m_lootCardQuality = Globals.cardQuality.NORMAL
 	combat1.m_goToLoot = true

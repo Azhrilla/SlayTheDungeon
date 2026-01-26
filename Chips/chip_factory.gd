@@ -21,7 +21,6 @@ static func createChip(_id:String)->Chip:
 		"_":
 			push_error ("Error: the chip with name {} was not implemented".format(_id))
 			newChip = null
-	print("new chip :")
-	print (_id)
+	print("new chip :{chip}".format({"chip":_id}))
 	UIGlobal.addChip(newChip)
 	return newChip
