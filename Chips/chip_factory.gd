@@ -1,19 +1,27 @@
 class_name ChipFactory
 
+const chipScene:PackedScene = preload("res://Chips/chip.tscn")
+
+
+const firstStrike = preload("res://Chips/chip_firstStrike.gd")
+const healthPack = preload("res://Chips/chip_healthPack.gd")
+const ramp = preload("res://Chips/chip_ramp.gd")
+
 
 
 static func createChip(_id:String)->Chip:
-	var newChip:Chip = null
+	var newChip:Chip = chipScene.instantiate()
 	match _id:
 		"Ramp":
-			newChip = chip_ramp.new()
+			newChip.set_script(ramp)
 		"HealthPack":
-			newChip = chip_healthPack.new()
+			newChip.set_script(healthPack)
 		"FirstStrike":
-			newChip = chip_firstStrike.new()
+			newChip.set_script(firstStrike)
 		"_":
 			push_error ("Error: the chip with name {} was not implemented".format(_id))
 			newChip = null
 	print("new chip :")
 	print (_id)
+	UIGlobal.addChip(newChip)
 	return newChip

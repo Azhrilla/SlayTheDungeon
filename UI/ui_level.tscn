@@ -12,6 +12,7 @@
 [sub_resource type="Theme" id="Theme_4dia8"]
 
 [node name="UI_Level" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_ntn5l")
 
 [node name="Cards" type="Control" parent="."]
