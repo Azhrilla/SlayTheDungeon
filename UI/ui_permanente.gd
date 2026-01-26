@@ -5,8 +5,8 @@ func _process(_delta: float) -> void:
 	pass
 	
 func addChip(_chip:Chip):
-	_chip.mouse_entered.connect(mouseEnteredChip)
-	_chip.mouse_exited.connect(mouseExitedChip)
+	_chip.mouseEntered.connect(mouseEnteredChip)
+	_chip.mouseExited.connect(mouseExitedChip)
 	$Control/TextureRect/HBoxContainer.add_child(_chip)
 
 func setDollars(_value:int)->void:

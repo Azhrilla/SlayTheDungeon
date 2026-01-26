@@ -2,6 +2,8 @@ extends Control
 class_name Chip
 
 var m_hero:Hero = null
+signal mouseEntered()
+signal mouseExited()
 
 func processChipsWhileAttacking(_attack:atkObject) -> void:
 	pass
@@ -19,7 +21,7 @@ func getInfoText()->String:
 	return "Text not set for this chip"
 
 func _on_texture_rect_mouse_entered() -> void:
-	mouse_entered.emit(self)
+	mouseEntered.emit(self)
 
 func _on_texture_rect_mouse_exited() -> void:
-	mouse_exited.emit(self)
+	mouseExited.emit(self)
