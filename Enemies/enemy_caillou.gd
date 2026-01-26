@@ -11,6 +11,8 @@ func _ready() -> void:
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	super.onDamageTaken(_effectiveDmg,_attacker)
 	m_currentArmor += 5
+	$AnimationPlayer.play("Parry")
+	$AnimationPlayer.queue("Idle")
 
 func attack(_heroes:Array[Character]) -> void:
 	match m_currentIntention:
@@ -18,7 +20,9 @@ func attack(_heroes:Array[Character]) -> void:
 			ATK_DMG = 4
 			var target = _heroes.pick_random()
 			target.takeDmg(ATK_DMG,self)
+			playAttackAnim()
 		"Dmg6":
 			ATK_DMG = 6
 			var target = _heroes.pick_random()
 			target.takeDmg(ATK_DMG,self)
+			playAttackAnim()

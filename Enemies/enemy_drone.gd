@@ -15,7 +15,7 @@ func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)
 	if m_isKO:
 		m_isKO = false
-		$AnimationPlayer.play_backwards("death")
+		$AnimationPlayer.play_backwards("Death")
 		$AnimationPlayer.queue("Idle")
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
@@ -23,12 +23,8 @@ func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	m_currentIntention = "N/A"
 	$CharUI/UIContainer/Control/Icon_Status.setStatus(0,Globals.statusType.INTERRO)
 	if !m_isKO:
-		$AnimationPlayer.play("death")
+		$AnimationPlayer.play("Death")
 	m_isKO = true
-
-func playAttackAnim() -> void:
-	$AnimationPlayer.play_backwards("attack")
-	$AnimationPlayer.queue("Idle")
 
 func attack(_heroes:Array[Character]) -> void:
 	var target = _heroes.pick_random()
