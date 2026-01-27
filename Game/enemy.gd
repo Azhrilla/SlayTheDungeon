@@ -12,6 +12,14 @@ func _ready() -> void:
 func attack(_heroes:Array[Character]) -> void:
 	pass
 
+func increasePosition() -> void:
+	if m_currentPosition != Globals.target.ENEMY4:
+		moveTo(m_currentPosition + 1)
+
+func decreasePosition() -> void:
+	if m_currentPosition != Globals.target.ENEMY1:
+		moveTo(m_currentPosition - 1)
+
 func playAttackAnim() -> void:
 	$AnimationPlayer.play("Attack")
 	$AnimationPlayer.queue("Idle")

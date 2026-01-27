@@ -18,7 +18,6 @@ func setUpLevel():
 			var boxSet = $BackGround/TextureRect/VBoxContainer/HBoxContainer.get_children()
 			for index in range(m_cardNames.size()):
 				var newCard = CardFactory.createCard(m_cardNames[index])
-				newCard.setVisibleSide(Globals.visibleSide.FRONT)
 				boxSet[index].add_child(newCard)
 				newCard.connect("mouseHoveredEnter",cardHoveredEnter)
 				newCard.connect("mouseHoveredExit",cardHoveredExit)

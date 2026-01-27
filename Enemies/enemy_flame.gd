@@ -5,7 +5,7 @@ var ATK_DMG:int = 10
 
 func _ready() -> void:
 	m_currentHealth = MAX_HEALTH
-	m_spikeDmg = 1
+	setStatusVariable(Globals.statusType.SPIKE,1)
 	m_intentions = ["Dmg3","Dmg3","Dmg3","Dmg5","Dmg5","Spike+2"]
 	super._ready()
 
@@ -25,5 +25,5 @@ func attack(_heroes:Array[Character]) -> void:
 			var target = _heroes.pick_random()
 			target.takeDmg(ATK_DMG,self)
 		"Spike+2":
-			m_spikeDmg +=2
+			addToStatusVariable(Globals.statusType.SPIKE,2)
 	

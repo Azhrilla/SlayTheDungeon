@@ -4,7 +4,6 @@ signal mouseHoveredEnter
 signal mouseHoveredExit
 signal cardNeedUIRefresh
 
-var m_visibleSide = Globals.visibleSide.BACK
 var m_name:String = "noname"
 var m_text:String = "filler Text"
 var m_currentPosition:Globals.cardPosition = Globals.cardPosition.NONE
@@ -53,20 +52,9 @@ func setCardState(_state:Globals.cardState)->void:
 			scale = Vector2.ONE
 
 func updateVisibility():
-	if (m_visibleSide == Globals.visibleSide.BACK):
-		#$SpriteBack.visible = true
-		$CardAppearance.visible = false
-		$cardName.visible = false
-		$cardText.visible = false
-	else:
-		#$SpriteBack.visible = false
 		$CardAppearance.visible = true
 		$cardName.visible = true
 		$cardText.visible = true
-	
-func setVisibleSide(side):
-	m_visibleSide = side
-	updateVisibility()
 
 func startParticles():
 	$CPUParticles2D.emitting = true

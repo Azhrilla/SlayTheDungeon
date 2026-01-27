@@ -4,7 +4,7 @@ var m_chips: Array[Chip]
 
 
 func processAttacks(_attack:atkObject) -> void:
-	_attack.m_baseDmg += m_strength
+	_attack.m_baseDmg += getStatusVariable(Globals.statusType.STR)
 	for chip in m_chips:
 		chip.processChipsWhileAttacking(_attack)
 
@@ -13,8 +13,8 @@ func startCombat():
 		chip.startCombat()
 	
 func endCombat():
-	m_strength = 0
-	m_currentArmor = 0
+	setStatusVariable(Globals.statusType.STR,0)
+	setStatusVariable(Globals.statusType.ARMOR,0)
 	for chip in m_chips:
 		chip.endCombat()
 

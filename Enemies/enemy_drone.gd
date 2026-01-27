@@ -1,7 +1,6 @@
 extends Enemy
 
 const MAX_HEALTH:int  = 30 
-const m_baseDmg = 3
 var m_isKO:bool = false
 
 func _ready() -> void:
@@ -9,7 +8,6 @@ func _ready() -> void:
 	m_intentions = ["Dmg3","Dmg5"]
 	super._ready()
 	$AnimationPlayer.play("Idle")
-	
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)
@@ -33,5 +31,5 @@ func attack(_heroes:Array[Character]) -> void:
 			target.takeDmg(3,self)
 			playAttackAnim()
 		"Dmg5":
-			target.takeDmg(4,self)
+			target.takeDmg(5,self)
 			playAttackAnim()

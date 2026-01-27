@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	super.onDamageTaken(_effectiveDmg,_attacker)
-	m_currentArmor += 5
+	addToStatusVariable(Globals.statusType.ARMOR,5)
 	$AnimationPlayer.play("Parry")
 	$AnimationPlayer.queue("Idle")
 

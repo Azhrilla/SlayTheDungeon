@@ -4,4 +4,4 @@ extends Card
 
 func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
 	var target = _allies.pick_random()
-	target.addArmor(m_armor)
+	target.addToStatusVariable(Globals.statusType.ARMOR,m_armor)

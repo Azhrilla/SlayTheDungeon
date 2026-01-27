@@ -6,7 +6,6 @@ var m_selectedCard:Card = null
 func _ready() -> void:
 	for cardName in GpState.m_cards:
 		var newCard = CardFactory.createCard(cardName)
-		newCard.setVisibleSide(Globals.visibleSide.FRONT)
 		newCard.custom_minimum_size = Vector2(165,230)
 		$ShowDeck/TextureRect/ScrollContainer/GridContainer.add_child(newCard)
 		newCard.connect("mouseHoveredEnter",cardHoveredEnter)

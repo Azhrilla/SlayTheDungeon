@@ -145,7 +145,6 @@ func _process(_delta: float) -> void:
 func addCard(_card:Card)->void:
 	$Cards.add_child(_card)
 	m_cards.append(_card)
-	_card.setVisibleSide(Globals.visibleSide.FRONT)
 	_card.connect("mouseHoveredEnter",cardHoveredEnter)
 	_card.connect("mouseHoveredExit",cardHoveredExit)
 	_card.connect("cardNeedUIRefresh",cardNeedUIRefresh)

@@ -1,5 +1,5 @@
 extends Node
-enum visibleSide{BACK, FRONT}
+
 enum cardTarget{ENEMY, NONE}
 enum cardType{NORMAL,POWER}
 enum cardPosition{DECK,HAND,DISCARD,NONE,POWER} 
@@ -13,10 +13,8 @@ const m_playLevel = "res://Game/play_level.tscn"
 const m_lootLevel = "res://UI/add_card_menu.tscn"
 const m_victoryLevel = "res://UI/victory.tscn"
 const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
-var m_levels:Array[levelInfos] = []
-
 const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
-
+var m_levels:Array[levelInfos] = []
 
 func _ready() -> void:
 	var mainMenu = levelInfos.new()
@@ -39,7 +37,7 @@ func _ready() -> void:
 	
 	var combat2 = levelInfos.new()
 	combat2.m_lvlFile = m_playLevel
-	combat2.m_enemies.append_array(["Caillou","Caillou"])
+	combat2.m_enemies.append_array(["Caillou","Caillou"])#
 	combat2.m_lootDollars = 100
 	combat2.m_lootCardQuality = Globals.cardQuality.NORMAL
 	combat2.m_goToLoot = true
