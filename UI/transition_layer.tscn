@@ -1,11 +1,33 @@
-[gd_scene load_steps=2 format=3 uid="uid://brdvho1yet150"]
+[gd_scene format=3 uid="uid://c45r6joilwflw"]
 
-[ext_resource type="Script" path="res://UI/transition_layer.gd" id="1_d1att"]
+[sub_resource type="GDScript" id="GDScript_cgma5"]
+script/source = "extends CanvasLayer
 
-[node name="TransitionLayer" type="CanvasLayer"]
-script = ExtResource("1_d1att")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+func _ready() -> void:
+	$ColorRect.modulate = Color(0,0,0,0)
+
+func goToNextLevel()->void:
+	if GpState.m_currentLevel.m_goToLoot:
+		MainUI.switchLevel(Globals.m_lootLevel)
+	elif GpState.m_currentLevel.m_nextLevel:
+		GpState.m_currentLevel = GpState.m_currentLevel.m_nextLevel
+		MainUI.switchLevel(GpState.m_currentLevel.m_lvlFile)
+
+func switchLevel(_lvlName:String):
+	print (\"Go to level {str}\".format({\"str\":_lvlName}))
+	var tween = get_tree().create_tween()
+	await tween.tween_property($ColorRect,\"modulate\",Color(0,0,0,1),0.3).finished
+	get_tree().change_scene_to_file(_lvlName)
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property($ColorRect,\"modulate\",Color(0,0,0,0),0.3)
+	
+"
+
+[node name="TransitionLayer" type="CanvasLayer" unique_id=38306515]
+script = SubResource("GDScript_cgma5")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1848304019]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -17,7 +17,7 @@ func _on_texture_button_pressed() -> void:
 	if !m_selectedCard:
 		return
 	GpState.m_cards.erase(m_selectedCard.m_name)
-	TransitionLayer.goToNextLevel()
+	MainUI.goToNextLevel()
 
 func _process(_delta: float) -> void:
 	if (Input.is_action_just_pressed("click")) and m_cardHovered:

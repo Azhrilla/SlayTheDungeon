@@ -47,7 +47,7 @@ func _on_select_card_pressed() -> void:
 		return
 	
 	GpState.m_cards.append(m_cardChosen.m_name)
-	TransitionLayer.goToNextLevel()
+	MainUI.goToNextLevel()
 		
 func _on_take_no_card_pressed() -> void:
-	TransitionLayer.goToNextLevel()
+	MainUI.goToNextLevel()

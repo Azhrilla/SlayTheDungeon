@@ -7,5 +7,5 @@ var m_currentDollars:int:
 	set = setDollars
 
 func setDollars(_value:int)->void:
-	UIGlobal.setDollars(_value)
+	MainUI.setDollars(_value)
 	m_currentDollars = _value

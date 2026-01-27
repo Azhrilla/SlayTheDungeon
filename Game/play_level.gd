@@ -67,7 +67,7 @@ func endRound():
 func endCombat()->void:
 	$Player.endCombat()
 	$Player.detachHeroes()
-	TransitionLayer.goToNextLevel()
+	MainUI.goToNextLevel()
 	m_nextTurnState = turnState.NONE
 	
 func _ready() -> void:

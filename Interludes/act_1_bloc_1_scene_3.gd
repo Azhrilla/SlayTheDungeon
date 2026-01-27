@@ -10,14 +10,14 @@ func _ready() -> void:
 		$TextureRect2/RemoveCardButton.disabled = true
 
 func _on_button_next_pressed() -> void:
-	TransitionLayer.goToNextLevel()
+	MainUI.goToNextLevel()
 
 func _on_remove_card_button_pressed() -> void:
 	GpState.m_currentDollars-=m_costRemove
-	TransitionLayer.switchLevel(Globals.m_removeCardLevel)
+	MainUI.switchLevel(Globals.m_removeCardLevel)
 
 func _on_chip_button_pressed() -> void:
 	GpState.m_currentDollars-=m_costChip
 	var newChip = ChipFactory.createChip(Globals.m_basicChipList.pick_random())
 	GpState.m_hero.addChip(newChip)
-	TransitionLayer.goToNextLevel()
+	MainUI.goToNextLevel()

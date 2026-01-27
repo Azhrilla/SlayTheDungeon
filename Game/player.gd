@@ -31,7 +31,7 @@ func onHeroDeath(_hero:Character):
 	m_heroes.erase(_hero)
 	$Heroes.remove_child(_hero)
 	if m_heroes.is_empty():
-		TransitionLayer.switchLevel("res://UI/defeat.tscn")
+		MainUI.switchLevel("res://UI/defeat.tscn")
 
 func _process(_delta: float) -> void:
 	pass

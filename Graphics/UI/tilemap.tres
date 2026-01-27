@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ce22gsyr1i1cv"]
+[gd_resource type="TileSet" format=3 uid="uid://ce22gsyr1i1cv"]
 
 [ext_resource type="Texture2D" uid="uid://s77pkekc4veu" path="res://Graphics/Bordel/tests/Sidescroller Shooter - Central City/Assets/Buildings.png" id="1_mcxwy"]
 
