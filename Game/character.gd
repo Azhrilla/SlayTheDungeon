@@ -9,6 +9,9 @@ var m_currentPosition = 0
 var m_spikeDmg:int = 0
 var m_strength:int = 0
 
+@onready var m_statusContainer = $CharUI/UIContainer/StatusContainer
+@onready var m_healthBar = $CharUI/UIContainer/HealthBar
+@onready var m_healthValue = $CharUI/UIContainer/HealthBar/HealthValue
 
 signal OnDeath
 signal mouseOver(_char:Character)
@@ -22,7 +25,7 @@ func endRound(_heroes:Array[Character],_monsters:Array[Character]):
 	pass
 
 func _ready() -> void:
-	$CharUI/UIContainer/HealthBar.max_value = m_currentHealth
+	m_healthBar.max_value = m_currentHealth
 
 func getStatusCount() -> int:
 	var statusCount = 0
@@ -38,30 +41,30 @@ func getStatusCount() -> int:
 func setArmor(indexStatusInput:int) -> int:
 	if m_currentArmor == 0:
 		return indexStatusInput
-	var statusIcon = $CharUI/UIContainer/StatusContainer.get_child(indexStatusInput)
+	var statusIcon = m_statusContainer.get_child(indexStatusInput)
 	statusIcon.setStatus(m_currentArmor,Globals.statusType.ARMOR)
 	return indexStatusInput + 1
 
 func setStr(indexStatusInput:int) -> int:
 	if m_strength == 0:
 		return indexStatusInput
-	var statusIcon = $CharUI/UIContainer/StatusContainer.get_child(indexStatusInput)
+	var statusIcon =m_statusContainer.get_child(indexStatusInput)
 	statusIcon.setStatus(m_strength,Globals.statusType.STR)
 	return indexStatusInput + 1
 
 func setSpike(indexStatusInput:int) -> int:
 	if m_spikeDmg == 0:
 		return indexStatusInput
-	var statusIcon = $CharUI/UIContainer/StatusContainer.get_child(indexStatusInput)
+	var statusIcon = m_statusContainer.get_child(indexStatusInput)
 	statusIcon.setStatus(m_spikeDmg,Globals.statusType.SPIKE)
 	return indexStatusInput + 1
 
 func updateStatusGUI():
 	var statusCount = getStatusCount()
-	while $CharUI/UIContainer/StatusContainer.get_child_count() > statusCount:
-		$CharUI/UIContainer/StatusContainer.remove_child($CharUI/UIContainer/StatusContainer.get_child(0))
-	while $CharUI/UIContainer/StatusContainer.get_child_count() < statusCount:
-		$CharUI/UIContainer/StatusContainer.add_child(iconStatusScene.instantiate())
+	while m_statusContainer.get_child_count() > statusCount:
+		m_statusContainer.remove_child(m_statusContainer.get_child(0))
+	while m_statusContainer.get_child_count() < statusCount:
+		m_statusContainer.add_child(iconStatusScene.instantiate())
 	
 	var statusIndex = 0
 	statusIndex = setArmor(statusIndex)
@@ -70,8 +73,8 @@ func updateStatusGUI():
 	
 func _process(_delta: float) -> void:
 	updateStatusGUI()
-	$CharUI/UIContainer/HealthBar.value = m_currentHealth
-	$CharUI/UIContainer/HealthBar/HealthValue.text = "PVs:{0}".format([m_currentHealth])
+	m_healthBar.value = m_currentHealth
+	m_healthValue.text = "PVs:{0}".format([m_currentHealth])
 
 func useArmorAndGetDmg(_dmg:int) -> int:
 	var absorbedDmg = min(m_currentArmor,_dmg)

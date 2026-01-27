@@ -9,13 +9,13 @@ enum cardState{DEFAULT,PLAYABLE,HOVERED}
 enum statusType{NONE,ARMOR,SPIKE,DMG,STR,INTERRO,JUMP}
 enum cardQuality{NONE,NORMAL,RARE,EPIC}
 
-var m_playLevel = "res://Game/play_level.tscn"
-var m_lootLevel = "res://UI/add_card_menu.tscn"
-var m_victoryLevel = "res://UI/victory.tscn"
-var m_removeCardLevel = "res://UI/remove_card_scene.tscn"
+const m_playLevel = "res://Game/play_level.tscn"
+const m_lootLevel = "res://UI/add_card_menu.tscn"
+const m_victoryLevel = "res://UI/victory.tscn"
+const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
 var m_levels:Array[levelInfos] = []
 
-var m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
+const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
 
 
 func _ready() -> void:
