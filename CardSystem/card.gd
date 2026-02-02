@@ -13,13 +13,14 @@ var m_cardType = Globals.cardType.NORMAL
 func needTarget() -> bool:
 	return false
 
-func attackTarget(_baseDmg:int,_target:Character,_allies:Array[Character]) -> void:
+func attackTarget(_baseDmg:int,_target:Character,_allies:Array[Character]) -> bool:
 	var attack = atkObject.new()
 	attack.m_allies = _allies
 	attack.m_baseDmg = _baseDmg
 	attack.m_target = _target
 	m_player.processPowersWhenAttacking(attack)
-	_target.takeDmg(attack.m_baseDmg,getCardActor(_allies))
+	print ("Card {card} will attack target {target} for {dmg} dmg".format({"dmg":str(attack.m_baseDmg),"card":str(self),"target":str(_target)}))
+	return _target.takeDmg(attack.m_baseDmg,getCardActor(_allies))
 
 func _ready() -> void:
 	updateVisibility()

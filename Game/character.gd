@@ -58,14 +58,14 @@ func heal(_value:int)->void:
 	if m_currentHealth > m_maximumHealth:
 		m_currentHealth = m_maximumHealth
 
-func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true):
+func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true) -> bool :
 	var effectiveDmg:int = useArmorAndGetDmg(_dmg)
 	if effectiveDmg == 0:
-		return		
+		return false		
 		
 	if getStatusVariable(Globals.statusType.BARRIER) > 0:
 		addToStatusVariable(Globals.statusType.BARRIER,-1)
-		return
+		return false
 		
 	if _isAttackFirstTrigger:
 		onDamageTaken(effectiveDmg,_attacker)	
@@ -73,6 +73,8 @@ func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true):
 	m_currentHealth -= effectiveDmg
 	if m_currentHealth<=0:
 		OnDeath.emit(self)
+		return true
+	return false
 
 func getStatusVariable(_status:Globals.statusType) -> int:
 	return m_statusVariables[_status]

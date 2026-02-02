@@ -10,6 +10,8 @@ const TS_grab:PackedScene = preload("res://Cards/ts_grab.tscn")
 const TS_windStrike:PackedScene = preload("res://Cards/ts_wind_strike.tscn")
 const TS_hugeStrike:PackedScene = preload("res://Cards/ts_huge_strike.tscn")
 const TS_swiftAsTheWind:PackedScene = preload("res://Cards/ts_swift_as_the_wind.tscn")
+const TS_Barrier:PackedScene = preload("res://Cards/ts_barrier.tscn")
+const TS_DoubleUp:PackedScene = preload("res://Cards/ts_double_up.tscn")
 
 static func createCard(_id:String)->Card:
 	var newCard:Card = null
@@ -30,6 +32,10 @@ static func createCard(_id:String)->Card:
 			newCard = TS_hugeStrike.instantiate()
 		"SwiftAsTheWind":
 			newCard = TS_swiftAsTheWind.instantiate()
+		"Barrier":
+			newCard = TS_Barrier.instantiate()
+		"DoubleUp":
+			newCard = TS_DoubleUp.instantiate()
 		"_":
 			push_error ("Error: the card with name {} was not implemented".format(_id))
 			newCard = cardScene.instantiate()

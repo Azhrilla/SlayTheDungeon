@@ -1,6 +1,6 @@
 extends Control
 
-var m_cardNames:Array[String] = ["WindStrike","HugeStrike","SwiftAsTheWind"]
+var m_cardNames:Array[String] = []
 var m_UIReady = false
 var m_cardHovered = null
 var m_cardChosen = null
@@ -11,7 +11,9 @@ func _ready() -> void:
 		GpState.m_currentDollars += GpState.m_currentLevel.m_lootDollars
 		var text = "You found {dolls} dollars and can add a new card.".format({"dolls": str(GpState.m_currentLevel.m_lootDollars)})
 		$BackGround/TextureRect/VBoxContainer/Label.text = text
-	GpState.m_currentLevel.m_goToLoot = false
+	GpState.m_currentLevel.m_goToLoot = false	
+	m_cardNames = Globals.getCardsLoot()
+
 	
 func setUpLevel():
 	if !m_UIReady:

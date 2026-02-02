@@ -16,6 +16,19 @@ const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
 const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
 var m_levels:Array[levelInfos] = []
 
+static var m_availableCards = {
+	Globals.cardQuality.NORMAL : ["WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp"],
+}
+
+static func getCardsLoot() -> Array[String]:
+	var currentQuality = GpState.m_currentLevel.m_lootCardQuality
+	var output:Array[String]
+	while output.size() < 3:
+		var newCard = m_availableCards[currentQuality].pick_random()
+		if output.find(newCard) == -1:
+			output.append(newCard)
+	return output
+
 func _ready() -> void:
 	var mainMenu = levelInfos.new()
 	
@@ -27,7 +40,7 @@ func _ready() -> void:
 	
 	var combat1 = levelInfos.new()
 	combat1.m_lvlFile = m_playLevel
-	combat1.m_enemies.append_array(["Drone","Drone","Drone","Drone"])#
+	combat1.m_enemies.append_array(["Drone","Drone"])#,"Drone","Drone"
 	combat1.m_lootDollars = 50
 	combat1.m_lootCardQuality = Globals.cardQuality.NORMAL
 	combat1.m_goToLoot = true

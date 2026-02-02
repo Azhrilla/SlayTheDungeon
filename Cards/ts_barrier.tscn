@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dcpf13e56fxi4"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_b3jvm"]
+[ext_resource type="Script" uid="uid://d1plxfs3vcgjt" path="res://Cards/ts_barrier.gd" id="2_e3yyt"]
+
+[node name="TS_Barrier" unique_id=1262097703 instance=ExtResource("1_b3jvm")]
+script = ExtResource("2_e3yyt")
+
+[node name="cardName" parent="." index="1"]
+text = "Barrier"
+
+[node name="cardText" parent="." index="2"]
+text = "Prevent the next damage received"
+autowrap_mode = 3
