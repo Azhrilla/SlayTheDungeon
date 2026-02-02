@@ -38,3 +38,7 @@ func setStatus(_value:int,_statusType:Globals.statusType):
 			var texturePath= "res://Graphics/UI/Icons/jump.png"
 			var texture2d = load(texturePath)
 			$TextureStatus.texture = texture2d;
+		Globals.statusType.BARRIER:
+			var texturePath= "res://Graphics/UI/Icons/barrier.png"
+			var texture2d = load(texturePath)
+			$TextureStatus.texture = texture2d;

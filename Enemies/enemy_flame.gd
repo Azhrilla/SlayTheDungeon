@@ -4,7 +4,7 @@ var ATK_DMG:int = 10
 
 
 func _ready() -> void:
-	m_currentHealth = MAX_HEALTH
+	m_maximumHealth = MAX_HEALTH
 	setStatusVariable(Globals.statusType.SPIKE,1)
 	m_intentions = ["Dmg3","Dmg3","Dmg3","Dmg5","Dmg5","Spike+2"]
 	super._ready()

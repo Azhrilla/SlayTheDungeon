@@ -1,13 +1,17 @@
 extends Enemy
-
-const MAX_HEALTH:int  = 30 
 var m_isKO:bool = false
+const MAX_HEALTH:int  = 30 
 
 func _ready() -> void:
-	m_currentHealth = MAX_HEALTH
-	m_intentions = ["Dmg3","Dmg5"]
+	m_maximumHealth = MAX_HEALTH
+	m_intentions = ["Dmg3","Dmg5","Dmg3","Dmg5","Barrier"]
 	super._ready()
 	$AnimationPlayer.play("Idle")
+
+func updateIntentionStatus(_str:String):
+	super.updateIntentionStatus(_str)
+	if _str.contains("Barrier"):
+		$CharUI/UIContainer/Control/Icon_Status.setStatus(0,Globals.statusType.BARRIER)
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)
@@ -33,3 +37,5 @@ func attack(_heroes:Array[Character]) -> void:
 		"Dmg5":
 			target.takeDmg(5,self)
 			playAttackAnim()
+		"Barrier":
+			addToStatusVariable(Globals.statusType.BARRIER,1)

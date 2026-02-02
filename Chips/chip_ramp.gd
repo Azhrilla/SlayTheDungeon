@@ -9,5 +9,5 @@ func getInfoText()->String:
 func cardPlayed(_card:Card):
 	m_cardCount +=1
 	if m_cardCount == m_cardTarget:
-		m_hero.m_strength +=1
+		m_hero.addToStatusVariable(Globals.statusType.STR,1)
 		m_cardCount = 0

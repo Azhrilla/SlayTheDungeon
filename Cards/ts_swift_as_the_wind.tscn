@@ -1,18 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cykkqgaqkimv3"]
+[gd_scene format=3 uid="uid://cykkqgaqkimv3"]
 
 [ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_qv7xb"]
-[ext_resource type="Script" path="res://Cards/ts_swift_as_the_wind.gd" id="2_qro15"]
+[ext_resource type="Script" uid="uid://dhc2aouxautah" path="res://Cards/ts_swift_as_the_wind.gd" id="2_qro15"]
 
-[node name="TS_SwiftAsTheWind" instance=ExtResource("1_qv7xb")]
+[node name="TS_SwiftAsTheWind" unique_id=900342792 instance=ExtResource("1_qv7xb")]
 script = ExtResource("2_qro15")
 
-[node name="cardName" parent="." index="3"]
+[node name="cardName" parent="." index="1"]
 offset_left = -66.0
-offset_top = -76.0
+offset_top = -26.0
 offset_right = 66.0
 text = "Swift as the wind"
 
-[node name="cardText" parent="." index="4"]
+[node name="cardText" parent="." index="2"]
 text = "All attacks got +5
 dmg when targeting
-an first spot enemy"
+a first spot enemy"

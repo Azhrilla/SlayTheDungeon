@@ -1,10 +1,10 @@
 extends Enemy
-const MAX_HEALTH:int  = 30 
+const MAX_HEALTH:int  = 40 
 var ATK_DMG:int = 10
 
 
 func _ready() -> void:
-	m_currentHealth = MAX_HEALTH
+	m_maximumHealth = MAX_HEALTH
 	m_intentions = ["Dmg4","Dmg4","Dmg4","Dmg6","Dmg6"]
 	super._ready()
 
