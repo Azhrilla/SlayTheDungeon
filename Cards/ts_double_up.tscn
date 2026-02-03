@@ -6,9 +6,10 @@
 [node name="TS_DoubleUp" unique_id=1116141428 instance=ExtResource("1_gxvxl")]
 script = ExtResource("2_e2x6p")
 m_damage = 5
+m_critDmg = 10
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Double Up"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
-text = "Deals 5 to the first target and 5 to the one just behind (10 if the first kills)"
+text = "Deals {dmg} to the first target and {dmg} to the one just behind ({crit} if the first kills)"

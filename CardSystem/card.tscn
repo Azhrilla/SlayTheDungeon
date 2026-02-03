@@ -46,6 +46,7 @@ offset_right = 42.0
 grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="cardText" type="Label" parent="." unique_id=1102009803]
 layout_mode = 1

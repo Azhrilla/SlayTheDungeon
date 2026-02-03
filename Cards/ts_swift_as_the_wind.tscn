@@ -5,14 +5,15 @@
 
 [node name="TS_SwiftAsTheWind" unique_id=900342792 instance=ExtResource("1_qv7xb")]
 script = ExtResource("2_qro15")
+m_addedDmg = 3
 
-[node name="cardName" parent="." index="1"]
+[node name="cardName" parent="." index="1" unique_id=952563157]
 offset_left = -66.0
 offset_top = -26.0
 offset_right = 66.0
 text = "Swift as the wind"
 
-[node name="cardText" parent="." index="2"]
-text = "All attacks got +5
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "All attacks got +{dmg}
 dmg when targeting
 a first spot enemy"
