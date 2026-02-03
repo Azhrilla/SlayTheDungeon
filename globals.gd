@@ -20,7 +20,7 @@ static var m_availableCards = {
 	Globals.cardQuality.NORMAL : ["WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp"],
 }
 
-static func getCardsLoot() -> Array[String]:
+func getCardsLoot() -> Array[String]:
 	var currentQuality = GpState.m_currentLevel.m_lootCardQuality
 	var output:Array[String]
 	while output.size() < 3:

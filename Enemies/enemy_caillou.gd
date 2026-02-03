@@ -14,7 +14,7 @@ func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	$AnimationPlayer.play("Parry")
 	$AnimationPlayer.queue("Idle")
 
-func attack(_heroes:Array[Character]) -> void:
+func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
 	match m_currentIntention:
 		"Dmg4":
 			ATK_DMG = 4

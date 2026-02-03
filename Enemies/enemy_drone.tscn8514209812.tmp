@@ -29,5 +29,5 @@ vframes = 6
 libraries/ = SubResource("AnimationLibrary_k1lh2")
 
 [node name="ShieldComponent" parent="." index="4" unique_id=526406930 instance=ExtResource("7_o3sbt")]
-position = Vector2(6, -8.000001)
-scale = Vector2(0.4, 0.3)
+position = Vector2(3.9999998, -13.999999)
+scale = Vector2(0.4, 0.4)

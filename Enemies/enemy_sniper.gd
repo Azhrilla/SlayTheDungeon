@@ -64,7 +64,7 @@ func choseIntention():
 	
 	
 
-func attack(_heroes:Array[Character]) -> void:
+func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
 	var target = _heroes.pick_random()
 	match m_currentIntention:
 		"Aim":

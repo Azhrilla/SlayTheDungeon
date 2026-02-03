@@ -9,7 +9,7 @@ func _ready() -> void:
 	$AnimationPlayer.play("Idle")
 	m_type = Globals.type.MONSTER
 
-func attack(_heroes:Array[Character]) -> void:
+func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
 	pass
 
 func increasePosition() -> void:

@@ -1,12 +1,22 @@
 extends Enemy
 var m_isKO:bool = false
 const MAX_HEALTH:int  = 30 
+var m_shieldWasUp = false
 
 func _ready() -> void:
 	m_maximumHealth = MAX_HEALTH
 	m_intentions = ["Dmg3","Dmg5","Dmg3","Dmg5","Barrier"]
 	super._ready()
 	$AnimationPlayer.play("Idle")
+
+func _process(_delta: float) -> void:
+	super._process(_delta)
+	if getStatusVariable(Globals.statusType.BARRIER) > 0 and !m_shieldWasUp:
+		$ShieldComponent.startShield()
+		m_shieldWasUp = true
+	elif getStatusVariable(Globals.statusType.BARRIER) == 0 and m_shieldWasUp:
+		$ShieldComponent.stopShield()
+		m_shieldWasUp = false
 
 func updateIntentionStatus(_str:String):
 	super.updateIntentionStatus(_str)
@@ -28,7 +38,7 @@ func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 		$AnimationPlayer.play("Death")
 	m_isKO = true
 
-func attack(_heroes:Array[Character]) -> void:
+func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
 	var target = _heroes.pick_random()
 	match m_currentIntention:
 		"Dmg3":
@@ -38,4 +48,5 @@ func attack(_heroes:Array[Character]) -> void:
 			target.takeDmg(5,self)
 			playAttackAnim()
 		"Barrier":
-			addToStatusVariable(Globals.statusType.BARRIER,1)
+			var ally = _allies.pick_random()
+			ally.addToStatusVariable(Globals.statusType.BARRIER,1)

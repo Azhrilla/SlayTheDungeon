@@ -51,7 +51,7 @@ func monsterPlay():
 	m_currentTurnState = turnState.MONSTER_PLAY
 	for enemy:Character in m_enemies:
 		if !$Player.getHeroes().is_empty():
-			enemy.attack($Player.getHeroes())
+			enemy.doWork($Player.getHeroes(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_END
 	
 func monsterEndRound():

@@ -14,7 +14,7 @@ func updateIntentionStatus(_str:String):
 	if _str.contains("Spike+2"):
 		$CharUI/UIContainer/Control/Icon_Status.setStatus(2,Globals.statusType.SPIKE)
 
-func attack(_heroes:Array[Character]) -> void:
+func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
 	match m_currentIntention:
 		"Dmg3":
 			ATK_DMG = 3
