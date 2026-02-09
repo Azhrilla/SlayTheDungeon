@@ -23,8 +23,11 @@ func endRound(_heroes:Array[Character],_monsters:Array[Character]):
 		chip.endRound()
 
 func endCombat():
-	setStatusVariable(Globals.statusType.STR,0)
-	setStatusVariable(Globals.statusType.ARMOR,0)
+	m_armorIsPermanent = false
+	
+	for statusType in Globals.statusType.values():
+		setStatusVariable(statusType,0)
+
 	for chip in m_chips:
 		chip.endCombat()
 

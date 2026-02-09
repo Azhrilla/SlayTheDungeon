@@ -6,9 +6,8 @@
 [node name="TS_Barrier" unique_id=1262097703 instance=ExtResource("1_b3jvm")]
 script = ExtResource("2_e3yyt")
 
-[node name="cardName" parent="." index="1"]
+[node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Barrier"
 
-[node name="cardText" parent="." index="2"]
+[node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Prevent the next damage received"
-autowrap_mode = 3

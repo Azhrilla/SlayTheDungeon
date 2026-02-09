@@ -127,3 +127,4 @@ func updateStatusGUI():
 			continue
 		var statusIcon = m_statusContainer.get_child(statusIndex)
 		statusIcon.setStatus(m_statusVariables[status],status)
+		statusIndex+=1

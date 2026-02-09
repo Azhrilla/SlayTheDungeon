@@ -14,6 +14,12 @@ func startCombat():
 func endCombat():
 	pass	
 
+func startRound():
+	pass
+	
+func endRound():
+	pass	
+
 func cardPlayed(_card:Card):
 	pass
 
