@@ -8,6 +8,7 @@ enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MO
 var m_currentTurnState = turnState.START_COMBAT
 var m_nextTurnState
 
+
 func getHeroes()->Array[Character]:
 	return $Player.getHeroes()
 
@@ -141,7 +142,6 @@ func _process(_delta: float) -> void:
 			endRound()
 		turnState.END_COMBAT:
 			endCombat()
-	
 
 func _on_button_mouse_entered() -> void:
 	$Player.m_mouseOverButton = true

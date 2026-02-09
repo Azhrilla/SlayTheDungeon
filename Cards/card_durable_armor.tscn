@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://d2tyjj0hn6isc"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_5hevf"]
+[ext_resource type="Script" uid="uid://ceylbdssaqr5y" path="res://Cards/card_durable_armor.gd" id="2_8cvma"]
+
+[node name="Card_DurableArmor" unique_id=1116141428 instance=ExtResource("1_5hevf")]
+script = ExtResource("2_8cvma")
+
+[node name="cardName" parent="." index="1" unique_id=952563157]
+text = "Durable Armor"
+
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "Keep armor between rounds"

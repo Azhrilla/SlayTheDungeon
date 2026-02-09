@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://e10nn4cx5b4i"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_ii0u8"]
+[ext_resource type="Script" uid="uid://brokotwy1v1m5" path="res://Cards/card_prepare.gd" id="2_wtfcl"]
+
+[node name="Card_Prepare" unique_id=1116141428 instance=ExtResource("1_ii0u8")]
+script = ExtResource("2_wtfcl")
+m_armor = 2
+
+[node name="cardName" parent="." index="1" unique_id=952563157]
+text = "Coming prepared"
+
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "Add {armor} armor and draw a card"

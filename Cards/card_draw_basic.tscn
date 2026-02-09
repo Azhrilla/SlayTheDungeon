@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c3vju8solj760"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_yq1qk"]
+[ext_resource type="Script" uid="uid://cwklyxpkbtle8" path="res://Cards/card_draw_basic.gd" id="2_o0xfn"]
+
+[node name="Card_DrawBasic" unique_id=1116141428 instance=ExtResource("1_yq1qk")]
+script = ExtResource("2_o0xfn")
+
+[node name="cardName" parent="." index="1" unique_id=952563157]
+text = "Draw"
+
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "Draw 2 cards"

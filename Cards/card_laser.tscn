@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://cecdyab21801d"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_xefr2"]
+[ext_resource type="Script" uid="uid://ddok23pff0ytb" path="res://Cards/card_laser.gd" id="2_swbtf"]
+
+[node name="Card_Laser" unique_id=1116141428 instance=ExtResource("1_xefr2")]
+script = ExtResource("2_swbtf")
+m_damage = 10
+m_diminution = 3
+
+[node name="cardName" parent="." index="1" unique_id=952563157]
+text = "Laser"
+
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "Deal {dmg} to all targets, diminshed by {minus} after each enemy"

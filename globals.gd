@@ -16,7 +16,7 @@ const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
 const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
 
 static var m_availableCards = {
-	Globals.cardQuality.NORMAL : ["WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp"],
+	Globals.cardQuality.NORMAL : ["WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp","Laser","Prepare","DurableArmor","DrawBasic"],
 }
 
 func getCardsLoot() -> Array[String]:
@@ -27,6 +27,3 @@ func getCardsLoot() -> Array[String]:
 		if output.find(newCard) == -1:
 			output.append(newCard)
 	return output
-
-func _process(_delta: float) -> void:
-	EnemyFactory.statusLoading()

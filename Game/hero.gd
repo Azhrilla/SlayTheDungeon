@@ -11,7 +11,17 @@ func processAttacks(_attack:atkObject) -> void:
 func startCombat():
 	for chip in m_chips:
 		chip.startCombat()
-	
+
+func startRound(_heroes:Array[Character],_monsters:Array[Character]):
+	super.startRound(_heroes,_monsters)
+	for chip in m_chips:
+		chip.startRound()
+
+func endRound(_heroes:Array[Character],_monsters:Array[Character]):
+	super.endRound(_heroes,_monsters)
+	for chip in m_chips:
+		chip.endRound()
+
 func endCombat():
 	setStatusVariable(Globals.statusType.STR,0)
 	setStatusVariable(Globals.statusType.ARMOR,0)

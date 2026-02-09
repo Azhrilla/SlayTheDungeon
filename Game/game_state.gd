@@ -16,3 +16,6 @@ func getCurrentLevel()->levelInfos:
 func setDollars(_value:int)->void:
 	MainUI.setDollars(_value)
 	m_currentDollars = _value
+
+func _process(_delta: float) -> void:
+	EnemyFactory.statusLoading()

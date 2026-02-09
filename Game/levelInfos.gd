@@ -1,7 +1,5 @@
 class_name levelInfos
 
-
-
 var m_lvlFile:String = ""
 var m_enemies:Array[String] = []
 var m_lootDollars = 0

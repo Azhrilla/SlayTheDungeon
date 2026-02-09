@@ -18,6 +18,7 @@ var m_level = null
 var m_maximumHealth = 40
 var m_currentHealth = 0
 var m_type = Globals.type.NONE
+var m_armorIsPermanent:bool = false
 var m_currentPosition = Globals.target.NONE
 var m_preferedPosition = Globals.target.NONE
 var m_statusVariables = {
@@ -44,7 +45,8 @@ func getMonsters()->Array[Character]:
 
 #GamePlay Functions
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	setStatusVariable(Globals.statusType.ARMOR,0)
+	if !m_armorIsPermanent:
+		setStatusVariable(Globals.statusType.ARMOR,0)
 
 func endRound(_heroes:Array[Character],_monsters:Array[Character]):
 	pass
@@ -52,7 +54,7 @@ func endRound(_heroes:Array[Character],_monsters:Array[Character]):
 func useArmorAndGetDmg(_dmg:int) -> int:
 	var absorbedDmg = min(m_statusVariables[Globals.statusType.ARMOR],_dmg)
 	var effectiveDmg:int = _dmg - absorbedDmg
-	m_statusVariables[Globals.statusType.ARMOR] -= absorbedDmg
+	addToStatusVariable(Globals.statusType.ARMOR,-absorbedDmg)
 	return effectiveDmg
 
 func moveTo(_target:Globals.target)->void:
