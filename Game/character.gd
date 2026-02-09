@@ -28,6 +28,8 @@ var m_statusVariables = {
 	Globals.statusType.BARRIER : 0
 }
 
+const m_buffList = [Globals.statusType.STR,Globals.statusType.ARMOR,Globals.statusType.BARRIER,Globals.statusType.SPIKE]
+
 #Base Functions
 func _ready() -> void:
 	m_healthBar.max_value = m_maximumHealth
@@ -96,6 +98,13 @@ func setStatusVariable(_status:Globals.statusType,_value:int)->void:
 func addToStatusVariable(_status:Globals.statusType,_value:int)->void:
 	var newValue = m_statusVariables[_status]+_value
 	setStatusVariable(_status,newValue)
+
+func getBuffStatusList() -> Array[Globals.statusType]:
+	var output :Array[Globals.statusType] = []
+	for status in m_statusVariables:
+		if m_statusVariables[status] > 0 && m_buffList.has(status):
+			output.append(status)
+	return output
 
 #UI Functions
 func getStatusCount() -> int:

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b7bf0csusig53"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_kedit"]
+[ext_resource type="Script" uid="uid://cmqefillmjjys" path="res://Cards/card_scrambler.gd" id="2_i1anc"]
+
+[node name="Card_Scrambler" unique_id=1116141428 instance=ExtResource("1_kedit")]
+script = ExtResource("2_i1anc")
+
+[node name="cardName" parent="." index="1" unique_id=952563157]
+text = "Scrambler"
+
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "Halves one random buff on the enemy"
