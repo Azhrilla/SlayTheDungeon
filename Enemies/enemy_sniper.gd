@@ -59,10 +59,7 @@ func choseIntention():
 		m_currentIntention = "Aim"
 	else:
 		m_currentIntention = m_intentions.pick_random()
-		
 	updateIntentionText()
-	
-	
 
 func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
 	var target = _heroes.pick_random()

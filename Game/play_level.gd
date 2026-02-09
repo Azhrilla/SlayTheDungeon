@@ -1,20 +1,50 @@
 extends Node2D
 
+class_name GameLevel
+
 var m_enemies:Array[Character] = []
 var m_turnOver:bool = false
 enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE,END_COMBAT}
 var m_currentTurnState = turnState.START_COMBAT
 var m_nextTurnState
 
+func getHeroes()->Array[Character]:
+	return $Player.getHeroes()
+
+func getEnemies()->Array[Character]:
+	return m_enemies
+
 func createEnemies():
-	var positionEnemy = Globals.target.ENEMY1
-	for enemyName in GpState.m_currentLevel.m_enemies:
-		var newEnemy:Character = EnemyFactory.createEnemy(enemyName)
-		newEnemy.m_currentPosition = positionEnemy
-		m_enemies.append(newEnemy)
-		$Enemies.add_child(newEnemy)
-		newEnemy.connect("OnDeath", onEnemyDeath)
-		positionEnemy = (positionEnemy as int + 1) as Globals.target
+	for enemyName in GpState.getCurrentEnemy():
+		createEnemy(enemyName)
+
+func findTargetInSlot(_slot:Globals.target) -> Character:
+	for target in m_enemies:
+		if target.m_currentPosition == _slot:
+			return target
+	return null
+
+func getFirstEmptySlot() -> Globals.target:
+	var currentPosition = Globals.target.ENEMY1
+	var target = findTargetInSlot(currentPosition)
+	while target!=null:
+		currentPosition = (currentPosition as int + 1) as Globals.target
+		target = findTargetInSlot(currentPosition)
+	return currentPosition
+
+func createEnemy(_idMob:String,_position:Globals.target = Globals.target.NONE):
+	var slot = _position
+	if slot == Globals.target.NONE || findTargetInSlot(_position) != null:
+		slot = getFirstEmptySlot()
+			
+	var newEnemy:Character = EnemyFactory.createEnemy(_idMob)
+	m_enemies.append(newEnemy)
+	$Enemies.add_child(newEnemy)
+	newEnemy.connect("OnDeath", onEnemyDeath)
+	newEnemy.m_level = self
+	newEnemy.m_currentPosition = slot
+	setCharacters()
+	return newEnemy
 
 func createCards():
 	for cardName in GpState.m_cards:
@@ -70,14 +100,17 @@ func endCombat()->void:
 	MainUI.goToNextLevel()
 	m_nextTurnState = turnState.NONE
 	
-func _ready() -> void:
-	createEnemies()
+func setCharacters()->void:
 	var characters:Array[Character] = []
 	for hero in $Player.getHeroes():
 		characters.append(hero)
+		hero.m_level = self
 	for enemy in m_enemies:
 		characters.append(enemy)
-	$UI_Level.setCharacters(characters)
+	$UI_Level.setCharacters(characters)	
+
+func _ready() -> void:
+	createEnemies()
 	createCards()
 	m_nextTurnState = turnState.START_COMBAT
 

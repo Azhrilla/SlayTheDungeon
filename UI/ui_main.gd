@@ -27,11 +27,8 @@ func mouseExitedChip(_chip:Chip):
 	$ChipInfo.visible = false
 
 func goToNextLevel()->void:
-	if GpState.m_currentLevel.m_goToLoot:
-		switchLevel(Globals.m_lootLevel)
-	elif GpState.m_currentLevel.m_nextLevel:
-		GpState.m_currentLevel = GpState.m_currentLevel.m_nextLevel
-		switchLevel(GpState.m_currentLevel.m_lvlFile)
+		switchLevel(GpState.m_currentBloc.getNextLevel())
+
 
 func switchLevel(_lvlName:String):
 	print ("Go to level {str}".format({"str":_lvlName}))

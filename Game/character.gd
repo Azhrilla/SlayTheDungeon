@@ -14,10 +14,12 @@ const  iconStatusScene:PackedScene = preload("res://UI/Icons/icon_status.tscn")
 signal OnDeath
 
 #Attributes
+var m_level = null
 var m_maximumHealth = 40
 var m_currentHealth = 0
 var m_type = Globals.type.NONE
 var m_currentPosition = Globals.target.NONE
+var m_preferedPosition = Globals.target.NONE
 var m_statusVariables = {
 	Globals.statusType.SPIKE : 0,
 	Globals.statusType.STR : 0,
@@ -33,6 +35,12 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	m_healthBar.value = m_currentHealth
 	m_healthValue.text = "PVs:{0}".format([m_currentHealth])
+
+func getHeroes()->Array[Character]:
+	return m_level.getHeroes()
+
+func getMonsters()->Array[Character]:
+	return m_level.getEnemies()
 
 #GamePlay Functions
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
