@@ -63,6 +63,8 @@ func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 		hero.startRound(_heroes,_monsters)
 
 func endRound(_heroes:Array[Character],_monsters:Array[Character]):
+	for hero in m_heroes:
+		hero.endRound(_heroes,_monsters)
 	while $CardHolder.getCardCount(Globals.cardPosition.HAND) != 0:
 		discardCard($CardHolder.getCardContainer(Globals.cardPosition.HAND)[0])
 

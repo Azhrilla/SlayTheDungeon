@@ -5,7 +5,7 @@ var m_shieldWasUp = false
 
 func _ready() -> void:
 	m_maximumHealth = MAX_HEALTH
-	m_intentions = ["Dmg3","Dmg5","Dmg3","Dmg5","Barrier"]
+	m_intentions = ["Dmg3","Dmg3","Dmg5","Dmg5","Barrier"]
 	super._ready()
 	$AnimationPlayer.play("Idle")
 

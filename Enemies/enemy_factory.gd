@@ -5,7 +5,8 @@ const enemyScenes: Dictionary[String,String] ={
 		"Caillou":"uid://dakepv5v8j14s",
 		"Sniper":"uid://dtlrlbygskqkc",
 		"Drone":"uid://bc74efqmpracj",
-		"Grorobo":"uid://cw1yfid7378h4"
+		"Grorobo":"uid://cw1yfid7378h4",
+		"GiantRat":"uid://cr5avcpls14rh",
 	}
 
 static var m_resources = {}

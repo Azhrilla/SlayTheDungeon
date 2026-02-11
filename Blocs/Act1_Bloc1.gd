@@ -9,9 +9,14 @@ func getEnemy(_enemyLevel:int)->Array[String]:
 			if currentRNG > 0.5:
 				return ["Drone","Drone","Drone"]
 			else:
-				return ["Flame","Flame"]
+				return ["GiantRat","GiantRat"]
 		2:
-			return ["Drone","Drone","Drone","Drone"]
+			var rng = RandomNumberGenerator.new()
+			var currentRNG = rng.randf_range(0.0, 1.0)
+			if currentRNG > 0.5:
+				return ["Drone","Drone","Drone","Drone"]
+			else:
+				return ["GiantRat","GiantRat","GiantRat"]
 		3: 
 			var rng = RandomNumberGenerator.new()
 			var currentRNG = rng.randf_range(0.0, 1.0)

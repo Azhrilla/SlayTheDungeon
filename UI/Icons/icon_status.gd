@@ -1,5 +1,6 @@
 extends Control
 
+@onready var statusTexture = $Control/TextureStatus
 var m_statusType:Globals.statusType = Globals.statusType.NONE
 
 func setStatus(_value:int,_statusType:Globals.statusType):
@@ -17,28 +18,32 @@ func setStatus(_value:int,_statusType:Globals.statusType):
 		Globals.statusType.SPIKE:
 			var texturePath= "res://Graphics/UI/Icons/lightning.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
 		Globals.statusType.ARMOR:
 			var texturePath= "res://Graphics/UI/Icons/shield.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
 		Globals.statusType.DMG:
 			var texturePath= "res://Graphics/UI/Icons/target.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
 		Globals.statusType.STR:
 			var texturePath= "res://Graphics/UI/Icons/power.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
 		Globals.statusType.INTERRO:
 			var texturePath= "res://Graphics/UI/Icons/interro.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
 		Globals.statusType.JUMP:
 			var texturePath= "res://Graphics/UI/Icons/jump.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
 		Globals.statusType.BARRIER:
 			var texturePath= "res://Graphics/UI/Icons/barrier.png"
 			var texture2d = load(texturePath)
-			$TextureStatus.texture = texture2d;
+			statusTexture.texture = texture2d;
+		Globals.statusType.POISON:
+			var texturePath= "res://Graphics/UI/Icons/poison.png"
+			var texture2d = load(texturePath)
+			statusTexture.texture = texture2d;

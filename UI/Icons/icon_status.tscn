@@ -1,36 +1,79 @@
-[gd_scene load_steps=2 format=3 uid="uid://c8lxcjexkeo5q"]
+[gd_scene format=3 uid="uid://c8lxcjexkeo5q"]
 
+[ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="1_f281j"]
 [ext_resource type="Script" uid="uid://dffrcvpdatr7k" path="res://UI/Icons/icon_status.gd" id="1_gb0o6"]
 
-[node name="Icon_Status" type="Control"]
-custom_minimum_size = Vector2(20, 20)
-layout_mode = 3
-anchors_preset = 0
-offset_right = 25.0
+[sub_resource type="FontFile" id="FontFile_f281j"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/variation_coordinates = {}
+cache/0/face_index = 0
+cache/0/embolden = 0.0
+cache/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
+cache/0/spacing_top = 0
+cache/0/spacing_bottom = 0
+cache/0/spacing_space = 0
+cache/0/spacing_glyph = 0
+cache/0/baseline_offset = 0.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/20/0/ascent = 0.0
+cache/0/20/0/descent = 0.0
+cache/0/20/0/underline_position = 0.0
+cache/0/20/0/underline_thickness = 0.0
+cache/0/20/0/scale = 1.0
+cache/0/14/0/ascent = 0.0
+cache/0/14/0/descent = 0.0
+cache/0/14/0/underline_position = 0.0
+cache/0/14/0/underline_thickness = 0.0
+cache/0/14/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_d2lkr"]
+default_font = SubResource("FontFile_f281j")
+
+[node name="Icon_Status" type="HBoxContainer" unique_id=560978805]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 45.0
 offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_f281j")
 script = ExtResource("1_gb0o6")
 
-[node name="TextureStatus" type="TextureRect" parent="."]
-custom_minimum_size = Vector2(15, 15)
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -7.5
-offset_bottom = 7.5
-grow_horizontal = 0
-grow_vertical = 2
-expand_mode = 1
+[node name="value" type="Label" parent="." unique_id=671058606]
+custom_minimum_size = Vector2(10, 15)
+layout_mode = 2
+theme = SubResource("Theme_d2lkr")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="value" type="Label" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1774896820]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureStatus" type="TextureRect" parent="Control" unique_id=1383177003]
 layout_mode = 1
-anchors_preset = 4
+anchors_preset = 8
+anchor_left = 0.5
 anchor_top = 0.5
+anchor_right = 0.5
 anchor_bottom = 0.5
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
+offset_left = -7.5
+offset_top = -7.5
+offset_right = 7.5
+offset_bottom = 7.5
+grow_horizontal = 2
 grow_vertical = 2
+expand_mode = 2

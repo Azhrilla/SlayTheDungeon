@@ -25,7 +25,8 @@ var m_statusVariables = {
 	Globals.statusType.SPIKE : 0,
 	Globals.statusType.STR : 0,
 	Globals.statusType.ARMOR : 0,
-	Globals.statusType.BARRIER : 0
+	Globals.statusType.BARRIER : 0,
+	Globals.statusType.POISON : 0
 }
 
 const m_buffList = [Globals.statusType.STR,Globals.statusType.ARMOR,Globals.statusType.BARRIER,Globals.statusType.SPIKE]
@@ -45,13 +46,23 @@ func getHeroes()->Array[Character]:
 func getMonsters()->Array[Character]:
 	return m_level.getEnemies()
 
+func findMonsterInSlot(_slot:Globals.target) -> Character:
+	for target in getMonsters():
+		if target.m_currentPosition == _slot:
+			return target
+	return null
+
 #GamePlay Functions
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	if !m_armorIsPermanent:
 		setStatusVariable(Globals.statusType.ARMOR,0)
 
-func endRound(_heroes:Array[Character],_monsters:Array[Character]):
-	pass
+
+func endRound(_heroes:Array[Character],_monsters:Array[Character]):	
+	var poisonCount = getStatusVariable(Globals.statusType.POISON)	
+	if poisonCount > 0:
+		takeDmg(poisonCount,null,false,true)
+		addToStatusVariable(Globals.statusType.POISON,-1)
 
 func useArmorAndGetDmg(_dmg:int) -> int:
 	var absorbedDmg = min(m_statusVariables[Globals.statusType.ARMOR],_dmg)
@@ -60,7 +71,10 @@ func useArmorAndGetDmg(_dmg:int) -> int:
 	return effectiveDmg
 
 func moveTo(_target:Globals.target)->void:
-	m_currentPosition = _target
+	if findMonsterInSlot(_target) == null:
+		m_currentPosition = _target
+	else:
+		push_error("Trying to move a monster to an occupied slot")
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	_attacker.takeDmg(m_statusVariables[Globals.statusType.SPIKE],self,false)
@@ -70,12 +84,12 @@ func heal(_value:int)->void:
 	if m_currentHealth > m_maximumHealth:
 		m_currentHealth = m_maximumHealth
 
-func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true) -> bool :
+func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true,_goesThroughArmor:bool = false) -> bool :
 	var effectiveDmg:int = useArmorAndGetDmg(_dmg)
 	if effectiveDmg == 0:
 		return false		
 		
-	if getStatusVariable(Globals.statusType.BARRIER) > 0:
+	if getStatusVariable(Globals.statusType.BARRIER) > 0 and !_goesThroughArmor:
 		addToStatusVariable(Globals.statusType.BARRIER,-1)
 		return false
 		
@@ -127,4 +141,5 @@ func updateStatusGUI():
 			continue
 		var statusIcon = m_statusContainer.get_child(statusIndex)
 		statusIcon.setStatus(m_statusVariables[status],status)
+		#statusIcon.scale = Vector2(0.5,0.5)
 		statusIndex+=1
