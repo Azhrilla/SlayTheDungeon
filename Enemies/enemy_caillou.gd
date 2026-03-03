@@ -1,11 +1,13 @@
 extends Enemy
 const MAX_HEALTH:int  = 40 
 var ATK_DMG:int = 10
-
+@export var m_baseDmg:int = 4
+@export var m_highDmg:int = 6
 
 func _ready() -> void:
 	m_maximumHealth = MAX_HEALTH
-	m_intentions = ["Dmg4","Dmg4","Dmg4","Dmg6","Dmg6"]
+	m_intentions=[Intention_SimpleDmg.new(m_baseDmg),Intention_SimpleDmg.new(m_highDmg)]
+	m_defaultWeightsIntentions = [3,2]
 	super._ready()
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
@@ -13,16 +15,3 @@ func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	addToStatusVariable(Globals.statusType.ARMOR,5)
 	$AnimationPlayer.play("Parry")
 	$AnimationPlayer.queue("Idle")
-
-func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
-	match m_currentIntention:
-		"Dmg4":
-			ATK_DMG = 4
-			var target = _heroes.pick_random()
-			target.takeDmg(ATK_DMG,self)
-			playAttackAnim()
-		"Dmg6":
-			ATK_DMG = 6
-			var target = _heroes.pick_random()
-			target.takeDmg(ATK_DMG,self)
-			playAttackAnim()

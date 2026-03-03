@@ -6,43 +6,14 @@ extends Enemy
 
 func _ready() -> void:
 	m_maximumHealth = m_maxHealth
-	m_intentions = ["Dmg3","Dmg4","Dmg5","Poison"]
+	m_intentions=[Intention_Poison.new(m_poison),Intention_SimpleDmg.new(m_baseDmg),Intention_SimpleDmg.new(m_baseDmg+1),Intention_SimpleDmg.new(m_baseDmg+2),Intention_FleeArmor.new(m_armor)]
+	m_defaultWeightsIntentions = [1,1,1,0]
 	super._ready()
-
-func updateIntentionStatus(_str:String):
-	super.updateIntentionStatus(_str)
-	if _str.contains("Poison"):
-		$CharUI/UIContainer/Control/Icon_Status.setStatus(m_poison,Globals.statusType.POISON)
-	if _str.contains("Flee"):
-		$CharUI/UIContainer/Control/Icon_Status.setStatus(0,Globals.statusType.JUMP)
 		
 func choseIntention():
 	if m_currentPosition == Globals.target.ENEMY1 and getMonsters().size() < 4:
-		m_currentIntention = "Flee"
-		updateIntentionStatus(m_currentIntention)
+		setIntention(m_intentions[4])
 		return
-
-	
-	m_currentIntention = m_intentions.pick_random()
-	updateIntentionStatus(m_currentIntention)
-
-
-func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
-	if m_currentIntention.contains("Dmg"):
-		var strIntention = m_currentIntention
-		strIntention.remove_chars("Dmg")
-		var target = _heroes.pick_random()
-		target.takeDmg(strIntention.to_int(),self)
-	
-	if m_currentIntention.contains("Poison"):
-		var target = _heroes.pick_random()
-		target.addToStatusVariable(Globals.statusType.POISON,m_poison)
-	
-	if m_currentIntention.contains("Flee"):
-		addToStatusVariable(Globals.statusType.ARMOR,m_armor)
-		if !findMonsterInSlot(Globals.target.ENEMY4):
-			moveTo(Globals.target.ENEMY4)
-		elif !findMonsterInSlot(Globals.target.ENEMY3):
-			moveTo(Globals.target.ENEMY3)
-		elif !findMonsterInSlot(Globals.target.ENEMY2):
-			moveTo(Globals.target.ENEMY2)
+		
+	var rng = RandomNumberGenerator.new()
+	setIntention(m_intentions[rng.rand_weighted(m_defaultWeightsIntentions)])

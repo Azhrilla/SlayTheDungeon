@@ -85,11 +85,13 @@ func heal(_value:int)->void:
 		m_currentHealth = m_maximumHealth
 
 func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true,_goesThroughArmor:bool = false) -> bool :
-	var effectiveDmg:int = useArmorAndGetDmg(_dmg)
+	var effectiveDmg:int = _dmg
+	if !_goesThroughArmor:
+		effectiveDmg = useArmorAndGetDmg(_dmg)
 	if effectiveDmg == 0:
 		return false		
 		
-	if getStatusVariable(Globals.statusType.BARRIER) > 0 and !_goesThroughArmor:
+	if getStatusVariable(Globals.statusType.BARRIER) > 0:
 		addToStatusVariable(Globals.statusType.BARRIER,-1)
 		return false
 		

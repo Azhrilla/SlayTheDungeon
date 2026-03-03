@@ -21,10 +21,7 @@ static func statusLoading():
 			
 			var newScene:PackedScene = ResourceLoader.load_threaded_get(uid)
 			m_resources[enemy] = newScene
-			print ("Finished loading {enemy} with uid :{uid} ".format({"enemy":enemy,"uid":uid}))
-		#elif status != ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED:
-			#print ("Preloading status {status} : {enemy} with uid :{uid} progress : {prog}".format({"status":status,"enemy":enemy,"uid":uid,"prog":progress[0]*100}))
-		
+			print ("Finished loading {enemy} with uid :{uid} ".format({"enemy":enemy,"uid":uid}))	
 
 static func preloadEnemy(_id:String):
 	if m_resources.has(_id):

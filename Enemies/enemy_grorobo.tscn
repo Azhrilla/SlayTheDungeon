@@ -493,10 +493,10 @@ animations = [{
 
 [node name="Enemy_Grorobo" unique_id=76610985 instance=ExtResource("1_nhwod")]
 script = ExtResource("2_jetni")
-MAX_HEALTH = 100
-m_punch = 10
-m_whip = 8
-m_shoot = 8
+MAX_HEALTH = 80
+m_punch = 8
+m_whip = 7
+m_shoot = 6
 
 [node name="CollisionShape2D" parent="." index="0"]
 position = Vector2(-1.625, -96.125)

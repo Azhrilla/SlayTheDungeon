@@ -1,29 +1,15 @@
 extends Enemy
-const MAX_HEALTH:int  = 30 
-var ATK_DMG:int = 10
+@export var m_maxHealth:int = 30
+@export var m_spike:int = 2
+@export var m_highDmg:int = 5
+@export var m_baseDmg:int = 3
 
 
 func _ready() -> void:
-	m_maximumHealth = MAX_HEALTH
+	m_maximumHealth = m_maxHealth
 	setStatusVariable(Globals.statusType.SPIKE,1)
-	m_intentions = ["Dmg3","Dmg3","Dmg3","Dmg5","Dmg5","Spike+2"]
+	m_intentions=[Intention_SimpleDmg.new(m_baseDmg),Intention_SimpleDmg.new(m_highDmg),Intention_Spike.new(m_spike)]
+	m_defaultWeightsIntentions = [3,2,1]
 	super._ready()
 
-func updateIntentionStatus(_str:String):
-	super.updateIntentionStatus(_str)
-	if _str.contains("Spike+2"):
-		$CharUI/UIContainer/Control/Icon_Status.setStatus(2,Globals.statusType.SPIKE)
-
-func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
-	match m_currentIntention:
-		"Dmg3":
-			ATK_DMG = 3
-			var target = _heroes.pick_random()
-			target.takeDmg(ATK_DMG,self)
-		"Dmg5":
-			ATK_DMG = 5
-			var target = _heroes.pick_random()
-			target.takeDmg(ATK_DMG,self)
-		"Spike+2":
-			addToStatusVariable(Globals.statusType.SPIKE,2)
 	

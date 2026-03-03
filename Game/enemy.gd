@@ -1,8 +1,9 @@
 extends Character
 class_name Enemy
 
-var m_intentions:Array[String] = []
-var m_currentIntention:String = ""
+var m_intentions:Array[Intention] = []
+var m_currentIntention:Intention = null
+var m_defaultWeightsIntentions = []
 
 func _ready() -> void:
 	super._ready()
@@ -10,7 +11,17 @@ func _ready() -> void:
 	m_type = Globals.type.MONSTER
 
 func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
-	pass
+	var target = getHeroes().pick_random()
+	m_currentIntention.doWork(self,target,_allies,m_level)
+
+func setIntention(_intent:Intention)->void:
+	m_currentIntention = _intent
+	_intent.updateIntentionStatus($CharUI/UIContainer/Control/Icon_Status)
+
+func choseIntention():
+	var rng = RandomNumberGenerator.new()
+	setIntention(m_intentions[rng.rand_weighted(m_defaultWeightsIntentions)])
+	return
 
 func increasePosition() -> void:
 	if m_currentPosition != Globals.target.ENEMY4:
@@ -23,15 +34,6 @@ func decreasePosition() -> void:
 func playAttackAnim() -> void:
 	$AnimationPlayer.play("Attack")
 	$AnimationPlayer.queue("Idle")
-
-func updateIntentionStatus(_str:String):
-	if _str.contains("Dmg"):
-		_str.remove_chars("Dmg")
-		$CharUI/UIContainer/Control/Icon_Status.setStatus(_str.to_int(),Globals.statusType.DMG)
-
-func choseIntention():
-	m_currentIntention = m_intentions.pick_random()
-	updateIntentionStatus(m_currentIntention)
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)

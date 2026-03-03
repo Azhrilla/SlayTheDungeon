@@ -5,7 +5,8 @@ var m_shieldWasUp = false
 
 func _ready() -> void:
 	m_maximumHealth = MAX_HEALTH
-	m_intentions = ["Dmg3","Dmg3","Dmg5","Dmg5","Barrier"]
+	m_intentions=[Intention_SimpleDmg.new(3),Intention_SimpleDmg.new(5),Intention_BarrierAlly.new(),Intention_Stunned.new()]
+	m_defaultWeightsIntentions = [2,2,1,0]
 	super._ready()
 	$AnimationPlayer.play("Idle")
 
@@ -18,10 +19,6 @@ func _process(_delta: float) -> void:
 		$ShieldComponent.stopShield()
 		m_shieldWasUp = false
 
-func updateIntentionStatus(_str:String):
-	super.updateIntentionStatus(_str)
-	if _str.contains("Barrier"):
-		$CharUI/UIContainer/Control/Icon_Status.setStatus(0,Globals.statusType.BARRIER)
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)
@@ -32,21 +29,7 @@ func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	super.onDamageTaken(_effectiveDmg,_attacker)
-	m_currentIntention = "N/A"
-	$CharUI/UIContainer/Control/Icon_Status.setStatus(0,Globals.statusType.INTERRO)
+	setIntention(m_intentions[3])
 	if !m_isKO:
 		$AnimationPlayer.play("Death")
 	m_isKO = true
-
-func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
-	var target = _heroes.pick_random()
-	match m_currentIntention:
-		"Dmg3":
-			target.takeDmg(3,self)
-			playAttackAnim()
-		"Dmg5":
-			target.takeDmg(5,self)
-			playAttackAnim()
-		"Barrier":
-			var ally = _allies.pick_random()
-			ally.addToStatusVariable(Globals.statusType.BARRIER,1)
