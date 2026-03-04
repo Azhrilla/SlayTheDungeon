@@ -31,9 +31,15 @@ func decreasePosition() -> void:
 	if m_currentPosition != Globals.target.ENEMY1:
 		moveTo(m_currentPosition - 1)
 
-func playAttackAnim() -> void:
-	$AnimationPlayer.play("Attack")
-	$AnimationPlayer.queue("Idle")
+func playAnim(_str:String,_shouldBackToIdle = true) -> void:
+	$AnimationPlayer.play(_str)
+	if _shouldBackToIdle:
+		$AnimationPlayer.queue("Idle")
+
+func playAnimBackward(_str:String,_shouldBackToIdle = true) -> void:
+	$AnimationPlayer.play_backwards(_str)
+	if _shouldBackToIdle:
+		$AnimationPlayer.queue("Idle")
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)

@@ -1,9 +1,11 @@
 class_name Intention_Hit_N_Run extends Intention
 
 var m_dmg:int = 0
+var m_animName:String = ""
 
-func _init(_dmg:int = 0)-> void:
+func _init(_dmg:int = 0,_animName:String = "Attack")-> void:
 	m_dmg = _dmg
+	m_animName = _animName
 
 func findMonsterInSlot(_slot:Globals.target,_allies:Array[Character]) -> Character:
 	for target in _allies:
@@ -17,4 +19,4 @@ func updateIntentionStatus(_intentionNode:Control)->void:
 func doWork(_actor:Character,_target:Character,_allies:Array[Character],_level:GameLevel) -> void:
 	_actor.increasePosition()
 	_target.takeDmg(m_dmg,_actor)
-	_actor.playAttackAnim()
+	_actor.playAnim(m_animName)

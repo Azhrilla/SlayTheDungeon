@@ -24,12 +24,11 @@ func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 	super.startRound(_heroes,_monsters)
 	if m_isKO:
 		m_isKO = false
-		$AnimationPlayer.play_backwards("Death")
-		$AnimationPlayer.queue("Idle")
+		playAnimBackward("Death")
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	super.onDamageTaken(_effectiveDmg,_attacker)
 	setIntention(m_intentions[3])
 	if !m_isKO:
-		$AnimationPlayer.play("Death")
+		playAnim("Death",false)
 	m_isKO = true

@@ -8,9 +8,9 @@ var m_currentRNG = 0
 
 var bossAttacks: Dictionary[String,Intention] ={
 		"Whip":Intention_Hit_N_Run.new(m_whip),
-		"Shoot":Intention_SimpleDmg.new(m_shoot),
+		"Shoot":Intention_SimpleDmg.new(m_shoot,"Shoot"),
 		"Drone":Intention_DroneSpawn.new(),
-		"Punch":Intention_SimpleDmg.new(m_punch),
+		"Punch":Intention_SimpleDmg.new(m_punch,"Punch"),
 	}
 
 func _ready() -> void:
@@ -21,7 +21,7 @@ func _ready() -> void:
 
 func moveTo(_target:Globals.target):
 	super.moveTo(_target)
-	if m_currentIntention != bossAttacks["DroneSpawn"]:
+	if !m_currentIntention is Intention_DroneSpawn:
 		choseIntention(false)
 
 func startRound(_heroes:Array[Character],_monsters:Array[Character]):
