@@ -1,11 +1,18 @@
 extends Node
 
+var m_starterCards:Array[String] = ["QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Slash","Slash","Grab","Grab","Grab","Defense","Defense","Defense","Defense","Defense"]
 var m_hero:Hero = null
-var m_cards:Array[String] = ["QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Slash","Slash","Grab","Grab","Grab","Defense","Defense","Defense","Defense","Defense"]
+var m_cards:Array[String] = []
 var m_currentDollars:int:
 	set = setDollars
 
 var m_currentBloc:BlocSystem = null
+
+func resetGPState() -> void:
+	m_cards.clear()
+	m_cards.append_array(m_starterCards)
+	m_hero = null
+	m_currentDollars = 100
 
 func getCurrentEnemy()->Array[String]:
 	return m_currentBloc.getCurrentEnemies()
