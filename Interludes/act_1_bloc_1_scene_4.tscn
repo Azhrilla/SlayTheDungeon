@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dg3guswae7pyg"]
+
+[ext_resource type="PackedScene" uid="uid://54escbuu8bro" path="res://Interludes/interlude_scene.tscn" id="1_dbjsq"]
+
+[node name="InterludeScene" unique_id=208375955 instance=ExtResource("1_dbjsq")]
+
+[node name="Label" parent="TextureRect2" index="0"]
+text = "Plalce Holder : on arrive à l'entropot"

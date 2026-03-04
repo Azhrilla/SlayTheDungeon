@@ -38,8 +38,11 @@ func _init():
 	addLevel("",1,Globals.cardQuality.NORMAL,50)
 	addLevel("",2,Globals.cardQuality.NORMAL,50)
 	addLevel("res://Interludes/act_1_bloc_1_scene_3.tscn")
+	addLevel("res://Interludes/act_1_bloc_1_scene_4.tscn")
 	addLevel("",3,Globals.cardQuality.NORMAL,50)
 	addLevel("",3,Globals.cardQuality.NORMAL,50)
+	addLevel("res://Interludes/act_1_bloc_1_scene_5.tscn")
 	addLevel("",5,Globals.cardQuality.NORMAL,100)
+	addLevel("res://Interludes/act_1_bloc_1_scene_6.tscn")
 	addLevel(Globals.m_victoryLevel)
 	
