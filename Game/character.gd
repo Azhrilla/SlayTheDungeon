@@ -95,7 +95,7 @@ func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true,_goe
 		addToStatusVariable(Globals.statusType.BARRIER,-1)
 		return false
 		
-	if _isAttackFirstTrigger:
+	if _isAttackFirstTrigger && _attackar != null:
 		onDamageTaken(effectiveDmg,_attacker)	
 		
 	m_currentHealth -= effectiveDmg

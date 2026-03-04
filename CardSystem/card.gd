@@ -34,6 +34,8 @@ func findTargetInSlot(_targets:Array[Character],_slot:Globals.target) -> Charact
 	return null
 
 func getCardActor(_allies:Array[Character])->Character:
+	if _allies.is_empty():
+		return null
 	return _allies[0]
 
 func setPosition(_position:Globals.cardPosition)->void:
