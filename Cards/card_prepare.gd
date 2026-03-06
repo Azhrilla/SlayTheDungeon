@@ -9,6 +9,6 @@ func _ready() -> void:
 func needTarget() -> bool:
 	return false
 
-func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
+func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	m_player.drawCard()
-	_allies.pick_random().addToStatusVariable(Globals.statusType.ARMOR,m_armor)
+	_hero.addToStatusVariable(Globals.statusType.ARMOR,m_armor)

@@ -10,9 +10,8 @@ func _ready() -> void:
 	$AnimationPlayer.play("Idle")
 	m_type = Globals.type.MONSTER
 
-func doWork(_heroes:Array[Character],_allies:Array[Character]) -> void:
-	var target = getHeroes().pick_random()
-	m_currentIntention.doWork(self,target,_allies,m_level)
+func doWork(_hero:Character,_allies:Array[Character]) -> void:
+	m_currentIntention.doWork(self,_hero,_allies,m_level)
 
 func setIntention(_intent:Intention)->void:
 	m_currentIntention = _intent
@@ -41,10 +40,10 @@ func playAnimBackward(_str:String,_shouldBackToIdle = true) -> void:
 	if _shouldBackToIdle:
 		$AnimationPlayer.queue("Idle")
 
-func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	super.startRound(_heroes,_monsters)
+func startRound(_hero:Character,_monsters:Array[Character]):
+	super.startRound(_hero,_monsters)
 	
-func endRound(_heroes:Array[Character],_monsters:Array[Character]):
-	super.endRound(_heroes,_monsters)
+func endRound(_hero:Character,_monsters:Array[Character]):
+	super.endRound(_hero,_monsters)
 	choseIntention()
 	

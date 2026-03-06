@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cusxby04duf2c"]
+
+[ext_resource type="Script" uid="uid://blt83bik1ffgv" path="res://Ojects/object_base.gd" id="1_gxygk"]
+[ext_resource type="Texture2D" uid="uid://dcyo3w2yufkom" path="res://Graphics/UI/Buttons/Button Normal.png" id="1_iryfy"]
+[ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="2_gxygk"]
+[ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="3_4ysmk"]
+[ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="4_8ltsh"]
+
+[node name="ObjectBase" type="Node2D" unique_id=2120614027]
+script = ExtResource("1_gxygk")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=851938798]
+offset_right = 40.0
+offset_bottom = 40.0
+toggle_mode = true
+texture_normal = ExtResource("1_iryfy")
+texture_pressed = ExtResource("2_gxygk")
+texture_hover = ExtResource("3_4ysmk")
+texture_disabled = ExtResource("4_8ltsh")
+
+[node name="Label" type="Label" parent="TextureButton" unique_id=225533877]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="toggled" from="TextureButton" to="." method="_on_texture_button_toggled"]

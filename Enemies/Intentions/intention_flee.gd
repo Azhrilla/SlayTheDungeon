@@ -14,7 +14,7 @@ func findMonsterInSlot(_slot:Globals.target,_allies:Array[Character]) -> Charact
 func updateIntentionStatus(_intentionNode:Control)->void:
 	_intentionNode.setStatus(0,Globals.statusType.JUMP)
 	
-func doWork(_actor:Character,_target:Character,_allies:Array[Character],_level:GameLevel) -> void:
+func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel) -> void:
 		_actor.addToStatusVariable(Globals.statusType.ARMOR,m_armor)
 		if !findMonsterInSlot(Globals.target.ENEMY4,_allies):
 			_actor.moveTo(Globals.target.ENEMY4)

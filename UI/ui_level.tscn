@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://catd2nw28jgxi"]
+[gd_scene format=3 uid="uid://catd2nw28jgxi"]
 
 [ext_resource type="Script" uid="uid://cf8xtsxrjtq34" path="res://UI/ui_level.gd" id="1_ntn5l"]
 [ext_resource type="PackedScene" uid="uid://b5lyxhlcfk2yq" path="res://UI/arrow.tscn" id="2_070cm"]
@@ -11,31 +11,41 @@
 
 [sub_resource type="Theme" id="Theme_4dia8"]
 
-[node name="UI_Level" type="CanvasLayer"]
+[node name="UI_Level" type="CanvasLayer" unique_id=437708585]
 layer = 2
 script = ExtResource("1_ntn5l")
 
-[node name="Cards" type="Control" parent="."]
+[node name="Cards" type="Control" parent="." unique_id=1725021136]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlayZone" type="Control" parent="."]
+[node name="PlayZone" type="Control" parent="." unique_id=1539928477]
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="ObjectContainer" type="VBoxContainer" parent="." unique_id=2027925790]
+anchors_preset = -1
+anchor_left = 0.928
+anchor_top = 0.032
+anchor_right = 1.0
+anchor_bottom = 0.032
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=214116409]
 anchors_preset = -1
 anchor_top = 0.03
 anchor_bottom = 0.03
 offset_right = 683.0
 offset_bottom = 66.0
 
-[node name="EndTurnButton" type="TextureButton" parent="HBoxContainer"]
+[node name="EndTurnButton" type="TextureButton" parent="HBoxContainer" unique_id=366727535]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme = SubResource("Theme_4dia8")
@@ -45,7 +55,7 @@ texture_hover = ExtResource("3_muh4u")
 texture_disabled = ExtResource("4_y5r26")
 stretch_mode = 0
 
-[node name="Button" type="Label" parent="HBoxContainer/EndTurnButton"]
+[node name="Button" type="Label" parent="HBoxContainer/EndTurnButton" unique_id=1217878078]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -61,7 +71,7 @@ grow_vertical = 2
 theme = ExtResource("6_6x1on")
 text = "End Turn"
 
-[node name="DrawButton" type="TextureButton" parent="HBoxContainer"]
+[node name="DrawButton" type="TextureButton" parent="HBoxContainer" unique_id=833571753]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme = SubResource("Theme_4dia8")
@@ -71,7 +81,7 @@ texture_hover = ExtResource("3_muh4u")
 texture_disabled = ExtResource("4_y5r26")
 stretch_mode = 0
 
-[node name="ButtonLabel" type="Label" parent="HBoxContainer/DrawButton"]
+[node name="ButtonLabel" type="Label" parent="HBoxContainer/DrawButton" unique_id=1919902809]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -87,7 +97,7 @@ grow_vertical = 2
 theme = ExtResource("6_6x1on")
 text = "Show DrawPile"
 
-[node name="DiscardButton" type="TextureButton" parent="HBoxContainer"]
+[node name="DiscardButton" type="TextureButton" parent="HBoxContainer" unique_id=1269877796]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 theme = SubResource("Theme_4dia8")
@@ -97,7 +107,7 @@ texture_hover = ExtResource("3_muh4u")
 texture_disabled = ExtResource("4_y5r26")
 stretch_mode = 0
 
-[node name="Button" type="Label" parent="HBoxContainer/DiscardButton"]
+[node name="Button" type="Label" parent="HBoxContainer/DiscardButton" unique_id=1019458697]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -113,13 +123,13 @@ grow_vertical = 2
 theme = ExtResource("6_6x1on")
 text = "Show Discard"
 
-[node name="HandLeft" type="Control" parent="."]
+[node name="HandLeft" type="Control" parent="." unique_id=1767461670]
 layout_mode = 3
 anchor_top = 0.7
 anchor_bottom = 0.7
 grow_vertical = 0
 
-[node name="HandRight" type="Control" parent="."]
+[node name="HandRight" type="Control" parent="." unique_id=1372973481]
 layout_mode = 3
 anchor_left = 1.0
 anchor_top = 0.7
@@ -128,7 +138,7 @@ anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Deck" type="Control" parent="."]
+[node name="Deck" type="Control" parent="." unique_id=2022429618]
 visible = false
 layout_mode = 3
 anchor_left = 0.1
@@ -138,7 +148,7 @@ anchor_bottom = 0.2
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Discard" type="Control" parent="."]
+[node name="Discard" type="Control" parent="." unique_id=1757137829]
 visible = false
 layout_mode = 3
 anchor_left = 0.9
@@ -150,7 +160,7 @@ offset_bottom = 40.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerPos" type="Control" parent="."]
+[node name="PlayerPos" type="Control" parent="." unique_id=725464612]
 layout_mode = 3
 anchor_left = 0.29
 anchor_top = 0.58
@@ -161,9 +171,9 @@ offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
 
-[node name="Arrow" parent="." instance=ExtResource("2_070cm")]
+[node name="Arrow" parent="." unique_id=975008601 instance=ExtResource("2_070cm")]
 
-[node name="Enemies" type="Control" parent="."]
+[node name="Enemies" type="Control" parent="." unique_id=1188090065]
 layout_mode = 3
 anchor_left = 0.476
 anchor_top = 0.43
@@ -175,28 +185,28 @@ offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="MonsterBox" type="HBoxContainer" parent="Enemies"]
+[node name="MonsterBox" type="HBoxContainer" parent="Enemies" unique_id=1443099753]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Control" type="Control" parent="Enemies/MonsterBox"]
+[node name="Control" type="Control" parent="Enemies/MonsterBox" unique_id=9995087]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="Enemies/MonsterBox"]
+[node name="Control2" type="Control" parent="Enemies/MonsterBox" unique_id=1199680406]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
-[node name="Control3" type="Control" parent="Enemies/MonsterBox"]
+[node name="Control3" type="Control" parent="Enemies/MonsterBox" unique_id=760265241]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
-[node name="Control4" type="Control" parent="Enemies/MonsterBox"]
+[node name="Control4" type="Control" parent="Enemies/MonsterBox" unique_id=996917767]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
-[node name="ShowDeck" type="Control" parent="."]
+[node name="ShowDeck" type="Control" parent="." unique_id=1226751642]
 visible = false
 clip_children = 1
 custom_minimum_size = Vector2(400, 400)
@@ -211,7 +221,7 @@ offset_right = 116.0
 offset_bottom = 20.0
 grow_horizontal = 2
 
-[node name="TextureRect" type="TextureRect" parent="ShowDeck"]
+[node name="TextureRect" type="TextureRect" parent="ShowDeck" unique_id=1349453604]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = 15
@@ -222,7 +232,7 @@ grow_vertical = 2
 texture = ExtResource("8_fyvf8")
 expand_mode = 1
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ShowDeck/TextureRect"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ShowDeck/TextureRect" unique_id=1031064521]
 clip_children = 2
 custom_minimum_size = Vector2(0, 500)
 layout_mode = 1
@@ -235,11 +245,11 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
 
-[node name="GridContainer" type="GridContainer" parent="ShowDeck/TextureRect/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="ShowDeck/TextureRect/ScrollContainer" unique_id=139296931]
 layout_mode = 2
 columns = 5
 
-[node name="Hand" type="HBoxContainer" parent="."]
+[node name="Hand" type="HBoxContainer" parent="." unique_id=1151074393]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

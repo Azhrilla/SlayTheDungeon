@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bn2pjgfauuhyi"]
+
+[ext_resource type="PackedScene" uid="uid://cusxby04duf2c" path="res://Ojects/Object_Base.tscn" id="1_l54lk"]
+[ext_resource type="Script" uid="uid://dgi8bmpv06ofi" path="res://Ojects/object_techno_canon.gd" id="2_c6mf3"]
+
+[node name="ObjectTechnoCanon" unique_id=2120614027 instance=ExtResource("1_l54lk")]
+script = ExtResource("2_c6mf3")
+
+[node name="Label" parent="TextureButton" parent_id_path=PackedInt32Array(851938798) index="0" unique_id=225533877]
+text = "TechnoCanon"

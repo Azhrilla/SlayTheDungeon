@@ -8,5 +8,5 @@ func _init(_poison:int = 0)-> void:
 func updateIntentionStatus(_intentionNode:Control)->void:
 	_intentionNode.setStatus(m_poisonValue,Globals.statusType.POISON)
 	
-func doWork(_actor:Character,_target:Character,_allies:Array[Character],_level:GameLevel) -> void:
+func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel) -> void:
 	_target.addToStatusVariable(Globals.statusType.POISON,m_poisonValue)

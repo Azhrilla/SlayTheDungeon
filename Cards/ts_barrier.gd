@@ -6,5 +6,5 @@ func _ready():
 func needTarget() -> bool:
 	return false
 
-func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
-	_allies[0].addToStatusVariable(Globals.statusType.BARRIER,1)
+func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
+	_hero.addToStatusVariable(Globals.statusType.BARRIER,1)

@@ -10,10 +10,10 @@ func _ready() -> void:
 func needTarget() -> bool:
 	return false
 
-func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
+func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	var currentDmg = m_damage
 	for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
 		var target = findTargetInSlot(_targets,index)
 		if target:
-			attackTarget(currentDmg,target,_allies)
+			attackTarget(currentDmg,target,_hero)
 			currentDmg -= m_diminution

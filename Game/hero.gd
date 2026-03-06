@@ -1,24 +1,31 @@
 extends Character
 class_name Hero
-var m_chips: Array[Chip]
 
+const objectScene:PackedScene = preload("res://Ojects/object_techno_canon.tscn")
+
+
+var m_chips: Array[Chip]
+var m_objects:Array[ObjectBase]
 
 func processAttacks(_attack:atkObject) -> void:
 	_attack.m_baseDmg += getStatusVariable(Globals.statusType.STR)
 	for chip in m_chips:
 		chip.processChipsWhileAttacking(_attack)
-
+		
+func getObjects()->Array[ObjectBase]:
+	return m_objects
+	
 func startCombat():
 	for chip in m_chips:
 		chip.startCombat()
 
-func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	super.startRound(_heroes,_monsters)
+func startRound(_hero:Character,_monsters:Array[Character]):
+	super.startRound(_hero,_monsters)
 	for chip in m_chips:
 		chip.startRound()
 
-func endRound(_heroes:Array[Character],_monsters:Array[Character]):
-	super.endRound(_heroes,_monsters)
+func endRound(_hero:Character,_monsters:Array[Character]):
+	super.endRound(_hero,_monsters)
 	for chip in m_chips:
 		chip.endRound()
 
@@ -45,3 +52,5 @@ func _ready() -> void:
 	super._ready()
 	m_type = Globals.type.HERO
 	$Sprite2D2/AnimationPlayer.play("idle")
+	var newObject:ObjectBase = objectScene.instantiate()
+	m_objects.append(newObject)

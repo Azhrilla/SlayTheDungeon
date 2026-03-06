@@ -1,18 +1,15 @@
 extends Node2D
 class_name Player
 
-
-
 var m_mouseOverButton:bool = false
 var m_currentHandSize:int = 7
 var m_currentDrawCount:int = 5
-var m_heroes: Array[Character] = []
-
+var m_hero:Hero = null
 
 
 #Accessors
-func getHeroes() -> Array[Character]:
-	return m_heroes
+func getHero() -> Character:
+	return m_hero
 
 #SetUpLevel
 func addCard(_card:Card)->void:
@@ -21,17 +18,23 @@ func addCard(_card:Card)->void:
 
 func attachHero():
 	$Heroes.add_child(GpState.m_hero)
-	m_heroes.append(GpState.m_hero)
+	m_hero = GpState.m_hero
 	GpState.m_hero.connect("OnDeath", onHeroDeath)
 
 func detachHeroes():
 	$Heroes.remove_child(GpState.m_hero)
+	
+	var objects = m_hero.getObjects()
+	for object in objects:
+		object.isObjectToggled.disconnect()
+		if object.get_parent():
+			object.get_parent().remove_child(object)
+		m_hero.add_child(object)
 
 func onHeroDeath(_hero:Character):
-	m_heroes.erase(_hero)
+	m_hero = null
 	$Heroes.remove_child(_hero)
-	if m_heroes.is_empty():
-		MainUI.switchLevel("res://UI/defeat.tscn")
+	MainUI.switchLevel("res://UI/defeat.tscn")
 
 func _process(_delta: float) -> void:
 	pass
@@ -53,38 +56,44 @@ func discardCard(_card:Card):
 	$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)
 
 func startCombat():
-	for hero in m_heroes:
-		hero.startCombat()
+	m_hero.startCombat()
 
-func startRound(_heroes:Array[Character],_monsters:Array[Character]):
+func startRound(_hero:Character,_monsters:Array[Character]):
 	for cardCount in range(m_currentDrawCount):
 		drawCard()
-	for hero in m_heroes:
-		hero.startRound(_heroes,_monsters)
+	m_hero.startRound(_hero,_monsters)
 
-func endRound(_heroes:Array[Character],_monsters:Array[Character]):
-	for hero in m_heroes:
-		hero.endRound(_heroes,_monsters)
+func endRound(_hero:Character,_monsters:Array[Character]):
+	m_hero.endRound(_hero,_monsters)
 	while $CardHolder.getCardCount(Globals.cardPosition.HAND) != 0:
 		discardCard($CardHolder.getCardContainer(Globals.cardPosition.HAND)[0])
 
+func getObjectInUse() -> ObjectBase:
+	for object:ObjectBase in m_hero.getObjects():
+		if object.getToggle():
+			return object
+	return null
+
 func playCard(_card:Card,_targets:Array[Character],_targetPosition:Globals.target):
-	for hero in m_heroes:
-		hero.cardPlayed(_card)
+	var objectUsed:ObjectBase = getObjectInUse()
+	if objectUsed:
+		discardCard(_card)
+		objectUsed.doWork(_targets,m_hero,_targetPosition)
+		return
 	
-	_card.doWork(_targets,m_heroes,_targetPosition)
+	m_hero.cardPlayed(_card)
+	
+	_card.doWork(_targets,m_hero,_targetPosition)
 	if _card.m_cardType == Globals.cardType.NORMAL:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)
 	elif _card.m_cardType == Globals.cardType.POWER:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.POWER)
 
 func endCombat():
-	for hero in m_heroes:
-		hero.endCombat()
+	m_hero.endCombat()
 
 func processPowersWhenAttacking(_attack:atkObject) -> void:
 	for card:Card in $CardHolder.getCardContainer(Globals.cardPosition.POWER):
 		if card.has_method( "processPowersWhenAttacking"):
 			card.processPowersWhenAttacking(_attack)
-	for hero in m_heroes:
-		hero.processAttacks(_attack)
+	m_hero.processAttacks(_attack)

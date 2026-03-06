@@ -20,8 +20,8 @@ func _process(_delta: float) -> void:
 		m_shieldWasUp = false
 
 
-func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	super.startRound(_heroes,_monsters)
+func startRound(_hero:Character,_monsters:Array[Character]):
+	super.startRound(_hero,_monsters)
 	if m_isKO:
 		m_isKO = false
 		playAnimBackward("Death")

@@ -1,5 +1,4 @@
 extends CanvasLayer
-
 signal endTurnPressed
 signal cardShouldBePlayed(_card:Card,_target:Globals.target)
 
@@ -18,6 +17,9 @@ var m_dragMode:dragMod = dragMod.NONE
 var m_currentTarget:Globals.target = Globals.target.NONE
 var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
 
+var m_currentMana = 10
+var m_currentObject = null
+
 func _ready() -> void:
 	$ShowDeck/TextureRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$ShowDeck/TextureRect/ScrollContainer/GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -25,9 +27,17 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(refreshUI)
 	refreshUI()
 	setDragMode(dragMod.NONE)
-
+	
 func setCharacters(_chars:Array[Character]) -> void:
 	m_characters = _chars
+	for character:Character in m_characters:
+		if character is Hero:
+			for object:ObjectBase in character.getObjects():
+				if object.get_parent():
+					object.get_parent().remove_child(object)
+				$ObjectContainer.add_child(object)
+				object.isObjectToggled.connect(onObjectToggled)
+			
 
 func getMonsterPosition(_pos:Globals.target)->Vector2:
 	var currentBox = $Enemies/MonsterBox/Control
@@ -120,12 +130,19 @@ func handleDrag():
 		m_cardPlayable = false
 		m_cardHovered.position = m_hoveredLastPosition
 
+func cardOrObjectNeedTarget() -> bool:
+	if m_currentObject:
+		return m_currentObject.needTarget()
+	if m_cardHovered:
+		return m_cardHovered.needTarget()
+	return false
+
 func _process(_delta: float) -> void:
 	reorganizeHandPositions()		
 	refreshUI()
 	
 	if (Input.is_action_pressed("click")) and m_cardHovered:
-		if m_cardHovered.needTarget():
+		if cardOrObjectNeedTarget():
 			setDragMode(dragMod.TARGET)
 		else:
 			setDragMode(dragMod.PLAY)
@@ -297,12 +314,26 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 		controlNodes[index].add_child(card)
 		index +=1
 
+func getCurrentMana()->int:
+	return 10
+	
+func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
+	if _toggle == false:
+		m_currentObject = null
+		return
+	
+	if _object.getCost() < getCurrentMana():
+		m_currentObject = _object
+	else:
+		_object.setToggle(false)
+
+
+
 func _on_draw_button_pressed() -> void:
 	if m_currentlyShownDeck == Globals.cardPosition.DECK:
 		hideDeck(Globals.cardPosition.DECK)
 	else:
 		showDeck(Globals.cardPosition.DECK)
-
 
 func _on_discard_button_pressed() -> void:
 	if m_currentlyShownDeck == Globals.cardPosition.DISCARD:

@@ -13,14 +13,14 @@ var m_cardType = Globals.cardType.NORMAL
 func needTarget() -> bool:
 	return false
 
-func attackTarget(_baseDmg:int,_target:Character,_allies:Array[Character]) -> bool:
+func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	var attack = atkObject.new()
-	attack.m_allies = _allies
+	attack.m_hero = _hero
 	attack.m_baseDmg = _baseDmg
 	attack.m_target = _target
 	m_player.processPowersWhenAttacking(attack)
 	print ("Card {card} will attack target {target} for {dmg} dmg".format({"dmg":str(attack.m_baseDmg),"card":str(self),"target":str(_target)}))
-	return _target.takeDmg(attack.m_baseDmg,getCardActor(_allies))
+	return _target.takeDmg(attack.m_baseDmg,_hero)
 
 func _ready() -> void:
 	updateVisibility()
@@ -65,7 +65,7 @@ func startParticles():
 func stopParticles():
 	$CPUParticles2D.emitting = false
 
-func doWork(_enemies:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
+func doWork(_enemies:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	push_error("Card does not have a doWork function")
 
 func _on_card_appearance_mouse_entered() -> void:

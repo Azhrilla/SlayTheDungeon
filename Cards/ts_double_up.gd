@@ -10,16 +10,16 @@ func _ready() -> void:
 func needTarget() -> bool:
 	return false
 
-func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
+func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	
 	for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
 		var target = findTargetInSlot(_targets,index)
 		if target:
-			var isTargetKilled = attackTarget(m_damage,target,_allies)
+			var isTargetKilled = attackTarget(m_damage,target,_hero)
 			var target2 = findTargetInSlot(_targets,index+1)
 			if target2:
 				var newDmg = m_damage
 				if isTargetKilled:
 					newDmg = m_critDmg
-				attackTarget(newDmg,target2,_allies)
+				attackTarget(newDmg,target2,_hero)
 			return

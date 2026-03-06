@@ -64,31 +64,31 @@ func startRound():
 
 func playerStartRound():
 	m_currentTurnState = turnState.PLAYER_START
-	$Player.startRound($Player.getHeroes(),m_enemies)
+	$Player.startRound($Player.getHero(),m_enemies)
 	m_nextTurnState = turnState.NONE
 	
 func playerEndRound():
 	m_currentTurnState = turnState.PLAYER_END
-	$Player.endRound($Player.getHeroes(),m_enemies)
+	$Player.endRound($Player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_START
 	
 func monsterStartRound():
 	m_currentTurnState = turnState.MONSTER_START
-	for enemy:Character in m_enemies:
-		enemy.startRound($Player.getHeroes(),m_enemies)
+	for enemy:Enemy in m_enemies:
+		enemy.startRound($Player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_PLAY
 
 func monsterPlay():
 	m_currentTurnState = turnState.MONSTER_PLAY
 	for enemy:Character in m_enemies:
-		if !$Player.getHeroes().is_empty():
-			enemy.doWork($Player.getHeroes(),m_enemies)
+		if $Player.getHero():
+			enemy.doWork($Player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_END
 	
 func monsterEndRound():
 	m_currentTurnState = turnState.MONSTER_END
 	for enemy:Character in m_enemies:
-		enemy.endRound($Player.getHeroes(),m_enemies)
+		enemy.endRound($Player.getHero(),m_enemies)
 	m_nextTurnState = turnState.ROUND_END
 
 func endRound():
@@ -103,9 +103,9 @@ func endCombat()->void:
 	
 func setCharacters()->void:
 	var characters:Array[Character] = []
-	for hero in $Player.getHeroes():
-		characters.append(hero)
-		hero.m_level = self
+	var hero = $Player.getHero()
+	characters.append(hero)
+	hero.m_level = self
 	for enemy in m_enemies:
 		characters.append(enemy)
 	$UI_Level.setCharacters(characters)	

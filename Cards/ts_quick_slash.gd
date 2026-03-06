@@ -5,7 +5,7 @@ extends Card
 func needTarget() -> bool:
 	return false
 
-func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
+func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	var target = findTargetInSlot(_targets,Globals.target.ENEMY1)
 	if (target):
-		attackTarget(m_damage,target,_allies)
+		attackTarget(m_damage,target,_hero)

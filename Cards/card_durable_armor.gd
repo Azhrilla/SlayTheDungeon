@@ -5,6 +5,5 @@ func _ready() -> void:
 func needTarget() -> bool:
 	return false
 
-func doWork(_targets:Array[Character],_allies:Array[Character],_targetPosition:Globals.target):
-	for ally:Character in _allies :
-		ally.m_armorIsPermanent = true
+func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
+	_hero.m_armorIsPermanent = true

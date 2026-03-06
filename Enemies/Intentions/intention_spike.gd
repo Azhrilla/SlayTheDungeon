@@ -8,5 +8,5 @@ func _init(_spike:int = 0)-> void:
 func updateIntentionStatus(_intentionNode:Control)->void:
 	_intentionNode.setStatus(m_spikeAmount,Globals.statusType.SPIKE)
 	
-func doWork(_actor:Character,_target:Character,_allies:Array[Character],_level:GameLevel) -> void:
+func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel) -> void:
 	_actor.addToStatusVariable(Globals.statusType.SPIKE,m_spikeAmount)

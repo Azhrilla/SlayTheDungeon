@@ -40,8 +40,8 @@ func _process(_delta: float) -> void:
 	m_healthBar.value = m_currentHealth
 	m_healthValue.text = "PVs:{0}".format([m_currentHealth])
 
-func getHeroes()->Array[Character]:
-	return m_level.getHeroes()
+func getHero()->Character:
+	return m_level.getHero()
 
 func getMonsters()->Array[Character]:
 	return m_level.getEnemies()
@@ -53,12 +53,12 @@ func findMonsterInSlot(_slot:Globals.target) -> Character:
 	return null
 
 #GamePlay Functions
-func startRound(_heroes:Array[Character],_monsters:Array[Character]):
+func startRound(_hero:Character,_monsters:Array[Character]):
 	if !m_armorIsPermanent:
 		setStatusVariable(Globals.statusType.ARMOR,0)
 
 
-func endRound(_heroes:Array[Character],_monsters:Array[Character]):	
+func endRound(_hero:Character,_monsters:Array[Character]):	
 	var poisonCount = getStatusVariable(Globals.statusType.POISON)	
 	if poisonCount > 0:
 		takeDmg(poisonCount,null,false,true)

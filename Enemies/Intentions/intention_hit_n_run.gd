@@ -16,7 +16,7 @@ func findMonsterInSlot(_slot:Globals.target,_allies:Array[Character]) -> Charact
 func updateIntentionStatus(_intentionNode:Control)->void:
 	_intentionNode.setStatus(m_dmg,Globals.statusType.JUMP)
 	
-func doWork(_actor:Character,_target:Character,_allies:Array[Character],_level:GameLevel) -> void:
+func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel) -> void:
 	_actor.increasePosition()
 	_target.takeDmg(m_dmg,_actor)
 	_actor.playAnim(m_animName)
