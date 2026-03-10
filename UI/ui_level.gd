@@ -27,6 +27,8 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(refreshUI)
 	refreshUI()
 	setDragMode(dragMod.NONE)
+	$CombatUICharacter.init(GpState.m_hero)
+	
 	
 func setCharacters(_chars:Array[Character]) -> void:
 	m_characters = _chars
@@ -153,6 +155,8 @@ func _process(_delta: float) -> void:
 		if m_cardPlayable:
 			if (m_dragMode == dragMod.TARGET and m_currentTarget != Globals.target.NONE) or m_dragMode == dragMod.PLAY:
 				cardShouldBePlayed.emit(m_cardHovered,m_currentTarget)
+				if m_currentObject:
+					onObjectToggled(m_currentObject, false)
 		m_cardHovered.stopParticles()
 		m_cardHovered.scale = Vector2.ONE
 		m_cardHovered = null
@@ -277,7 +281,7 @@ func hideDeck(_zoneType:Globals.cardPosition)->void:
 	for card in getCardsInPosition(Globals.cardPosition.HAND):
 		card.visible = true
 	
-	$HBoxContainer/EndTurnButton.disabled = false
+	$EndTurnButton.disabled = false
 	$ShowDeck.visible = false
 	
 	for card in getCardsInPosition(_zoneType):
@@ -304,7 +308,7 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 	for card in getCardsInPosition(Globals.cardPosition.HAND):
 		card.visible = false
 	
-	$HBoxContainer/EndTurnButton.disabled = true
+	$EndTurnButton.disabled = true
 	
 	var index = 0
 	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
@@ -314,20 +318,22 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 		controlNodes[index].add_child(card)
 		index +=1
 
-func getCurrentMana()->int:
-	return 10
+func getCurrentTechnoChartreuseCount()->int:
+	for character in m_characters:
+		if character.m_type == Globals.type.HERO:
+			return character.getCurrentTechnoChartreuseCount()
+	return 0	
 	
 func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 	if _toggle == false:
 		m_currentObject = null
+		_object.setToggle(_toggle)
 		return
 	
-	if _object.getCost() < getCurrentMana():
+	if _object.getCost() <= getCurrentTechnoChartreuseCount():
 		m_currentObject = _object
 	else:
 		_object.setToggle(false)
-
-
 
 func _on_draw_button_pressed() -> void:
 	if m_currentlyShownDeck == Globals.cardPosition.DECK:

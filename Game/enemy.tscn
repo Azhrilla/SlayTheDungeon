@@ -1,33 +1,38 @@
-[gd_scene load_steps=4 format=3 uid="uid://dsjhyxievg8pq"]
+[gd_scene format=3 uid="uid://dsjhyxievg8pq"]
 
 [ext_resource type="PackedScene" uid="uid://b3or1ncou622t" path="res://Game/character.tscn" id="1_w44hy"]
 [ext_resource type="Script" uid="uid://xo5mjkujeho2" path="res://Game/enemy.gd" id="2_3lea4"]
 [ext_resource type="PackedScene" uid="uid://c8lxcjexkeo5q" path="res://UI/Icons/icon_status.tscn" id="3_jv4p2"]
+[ext_resource type="PackedScene" uid="uid://du1twjc8uk54m" path="res://Components/component_ui_character.tscn" id="4_sisc6"]
 
-[node name="Enemy" instance=ExtResource("1_w44hy")]
+[node name="Enemy" unique_id=1407420441 instance=ExtResource("1_w44hy")]
 script = ExtResource("2_3lea4")
 
-[node name="CharUI" parent="." index="2"]
+[node name="CharUI" parent="." index="2" unique_id=821363990]
+visible = true
 offset_top = -130.0
 offset_bottom = 20.0
 
-[node name="Control" type="Control" parent="CharUI/UIContainer" index="0"]
+[node name="Control" type="Control" parent="CharUI/UIContainer" parent_id_path=PackedInt32Array(97881623) index="0" unique_id=925966220]
 custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Icon_Status" parent="CharUI/UIContainer/Control" index="0" instance=ExtResource("3_jv4p2")]
+[node name="Icon_Status" parent="CharUI/UIContainer/Control" index="0" unique_id=2033434241 instance=ExtResource("3_jv4p2")]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -12.5
 offset_top = -15.0
 offset_right = 12.5
 offset_bottom = 15.0
-grow_horizontal = 2
-grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="HealthBar" parent="CharUI/UIContainer" parent_id_path=PackedInt32Array(97881623) index="1" unique_id=1449422509]
+visible = false
+
+[node name="StatusContainer" parent="CharUI/UIContainer" parent_id_path=PackedInt32Array(97881623) index="2" unique_id=1549505276]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3" unique_id=1750095605]
+
+[node name="ComponentUICharacter" parent="." index="4" unique_id=529866760 instance=ExtResource("4_sisc6")]
+offset_top = -71.0
+offset_bottom = -71.0

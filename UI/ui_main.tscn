@@ -35,12 +35,14 @@ grow_vertical = 2
 autowrap_mode = 3
 
 [node name="Control" type="Control" parent="." unique_id=1349586006]
+visible = false
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.03
 grow_horizontal = 2
 
 [node name="TextureRect" type="ColorRect" parent="Control" unique_id=446669340]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

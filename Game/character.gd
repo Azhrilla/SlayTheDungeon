@@ -6,17 +6,22 @@ class_name Character
 @onready var m_statusContainer = $CharUI/UIContainer/StatusContainer
 @onready var m_healthBar = $CharUI/UIContainer/HealthBar
 @onready var m_healthValue = $CharUI/UIContainer/HealthBar/HealthValue
+@onready var m_componentUICharacter:ComponentUICharacter = $ComponentUICharacter
+
 
 #Scenes
 const  iconStatusScene:PackedScene = preload("res://UI/Icons/icon_status.tscn")
 
 #Signals
 signal OnDeath
+signal onLifeChanged
+signal onStatusChanged
 
 #Attributes
 var m_level = null
 var m_maximumHealth = 40
-var m_currentHealth = 0
+var m_currentHealth = 0:
+	set = setHealth
 var m_type = Globals.type.NONE
 var m_armorIsPermanent:bool = false
 var m_currentPosition = Globals.target.NONE
@@ -31,10 +36,16 @@ var m_statusVariables = {
 
 const m_buffList = [Globals.statusType.STR,Globals.statusType.ARMOR,Globals.statusType.BARRIER,Globals.statusType.SPIKE]
 
+func setHealth(_value:int):
+	m_currentHealth = _value
+	onLifeChanged.emit(self)
+
 #Base Functions
 func _ready() -> void:
 	m_healthBar.max_value = m_maximumHealth
 	m_currentHealth = m_maximumHealth
+	if m_componentUICharacter:
+		m_componentUICharacter.init(self)
 
 func _process(_delta: float) -> void:
 	m_healthBar.value = m_currentHealth
@@ -109,6 +120,7 @@ func getStatusVariable(_status:Globals.statusType) -> int:
 
 func setStatusVariable(_status:Globals.statusType,_value:int)->void:
 	m_statusVariables[_status]=_value
+	onStatusChanged.emit(self)
 	updateStatusGUI()
 
 func addToStatusVariable(_status:Globals.statusType,_value:int)->void:
@@ -143,5 +155,4 @@ func updateStatusGUI():
 			continue
 		var statusIcon = m_statusContainer.get_child(statusIndex)
 		statusIcon.setStatus(m_statusVariables[status],status)
-		#statusIcon.scale = Vector2(0.5,0.5)
 		statusIndex+=1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://54escbuu8bro"]
+[gd_scene format=3 uid="uid://54escbuu8bro"]
 
 [ext_resource type="Texture2D" uid="uid://unk678wwkvuo" path="res://Graphics/UI/Card X1.png" id="1_7e63x"]
 [ext_resource type="Script" uid="uid://b0p0ukmcojf23" path="res://Interludes/interlude_scene.gd" id="1_f665n"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="5_ljedp"]
 [ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="6_neoe5"]
 
-[node name="InterludeScene" type="Control"]
+[node name="InterludeScene" type="Control" unique_id=625163298]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -17,7 +17,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_f665n")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1748191092]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -26,19 +26,22 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="."]
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=577931664]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.15
-anchor_right = 1.0
-anchor_bottom = 0.85
+anchor_right = 0.941
+anchor_bottom = 0.75
+offset_top = -102.0
+offset_right = 34.28003
+offset_bottom = 152.0
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("1_7e63x")
 expand_mode = 4
 
-[node name="Label" type="Label" parent="TextureRect2"]
+[node name="Label" type="Label" parent="TextureRect2" unique_id=1678306790]
 custom_minimum_size = Vector2(450, 300)
 layout_mode = 1
 anchors_preset = 8
@@ -56,7 +59,7 @@ theme = ExtResource("1_kl1j2")
 theme_override_font_sizes/font_size = 12
 autowrap_mode = 3
 
-[node name="ButtonNext" type="TextureButton" parent="TextureRect2"]
+[node name="ButtonNext" type="TextureButton" parent="TextureRect2" unique_id=690324809]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -73,7 +76,7 @@ texture_pressed = ExtResource("4_f665n")
 texture_hover = ExtResource("5_ljedp")
 texture_disabled = ExtResource("6_neoe5")
 
-[node name="Label" type="Label" parent="TextureRect2/ButtonNext"]
+[node name="Label" type="Label" parent="TextureRect2/ButtonNext" unique_id=869078104]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

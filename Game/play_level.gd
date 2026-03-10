@@ -1,5 +1,6 @@
 extends Node2D
 
+
 class_name GameLevel
 
 var m_enemies:Array[Character] = []
@@ -7,10 +8,10 @@ var m_turnOver:bool = false
 enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE,END_COMBAT}
 var m_currentTurnState = turnState.START_COMBAT
 var m_nextTurnState
-
+@onready var m_player = $Player
 
 func getHeroes()->Array[Character]:
-	return $Player.getHeroes()
+	return m_player.getHeroes()
 
 func getEnemies()->Array[Character]:
 	return m_enemies
@@ -51,12 +52,12 @@ func createCards():
 	for cardName in GpState.m_cards:
 		var newCard = CardFactory.createCard(cardName)
 		$UI_Level.addCard(newCard)
-		$Player.addCard(newCard)
-	$Player.shuffle()
+		m_player.addCard(newCard)
+	m_player.shuffle()
 
 func startCombat():
 	m_nextTurnState = turnState.MONSTER_END
-	$Player.startCombat()
+	m_player.startCombat()
 
 func startRound():
 	m_currentTurnState = turnState.ROUND_START
@@ -64,31 +65,31 @@ func startRound():
 
 func playerStartRound():
 	m_currentTurnState = turnState.PLAYER_START
-	$Player.startRound($Player.getHero(),m_enemies)
+	m_player.startRound(m_player.getHero(),m_enemies)
 	m_nextTurnState = turnState.NONE
 	
 func playerEndRound():
 	m_currentTurnState = turnState.PLAYER_END
-	$Player.endRound($Player.getHero(),m_enemies)
+	m_player.endRound(m_player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_START
 	
 func monsterStartRound():
 	m_currentTurnState = turnState.MONSTER_START
 	for enemy:Enemy in m_enemies:
-		enemy.startRound($Player.getHero(),m_enemies)
+		enemy.startRound(m_player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_PLAY
 
 func monsterPlay():
 	m_currentTurnState = turnState.MONSTER_PLAY
 	for enemy:Character in m_enemies:
-		if $Player.getHero():
-			enemy.doWork($Player.getHero(),m_enemies)
+		if m_player.getHero():
+			enemy.doWork(m_player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_END
 	
 func monsterEndRound():
 	m_currentTurnState = turnState.MONSTER_END
 	for enemy:Character in m_enemies:
-		enemy.endRound($Player.getHero(),m_enemies)
+		enemy.endRound(m_player.getHero(),m_enemies)
 	m_nextTurnState = turnState.ROUND_END
 
 func endRound():
@@ -96,14 +97,14 @@ func endRound():
 	m_nextTurnState = turnState.ROUND_START
 
 func endCombat()->void:
-	$Player.endCombat()
-	$Player.detachHeroes()
+	m_player.endCombat()
+	m_player.detachHeroes()
 	MainUI.goToNextLevel()
 	m_nextTurnState = turnState.NONE
 	
 func setCharacters()->void:
 	var characters:Array[Character] = []
-	var hero = $Player.getHero()
+	var hero = m_player.getHero()
 	characters.append(hero)
 	hero.m_level = self
 	for enemy in m_enemies:
@@ -123,6 +124,9 @@ func onEnemyDeath(_enemy:Character):
 		m_nextTurnState = turnState.END_COMBAT
 
 func _process(_delta: float) -> void:
+	if !m_player or !m_player.getHero():
+		return
+		
 	match m_nextTurnState:
 		turnState.START_COMBAT:
 			startCombat()
@@ -144,13 +148,13 @@ func _process(_delta: float) -> void:
 			endCombat()
 
 func _on_button_mouse_entered() -> void:
-	$Player.m_mouseOverButton = true
+	m_player.m_mouseOverButton = true
 
 func _on_button_mouse_exited() -> void:
-	$Player.m_mouseOverButton = false
+	m_player.m_mouseOverButton = false
 
 func _on_ui_level_end_turn_pressed() -> void:
 	m_nextTurnState = turnState.PLAYER_END
 
 func _on_ui_level_card_should_be_played(_card:Card,_target:Globals.target) -> void:
-	$Player.playCard(_card,m_enemies,_target)
+	m_player.playCard(_card,m_enemies,_target)

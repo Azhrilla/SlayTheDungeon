@@ -22,5 +22,4 @@ static func createChip(_id:String)->Chip:
 			push_error ("Error: the chip with name {} was not implemented".format(_id))
 			newChip = null
 	print("new chip :{chip}".format({"chip":_id}))
-	MainUI.addChip(newChip)
 	return newChip

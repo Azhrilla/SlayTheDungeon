@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0xggmt28dhm3"]
+[gd_scene format=3 uid="uid://d0xggmt28dhm3"]
 
 [ext_resource type="PackedScene" uid="uid://54escbuu8bro" path="res://Interludes/interlude_scene.tscn" id="1_rwfia"]
 [ext_resource type="Texture2D" uid="uid://dksv6fuplfpci" path="res://Graphics/Bordel/interludes/station.webp" id="2_1r1ou"]
 
-[node name="Act1_Bloc1_Scene1" instance=ExtResource("1_rwfia")]
+[node name="Act1_Bloc1_Scene1" unique_id=1378828230 instance=ExtResource("1_rwfia")]
 
-[node name="TextureRect" parent="." index="0"]
+[node name="TextureRect" parent="." index="0" unique_id=1748191092]
 texture = ExtResource("2_1r1ou")
 
-[node name="TextureRect2" parent="." index="1"]
+[node name="TextureRect2" parent="." index="1" unique_id=577931664]
+anchor_right = 0.959
+anchor_bottom = 0.645
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="Label" parent="TextureRect2" index="0"]
+[node name="Label" parent="TextureRect2" index="0" unique_id=1678306790]
 offset_left = -225.0
 offset_top = -150.0
 offset_right = 225.0
@@ -28,6 +30,6 @@ _une vieille dame qui me payait pour retrouver un chat probablement déjà trans
 
 (Note : on peut lancer que la 1ere pour l'instant)"
 
-[node name="ButtonNext" parent="TextureRect2" index="1"]
+[node name="ButtonNext" parent="TextureRect2" index="1" unique_id=690324809]
 offset_left = -57.0
 offset_right = 57.0

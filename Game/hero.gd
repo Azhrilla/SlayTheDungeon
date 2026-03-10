@@ -3,9 +3,9 @@ class_name Hero
 
 const objectScene:PackedScene = preload("res://Ojects/object_techno_canon.tscn")
 
-
 var m_chips: Array[Chip]
 var m_objects:Array[ObjectBase]
+var m_technoChartreuse:int = 3
 
 func processAttacks(_attack:atkObject) -> void:
 	_attack.m_baseDmg += getStatusVariable(Globals.statusType.STR)
@@ -15,6 +15,13 @@ func processAttacks(_attack:atkObject) -> void:
 func getObjects()->Array[ObjectBase]:
 	return m_objects
 	
+func getCurrentTechnoChartreuseCount():
+	return m_technoChartreuse
+
+func useObject(_targets:Array[Character],_objectUsed:ObjectBase,_targetPosition:Globals.target):
+	_objectUsed.doWork(_targets,self,_targetPosition)
+	m_technoChartreuse -= _objectUsed.getCost()
+
 func startCombat():
 	for chip in m_chips:
 		chip.startCombat()

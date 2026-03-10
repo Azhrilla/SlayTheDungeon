@@ -26,7 +26,6 @@ func detachHeroes():
 	
 	var objects = m_hero.getObjects()
 	for object in objects:
-		object.isObjectToggled.disconnect()
 		if object.get_parent():
 			object.get_parent().remove_child(object)
 		m_hero.add_child(object)
@@ -78,7 +77,7 @@ func playCard(_card:Card,_targets:Array[Character],_targetPosition:Globals.targe
 	var objectUsed:ObjectBase = getObjectInUse()
 	if objectUsed:
 		discardCard(_card)
-		objectUsed.doWork(_targets,m_hero,_targetPosition)
+		m_hero.useObject(_targets,objectUsed,_targetPosition)
 		return
 	
 	m_hero.cardPlayed(_card)

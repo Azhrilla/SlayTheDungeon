@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://du1twjc8uk54m"]
+
+[ext_resource type="Texture2D" uid="uid://bno2yip2i53du" path="res://Graphics/UI/HealthBar/Panel Empty.png" id="1_fesnq"]
+[ext_resource type="Script" uid="uid://mx4ka178lp8f" path="res://Components/component_ui_character.gd" id="1_hqhcb"]
+[ext_resource type="Texture2D" uid="uid://c2vdcwffkq0fh" path="res://Graphics/UI/HealthBar/Panel Empty Green.png" id="2_hqhcb"]
+
+[node name="ComponentUICharacter" type="Control" unique_id=529866760]
+layout_mode = 3
+anchor_right = 0.134
+anchor_bottom = 0.259
+script = ExtResource("1_hqhcb")
+
+[node name="UIContainer" type="VBoxContainer" parent="." unique_id=1855255648]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="TextureProgressBar" parent="UIContainer" unique_id=1256858633]
+custom_minimum_size = Vector2(100, 30)
+layout_mode = 2
+nine_patch_stretch = true
+texture_under = ExtResource("1_fesnq")
+texture_progress = ExtResource("2_hqhcb")
+metadata/_edit_lock_ = true
+
+[node name="HealthValue" type="Label" parent="UIContainer/HealthBar" unique_id=108998679]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -12.5
+offset_right = 50.0
+offset_bottom = 12.5
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="StatusContainer" type="HBoxContainer" parent="UIContainer" unique_id=747311954]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+metadata/_edit_lock_ = true

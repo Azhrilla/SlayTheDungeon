@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://blo23ccf67sfg"]
+
+[ext_resource type="Texture2D" uid="uid://133yw1hkh1he" path="res://Graphics/Hero/captureTete.JPG" id="1_85ug5"]
+[ext_resource type="Script" uid="uid://cky72dufkt4y3" path="res://UI/combat_ui_character.gd" id="1_ygvue"]
+[ext_resource type="Texture2D" uid="uid://unk678wwkvuo" path="res://Graphics/UI/Card X1.png" id="2_ygvue"]
+[ext_resource type="PackedScene" uid="uid://du1twjc8uk54m" path="res://Components/component_ui_character.tscn" id="4_ethkx"]
+
+[node name="CombatUICharacter" type="Control" unique_id=705920300]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ygvue")
+
+[node name="BackGround" type="ColorRect" parent="." unique_id=1601840508]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 178.0
+offset_right = 220.0
+offset_bottom = 477.0
+color = Color(0.2784314, 1, 1, 1)
+
+[node name="DollarsLabel" type="Label" parent="BackGround" unique_id=561975037]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.5
+offset_top = 17.0
+offset_right = 29.5
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "Dollars"
+
+[node name="ChipContainer" type="VBoxContainer" parent="BackGround" unique_id=2040874774]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CharacterHead" type="TextureRect" parent="." unique_id=611214006]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 50.0
+offset_right = 198.0
+offset_bottom = 195.0
+texture = ExtResource("1_85ug5")
+stretch_mode = 4
+
+[node name="ChipInfo" type="TextureRect" parent="." unique_id=1158030937]
+visible = false
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 0
+offset_left = 246.0
+offset_top = 179.0
+offset_right = 546.0
+offset_bottom = 479.0
+texture = ExtResource("2_ygvue")
+expand_mode = 2
+
+[node name="ChipInfoText" type="Label" parent="ChipInfo" unique_id=1509106537]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.2
+anchor_right = 0.8
+anchor_bottom = 0.8
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 3
+
+[node name="ComponentUICharacter" parent="." unique_id=529866760 instance=ExtResource("4_ethkx")]
+layout_mode = 1
+offset_left = 259.0
+offset_top = 56.0
+offset_right = 259.00003
+offset_bottom = 56.0

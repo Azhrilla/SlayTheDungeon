@@ -6,6 +6,8 @@ var m_cards:Array[String] = []
 var m_currentDollars:int:
 	set = setDollars
 
+signal onDollarChanged
+
 var m_currentBloc:BlocSystem = null
 
 func resetGPState() -> void:
@@ -21,7 +23,7 @@ func getCurrentLevel()->levelInfos:
 	return m_currentBloc.m_currentLevel
 
 func setDollars(_value:int)->void:
-	MainUI.setDollars(_value)
+	onDollarChanged.emit()
 	m_currentDollars = _value
 
 func _process(_delta: float) -> void:

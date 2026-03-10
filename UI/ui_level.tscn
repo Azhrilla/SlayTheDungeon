@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="5_pini3"]
 [ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="6_6x1on"]
 [ext_resource type="Texture2D" uid="uid://c6j5ii3ul2ok6" path="res://Graphics/Bordel/Card X1.png" id="8_fyvf8"]
+[ext_resource type="PackedScene" uid="uid://blo23ccf67sfg" path="res://UI/combat_ui_character.tscn" id="9_xmnc4"]
 
 [sub_resource type="Theme" id="Theme_4dia8"]
 
@@ -28,26 +29,28 @@ anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="ObjectContainer" type="VBoxContainer" parent="." unique_id=2027925790]
-anchors_preset = -1
-anchor_left = 0.928
-anchor_top = 0.032
-anchor_right = 1.0
-anchor_bottom = 0.032
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
+[node name="CombatUICharacter" parent="." unique_id=705920300 instance=ExtResource("9_xmnc4")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 3.0
+offset_top = -3.0
+offset_right = 3.0
+offset_bottom = -3.0
+grow_horizontal = 1
+grow_vertical = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=214116409]
-anchors_preset = -1
-anchor_top = 0.03
-anchor_bottom = 0.03
-offset_right = 683.0
-offset_bottom = 66.0
-
-[node name="EndTurnButton" type="TextureButton" parent="HBoxContainer" unique_id=366727535]
+[node name="EndTurnButton" type="TextureButton" parent="." unique_id=366727535]
 custom_minimum_size = Vector2(180, 0)
-layout_mode = 2
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.036
+anchor_right = 0.5
+anchor_bottom = 0.036
+offset_left = -90.0
+offset_right = 90.0
+offset_bottom = 66.0
+grow_horizontal = 2
 theme = SubResource("Theme_4dia8")
 texture_normal = ExtResource("2_qtc7g")
 texture_pressed = ExtResource("5_pini3")
@@ -55,7 +58,7 @@ texture_hover = ExtResource("3_muh4u")
 texture_disabled = ExtResource("4_y5r26")
 stretch_mode = 0
 
-[node name="Button" type="Label" parent="HBoxContainer/EndTurnButton" unique_id=1217878078]
+[node name="Button" type="Label" parent="EndTurnButton" unique_id=1217878078]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -71,8 +74,29 @@ grow_vertical = 2
 theme = ExtResource("6_6x1on")
 text = "End Turn"
 
+[node name="ObjectContainer" type="VBoxContainer" parent="." unique_id=2027925790]
+anchors_preset = -1
+anchor_left = 0.042
+anchor_top = 0.938
+anchor_right = 1.0
+anchor_bottom = 0.943
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="." unique_id=2052251372]
+anchors_preset = -1
+anchor_left = 0.982
+anchor_top = 0.982
+anchor_right = 0.982
+anchor_bottom = 0.982
+offset_left = -180.0
+offset_top = -80.0
+grow_horizontal = 0
+grow_vertical = 0
+
 [node name="DrawButton" type="TextureButton" parent="HBoxContainer" unique_id=833571753]
-custom_minimum_size = Vector2(180, 0)
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 theme = SubResource("Theme_4dia8")
 texture_normal = ExtResource("2_qtc7g")
@@ -125,16 +149,18 @@ text = "Show Discard"
 
 [node name="HandLeft" type="Control" parent="." unique_id=1767461670]
 layout_mode = 3
-anchor_top = 0.7
-anchor_bottom = 0.7
+anchor_left = 0.1
+anchor_top = 0.8
+anchor_right = 0.1
+anchor_bottom = 0.812
 grow_vertical = 0
 
 [node name="HandRight" type="Control" parent="." unique_id=1372973481]
 layout_mode = 3
-anchor_left = 1.0
-anchor_top = 0.7
-anchor_right = 1.0
-anchor_bottom = 0.7
+anchor_left = 0.9
+anchor_top = 0.8
+anchor_right = 0.9
+anchor_bottom = 0.8
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -163,9 +189,9 @@ grow_vertical = 2
 [node name="PlayerPos" type="Control" parent="." unique_id=725464612]
 layout_mode = 3
 anchor_left = 0.29
-anchor_top = 0.58
+anchor_top = 0.763
 anchor_right = 0.295
-anchor_bottom = 0.58
+anchor_bottom = 0.763
 offset_top = -20.0
 offset_right = 40.0
 offset_bottom = 20.0
@@ -175,10 +201,10 @@ grow_vertical = 2
 
 [node name="Enemies" type="Control" parent="." unique_id=1188090065]
 layout_mode = 3
-anchor_left = 0.476
-anchor_top = 0.43
-anchor_right = 0.476
-anchor_bottom = 0.43
+anchor_left = 0.601
+anchor_top = 0.649
+anchor_right = 0.73
+anchor_bottom = 0.649
 offset_left = -40.0
 offset_top = -20.0
 offset_bottom = 20.0
@@ -261,7 +287,7 @@ grow_vertical = 0
 
 [connection signal="mouse_entered" from="PlayZone" to="." method="_on_play_zone_mouse_entered"]
 [connection signal="mouse_exited" from="PlayZone" to="." method="_on_play_zone_mouse_exited"]
-[connection signal="pressed" from="HBoxContainer/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/DrawButton" to="." method="_on_draw_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/DiscardButton" to="." method="_on_discard_button_pressed"]
 [connection signal="mouse_entered" from="Enemies/MonsterBox/Control" to="." method="_on_control_mouse_entered"]
