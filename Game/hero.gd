@@ -18,6 +18,12 @@ func getObjects()->Array[ObjectBase]:
 func getCurrentTechnoChartreuseCount():
 	return m_technoChartreuse
 
+func canObjectBeUsed(_object:ObjectBase)->bool:
+	if _object.getCost() > m_technoChartreuse:
+		return false
+	else:
+		return true
+
 func useObject(_targets:Array[Character],_objectUsed:ObjectBase,_targetPosition:Globals.target):
 	_objectUsed.doWork(_targets,self,_targetPosition)
 	m_technoChartreuse -= _objectUsed.getCost()
@@ -53,11 +59,14 @@ func addChip(_chip:Chip)->void:
 	_chip.m_hero = self
 	m_chips.append(_chip)
 
+func _init():
+	var newObject:ObjectBase = objectScene.instantiate()
+	m_objects.append(newObject)
+	
 func _ready() -> void:
 	m_currentHealth = 40
 	m_maximumHealth = 40
 	super._ready()
 	m_type = Globals.type.HERO
 	$Sprite2D2/AnimationPlayer.play("idle")
-	var newObject:ObjectBase = objectScene.instantiate()
-	m_objects.append(newObject)
+	

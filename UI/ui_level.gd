@@ -17,7 +17,6 @@ var m_dragMode:dragMod = dragMod.NONE
 var m_currentTarget:Globals.target = Globals.target.NONE
 var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
 
-var m_currentMana = 10
 var m_currentObject = null
 
 func _ready() -> void:
@@ -28,18 +27,15 @@ func _ready() -> void:
 	refreshUI()
 	setDragMode(dragMod.NONE)
 	$CombatUICharacter.init(GpState.m_hero)
-	
+
+	for object:ObjectBase in GpState.m_hero.getObjects():
+		if object.get_parent():
+			object.get_parent().remove_child(object)
+		$ObjectContainer.add_child(object)
+		object.isObjectToggled.connect(onObjectToggled)
 	
 func setCharacters(_chars:Array[Character]) -> void:
 	m_characters = _chars
-	for character:Character in m_characters:
-		if character is Hero:
-			for object:ObjectBase in character.getObjects():
-				if object.get_parent():
-					object.get_parent().remove_child(object)
-				$ObjectContainer.add_child(object)
-				object.isObjectToggled.connect(onObjectToggled)
-			
 
 func getMonsterPosition(_pos:Globals.target)->Vector2:
 	var currentBox = $Enemies/MonsterBox/Control
@@ -77,7 +73,7 @@ func setVisibilityAndPosition(_card:Card)->void:
 	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
 	for index in range(cards.size()):
 		cards[index].visible = true
-		cards[index].global_position = controlNodes[index].global_position #+ controlNodes[index].custom_minimum_size/2
+		cards[index].global_position = controlNodes[index].global_position
 	
 
 func setArrowToTarget(_origin,_target) -> void:
@@ -107,7 +103,7 @@ func setDragMode(_dragMod:dragMod):
 		
 func handleDrag():
 	var currentPosMouse:Vector2 = get_viewport().get_mouse_position() - m_cardHovered.custom_minimum_size/2
-	#m_cardHovered.mouse_filter = 0
+	
 	if m_dragMode == dragMod.PLAY:
 		if m_mouseOnPlayZone:
 			m_hoveredLastPosition = currentPosMouse
@@ -295,7 +291,7 @@ func hideDeck(_zoneType:Globals.cardPosition)->void:
 	for index in range(cardCount):
 		cardsArray[index].visible = false
 	m_currentlyShownDeck = Globals.cardPosition.NONE
-		
+
 func showDeck(_zoneType:Globals.cardPosition)->void:
 	if m_currentlyShownDeck != Globals.cardPosition.NONE:
 		hideDeck(m_currentlyShownDeck)
@@ -318,19 +314,13 @@ func showDeck(_zoneType:Globals.cardPosition)->void:
 		controlNodes[index].add_child(card)
 		index +=1
 
-func getCurrentTechnoChartreuseCount()->int:
-	for character in m_characters:
-		if character.m_type == Globals.type.HERO:
-			return character.getCurrentTechnoChartreuseCount()
-	return 0	
-	
 func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 	if _toggle == false:
 		m_currentObject = null
 		_object.setToggle(_toggle)
 		return
 	
-	if _object.getCost() <= getCurrentTechnoChartreuseCount():
+	if GpState.m_hero.canObjectBeUsed(_object):
 		m_currentObject = _object
 	else:
 		_object.setToggle(false)
