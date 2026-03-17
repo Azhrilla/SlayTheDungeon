@@ -11,7 +11,10 @@ func processAttacks(_attack:atkObject) -> void:
 	_attack.m_baseDmg += getStatusVariable(Globals.statusType.STR)
 	for chip in m_chips:
 		chip.processChipsWhileAttacking(_attack)
-		
+
+func addTrap(_trap:TrapBase)->void:
+	m_level.addTrap(_trap)
+
 func getObjects()->Array[ObjectBase]:
 	return m_objects
 	

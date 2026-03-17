@@ -1,7 +1,7 @@
 extends Node
 
-enum cardTarget{ENEMY, NONE}
-enum cardType{NORMAL,POWER}
+enum cardTarget{ENEMY, NONE, EMPTY, ANY}
+enum cardType{NORMAL,POWER, TRAP}
 enum cardPosition{DECK,HAND,DISCARD,NONE,POWER} 
 enum type{HERO,MONSTER,NONE}
 enum target{NONE,ALLY1,ALLY2,ALLY3,ENEMY1,ENEMY2,ENEMY3,ENEMY4}
@@ -16,7 +16,7 @@ const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
 const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
 
 static var m_availableCards = {
-	Globals.cardQuality.NORMAL : ["WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp","Laser","Prepare","DurableArmor","DrawBasic","Scrambler"],
+	Globals.cardQuality.NORMAL : ["BasicTrap","WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp","Laser","Prepare","DurableArmor","DrawBasic","Scrambler"],
 }
 
 func getCardsLoot() -> Array[String]:

@@ -3,16 +3,16 @@ signal endTurnPressed
 signal cardShouldBePlayed(_card:Card,_target:Globals.target)
 
 enum dragMod{NONE,TARGET,PLAY}
+enum cardPlayMode{DEFAULT,PLAY,TARGET}
 
+var m_cardPlayMode = cardPlayMode.DEFAULT
 var m_cards:Array[Card] = []
-var m_cardHovered = null
-var m_originalPositionHoveredCard:Vector2 = Vector2.ZERO
+var m_cardHovered:Card = null
+var m_cardToPlay:Card = null
 var m_cardPlayable = false
 var m_characters:Array[Character] = []
 var m_mouseOnPlayZone = false
 var m_mouseOnControl  = false
-var m_hoveredLastPosition:Vector2 = Vector2.ZERO
-var m_currentTargetArrow:Vector2 = Vector2.ZERO
 var m_dragMode:dragMod = dragMod.NONE
 var m_currentTarget:Globals.target = Globals.target.NONE
 var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
@@ -37,9 +37,11 @@ func _ready() -> void:
 func setCharacters(_chars:Array[Character]) -> void:
 	m_characters = _chars
 
-func getMonsterPosition(_pos:Globals.target)->Vector2:
+func removeCharacter(_chars:Character)->void:
+	m_characters.erase(_chars)
+
+func getControlFromPosition(_pos:Globals.target)->Control:
 	var currentBox = $Enemies/MonsterBox/Control
-	
 	match _pos:
 		Globals.target.ENEMY1:
 			currentBox = $Enemies/MonsterBox/Control
@@ -50,7 +52,15 @@ func getMonsterPosition(_pos:Globals.target)->Vector2:
 		Globals.target.ENEMY4:
 			currentBox = $Enemies/MonsterBox/Control4
 		_:
-			push_error("Trying to get position of a monster with position higher than 3")
+			push_error("Trying to get position of a monster with non valid position")
+	return currentBox
+	
+func addTrap(_trap:TrapBase)->void:
+	var controlBox = getControlFromPosition(_trap.m_position)
+	controlBox.add_child(_trap)
+
+func getMonsterPosition(_pos:Globals.target)->Vector2:
+	var currentBox = getControlFromPosition(_pos)
 	return currentBox.global_position + currentBox.custom_minimum_size/2
 	
 func refreshUI() -> void:
@@ -86,15 +96,15 @@ func setDragMode(_dragMod:dragMod):
 	$Enemies.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$Enemies/MonsterBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if m_dragMode == dragMod.TARGET:
-		for character in m_characters:
-			if character.m_currentPosition == Globals.target.ENEMY1:
+		#for character in m_characters:
+			#if character.m_currentPosition == Globals.target.ENEMY1:
 				$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_STOP
-			if character.m_currentPosition == Globals.target.ENEMY2:
+			#if character.m_currentPosition == Globals.target.ENEMY2:
 				$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_STOP
-			if character.m_currentPosition == Globals.target.ENEMY3:
+			#if character.m_currentPosition == Globals.target.ENEMY3:
 				$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_STOP
-			if character.m_currentPosition == Globals.target.ENEMY4:
-				$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP	
+			#if character.m_currentPosition == Globals.target.ENEMY4:
+				$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
 		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -103,61 +113,61 @@ func setDragMode(_dragMod:dragMod):
 		
 func handleDrag():
 	var currentPosMouse:Vector2 = get_viewport().get_mouse_position() - m_cardHovered.custom_minimum_size/2
+	m_cardHovered.position = currentPosMouse
 	
-	if m_dragMode == dragMod.PLAY:
-		if m_mouseOnPlayZone:
-			m_hoveredLastPosition = currentPosMouse
-			$Arrow.visible = false
-			
-	if m_dragMode == dragMod.TARGET:
-		var targetArrow = currentPosMouse
-		if m_currentTargetArrow != Vector2.ZERO:
-			targetArrow = m_currentTargetArrow
-		setArrowToTarget(m_hoveredLastPosition,targetArrow)
-		$Arrow.visible = true
-		
 	if m_mouseOnPlayZone:
 		m_cardHovered.setCardState(Globals.cardState.PLAYABLE)
 		m_cardPlayable = true
-		m_cardHovered.position = m_hoveredLastPosition
 	else:
-		m_currentTargetArrow = Vector2.ZERO
-		$Arrow.visible = false
-		m_hoveredLastPosition = currentPosMouse
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
 		m_cardPlayable = false
-		m_cardHovered.position = m_hoveredLastPosition
 
-func cardOrObjectNeedTarget() -> bool:
+func getTargetType() -> Globals.cardTarget:
 	if m_currentObject:
-		return m_currentObject.needTarget()
+		return m_currentObject.getTargetType()
 	if m_cardHovered:
-		return m_cardHovered.needTarget()
-	return false
+		return m_cardHovered.getTargetType()
+	return Globals.cardTarget.NONE
 
+func playCard():
+	cardShouldBePlayed.emit(m_cardToPlay,m_currentTarget)
+	if m_currentObject:
+		onObjectToggled(m_currentObject, false)
+	m_cardToPlay.stopParticles()
+	m_cardToPlay.scale = Vector2.ONE
+	m_cardToPlay = null
+	m_cardHovered = null
+	$Arrow.visible = false
+	setDragMode(dragMod.NONE)
+	m_cardPlayMode = cardPlayMode.DEFAULT
+	
 func _process(_delta: float) -> void:
 	reorganizeHandPositions()		
 	refreshUI()
 	
-	if (Input.is_action_pressed("click")) and m_cardHovered:
-		if cardOrObjectNeedTarget():
-			setDragMode(dragMod.TARGET)
-		else:
-			setDragMode(dragMod.PLAY)
-		
-		handleDrag()
+	if m_cardPlayMode == cardPlayMode.DEFAULT:
+		if (Input.is_action_pressed("click")) and m_cardHovered:
+			handleDrag()
 
-	if (Input.is_action_just_released("click")) and m_cardHovered:
-		if m_cardPlayable:
-			if (m_dragMode == dragMod.TARGET and m_currentTarget != Globals.target.NONE) or m_dragMode == dragMod.PLAY:
-				cardShouldBePlayed.emit(m_cardHovered,m_currentTarget)
-				if m_currentObject:
-					onObjectToggled(m_currentObject, false)
-		m_cardHovered.stopParticles()
-		m_cardHovered.scale = Vector2.ONE
-		m_cardHovered = null
-		$Arrow.visible = false
-		setDragMode(dragMod.NONE)
+		if (Input.is_action_just_released("click")) and m_cardHovered:
+			if m_cardPlayable:
+				m_cardToPlay = m_cardHovered
+				if getTargetType() != Globals.cardTarget.NONE:
+					m_cardPlayMode = cardPlayMode.TARGET
+				else:
+					playCard()
+
+	if m_cardPlayMode == cardPlayMode.TARGET:
+		setDragMode(dragMod.TARGET)
+		var currentPosMouse:Vector2 = get_viewport().get_mouse_position() 
+		var targetArrow = currentPosMouse
+		if m_currentTarget:
+			targetArrow = getMonsterPosition(m_currentTarget)
+		setArrowToTarget($PlayerPos.position,targetArrow)
+		$Arrow.visible = true
+		
+		if (Input.is_action_pressed("click")) and m_currentTarget:
+			playCard()
 	
 func addCard(_card:Card)->void:
 	$Cards.add_child(_card)
@@ -206,7 +216,6 @@ func cardHoveredEnter(_card:Card):
 		return	
 	if m_cardHovered == null:
 		m_cardHovered = _card
-		m_originalPositionHoveredCard = m_cardHovered.position
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
 
 func cardHoveredExit(_card:Card):
@@ -234,17 +243,27 @@ func isTargetControlZoneEmpty(_target:Globals.target)->bool:
 			return false
 	return true
 
+func canControlZoneBeTargeted(_target:Globals.target) -> bool:
+	match getTargetType():
+		Globals.cardTarget.ENEMY:
+			return isTargetControlZoneEmpty(_target)
+		Globals.cardTarget.EMPTY:
+			return !isTargetControlZoneEmpty(_target)
+		Globals.cardTarget.ANY:
+			return true
+		_:
+			return false
+			
+			
 func setEnteredTargetControlZone(_target:Globals.target)->void:
-	if isTargetControlZoneEmpty(_target):
+	if canControlZoneBeTargeted(_target):
 		return
 	m_currentTarget = _target
-	m_currentTargetArrow = getMonsterPosition(_target)
 	m_mouseOnControl = true
 	m_mouseOnPlayZone = true
 
 func exitControlZone() -> void:
 	m_currentTarget = Globals.target.NONE
-	m_currentTargetArrow = Vector2.ZERO
 	m_mouseOnControl = false
 
 func _on_control_mouse_entered() -> void:

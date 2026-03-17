@@ -9,9 +9,7 @@ var m_text:String = "filler Text"
 var m_currentPosition:Globals.cardPosition = Globals.cardPosition.NONE
 var m_player = null
 var m_cardType = Globals.cardType.NORMAL
-
-func needTarget() -> bool:
-	return false
+var m_targetType:Globals.cardTarget = Globals.cardTarget.NONE
 
 func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	var attack = atkObject.new()
@@ -21,6 +19,9 @@ func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	m_player.processPowersWhenAttacking(attack)
 	print ("Card {card} will attack target {target} for {dmg} dmg".format({"dmg":str(attack.m_baseDmg),"card":str(self),"target":str(_target)}))
 	return _target.takeDmg(attack.m_baseDmg,_hero)
+
+func getTargetType() -> Globals.cardTarget:
+	return m_targetType
 
 func _ready() -> void:
 	updateVisibility()

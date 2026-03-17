@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0i6fuaoei75o"
-path="res://.godot/imported/dec 1 rough.png-6711e261037a700f2cc5f3b82bf1e35a.ctex"
+uid="uid://c1a023hs6ecle"
+path="res://.godot/imported/floating_mine.png-29116def7edf1ed6af66264414880f2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/dec 1 rough.png"
-dest_files=["res://.godot/imported/dec 1 rough.png-6711e261037a700f2cc5f3b82bf1e35a.ctex"]
+source_file="res://Graphics/Bordel/floating_mine.png"
+dest_files=["res://.godot/imported/floating_mine.png-29116def7edf1ed6af66264414880f2c.ctex"]
 
 [params]
 

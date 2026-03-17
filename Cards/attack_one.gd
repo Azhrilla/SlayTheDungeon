@@ -2,8 +2,9 @@ extends Card
 
 @export var m_damage:int = 5
 
-func needTarget() -> bool:
-	return true
+func _ready() -> void:
+	super._ready()
+	m_targetType = Globals.cardTarget.ENEMY
 
 func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	if _targetPosition == Globals.target.NONE:

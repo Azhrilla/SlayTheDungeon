@@ -1,7 +1,7 @@
 extends Node2D
 
 class_name ObjectBase
-
+var m_targetType = Globals.cardTarget.NONE
 signal isObjectToggled
 
 func findTargetInSlot(_targets:Array[Character],_slot:Globals.target) -> Character:
@@ -13,8 +13,8 @@ func findTargetInSlot(_targets:Array[Character],_slot:Globals.target) -> Charact
 func getCost() -> int:
 	return 0
 
-func needTarget() -> bool:
-	return false
+func getTargetType() -> Globals.cardTarget:
+	return m_targetType
 
 func doWork(_enemies:Array[Character],_hero:Hero,_targetPosition:Globals.target) -> void:
 	pass

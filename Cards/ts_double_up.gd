@@ -7,9 +7,6 @@ func _ready() -> void:
 	var cardText = $cardText.text
 	$cardText.text = cardText.format({"dmg":str(m_damage),"crit":str(m_critDmg)})
 
-func needTarget() -> bool:
-	return false
-
 func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	
 	for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):

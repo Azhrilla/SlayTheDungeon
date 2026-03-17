@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dmhic01x7kqc0"]
+
+[ext_resource type="PackedScene" uid="uid://dwhwkr6osui46" path="res://Game/Traps/trap_base.tscn" id="1_3qulx"]
+[ext_resource type="Texture2D" uid="uid://c1a023hs6ecle" path="res://Graphics/Bordel/floating_mine.png" id="1_q4qo2"]
+[ext_resource type="Script" uid="uid://decl3njgc4201" path="res://Game/Traps/trap_dmg_trap.gd" id="2_3qulx"]
+
+[node name="Trap_DmgTrap" unique_id=740061508 instance=ExtResource("1_3qulx")]
+script = ExtResource("2_3qulx")
+
+[node name="Sprite2D" parent="." index="0" unique_id=448142348]
+position = Vector2(58, 61)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_q4qo2")

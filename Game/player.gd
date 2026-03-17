@@ -83,7 +83,7 @@ func playCard(_card:Card,_targets:Array[Character],_targetPosition:Globals.targe
 	m_hero.cardPlayed(_card)
 	
 	_card.doWork(_targets,m_hero,_targetPosition)
-	if _card.m_cardType == Globals.cardType.NORMAL:
+	if _card.m_cardType != Globals.cardType.POWER:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)
 	elif _card.m_cardType == Globals.cardType.POWER:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.POWER)

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cme5o34jshhj2"]
+
+[ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_hh5i8"]
+[ext_resource type="Script" uid="uid://bih4ntvbibu2" path="res://Cards/card_basic_trap.gd" id="2_xep8o"]
+
+[node name="Card_BasicTrap" unique_id=1116141428 instance=ExtResource("1_hh5i8")]
+script = ExtResource("2_xep8o")
+
+[node name="cardName" parent="." index="1" unique_id=952563157]
+text = "ExploTrap"
+
+[node name="cardText" parent="." index="2" unique_id=1102009803]
+text = "Pose un piège sur le sol qui fait 15 de dmg "

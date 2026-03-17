@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dwhwkr6osui46"]
+
+[ext_resource type="Script" uid="uid://ds7ege2ma1k0j" path="res://Game/Traps/trap_base.gd" id="1_eshhf"]
+
+[node name="Trap_Base" type="Node2D" unique_id=740061508]
+script = ExtResource("1_eshhf")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=448142348]

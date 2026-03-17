@@ -1,8 +1,5 @@
 extends Card
 
-func needTarget() -> bool:
-	return false
-
 func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	if findTargetInSlot(_targets,Globals.target.ENEMY1):
 		return

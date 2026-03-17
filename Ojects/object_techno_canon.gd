@@ -5,8 +5,8 @@ class_name Object_TechnoCanon
 func getCost() -> int:
 	return 1
 
-func needTarget() -> bool:
-	return true
+func _ready() -> void:
+	m_targetType = Globals.cardTarget.ENEMY
 
 func doWork(_enemies:Array[Character],_hero:Hero,_targetPosition:Globals.target) -> void:
 	if _targetPosition == Globals.target.NONE:

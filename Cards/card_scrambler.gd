@@ -1,8 +1,9 @@
 extends Card
 
-func needTarget() -> bool:
-	return true
-
+func _ready() -> void:
+	super._ready()
+	m_targetType = Globals.cardTarget.ENEMY
+	
 func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	var target:Character = findTargetInSlot(_targets,_targetPosition)
 	var buffAvaialbles:Array[Globals.statusType] = target.getBuffStatusList()

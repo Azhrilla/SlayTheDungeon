@@ -18,14 +18,14 @@ _data = {
 [node name="Enemy_Drone" unique_id=1453931378 instance=ExtResource("1_ysy6f")]
 script = ExtResource("2_0c66c")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="1" unique_id=1713517992]
 scale = Vector2(1.5, 1.616)
 texture = ExtResource("2_2syjg")
 flip_h = true
 hframes = 16
 vframes = 6
 
-[node name="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" parent="." index="3" unique_id=1750095605]
 libraries/ = SubResource("AnimationLibrary_k1lh2")
 
 [node name="ShieldComponent" parent="." index="4" unique_id=526406930 instance=ExtResource("7_o3sbt")]

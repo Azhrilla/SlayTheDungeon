@@ -68,7 +68,6 @@ func startRound(_hero:Character,_monsters:Array[Character]):
 	if !m_armorIsPermanent:
 		setStatusVariable(Globals.statusType.ARMOR,0)
 
-
 func endRound(_hero:Character,_monsters:Array[Character]):	
 	var poisonCount = getStatusVariable(Globals.statusType.POISON)	
 	if poisonCount > 0:
@@ -82,13 +81,15 @@ func useArmorAndGetDmg(_dmg:int) -> int:
 	return effectiveDmg
 
 func moveTo(_target:Globals.target)->void:
+	m_level.moveTo(self,_target)
 	if findMonsterInSlot(_target) == null:
 		m_currentPosition = _target
 	else:
 		push_error("Trying to move a monster to an occupied slot")
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
-	_attacker.takeDmg(m_statusVariables[Globals.statusType.SPIKE],self,false)
+	if _attacker:
+		_attacker.takeDmg(m_statusVariables[Globals.statusType.SPIKE],self,false)
 
 func heal(_value:int)->void:
 	m_currentHealth += _value
@@ -106,7 +107,7 @@ func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true,_goe
 		addToStatusVariable(Globals.statusType.BARRIER,-1)
 		return false
 		
-	if _isAttackFirstTrigger && _attacker != null:
+	if _isAttackFirstTrigger:
 		onDamageTaken(effectiveDmg,_attacker)	
 		
 	m_currentHealth -= effectiveDmg

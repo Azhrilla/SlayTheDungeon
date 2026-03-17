@@ -18,6 +18,7 @@ const cardsScene = {
 	"DurableArmor":preload("res://Cards/card_durable_armor.tscn"),
 	"DrawBasic":preload("res://Cards/card_draw_basic.tscn"),
 	"Scrambler":preload("res://Cards/card_scrambler.tscn"),
+	"BasicTrap":preload("res://Cards/card_basic_trap.tscn"),
 }
 
 static func createCard(_id:String)->Card:
