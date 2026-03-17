@@ -10,5 +10,5 @@ func doWork(_targets:Array[Character],_hero:Character,_targetPosition:Globals.ta
 	if buffAvaialbles.is_empty():
 		return
 	var buffToHalves:Globals.statusType = buffAvaialbles.pick_random()
-	var newValue:int = target.getStatusVariable(buffToHalves)/ 2
+	var newValue:int = floor(target.getStatusVariable(buffToHalves) as float/ 2)
 	target.setStatusVariable(buffToHalves,newValue)

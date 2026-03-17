@@ -6,7 +6,7 @@ class_name Character
 @onready var m_statusContainer = $CharUI/UIContainer/StatusContainer
 @onready var m_healthBar = $CharUI/UIContainer/HealthBar
 @onready var m_healthValue = $CharUI/UIContainer/HealthBar/HealthValue
-@onready var m_componentUICharacter:ComponentUICharacter = $ComponentUICharacter
+var m_componentUICharacter:ComponentUICharacter = null 
 
 
 #Scenes
@@ -44,7 +44,9 @@ func setHealth(_value:int):
 func _ready() -> void:
 	m_healthBar.max_value = m_maximumHealth
 	m_currentHealth = m_maximumHealth
-	if m_componentUICharacter:
+	
+	if has_node("ComponentUICharacter"):
+		m_componentUICharacter = $ComponentUICharacter
 		m_componentUICharacter.init(self)
 
 func _process(_delta: float) -> void:
