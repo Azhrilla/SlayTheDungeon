@@ -15,6 +15,13 @@ func init(_hero:Hero)->void:
 
 	m_characterUI.init(_hero)
 
+func release(_hero:Hero)->void:
+	for myChip:Chip in _hero.m_chips:
+		if myChip.get_parent():
+			myChip.get_parent().remove_child(myChip)
+		_hero.add_child(myChip)
+		
+		
 func mouseEnteredChip(_chip:Chip):
 	$ChipInfo.visible = true
 	$ChipInfo/ChipInfoText.text = _chip.getInfoText()

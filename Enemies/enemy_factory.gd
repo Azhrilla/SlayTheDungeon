@@ -45,5 +45,5 @@ static func createEnemy(_id:String)->Enemy:
 		return newEnemy
 	
 	newEnemy = m_resources[_id].instantiate()
-
+	newEnemy.m_name = _id
 	return newEnemy

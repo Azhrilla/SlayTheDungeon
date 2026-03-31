@@ -33,7 +33,10 @@ func _ready() -> void:
 			object.get_parent().remove_child(object)
 		$ObjectContainer.add_child(object)
 		object.isObjectToggled.connect(onObjectToggled)
-	
+
+func _exit_tree() -> void:
+	$CombatUICharacter.release(GpState.m_hero)
+
 func setCharacters(_chars:Array[Character]) -> void:
 	m_characters = _chars
 
@@ -96,15 +99,10 @@ func setDragMode(_dragMod:dragMod):
 	$Enemies.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$Enemies/MonsterBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if m_dragMode == dragMod.TARGET:
-		#for character in m_characters:
-			#if character.m_currentPosition == Globals.target.ENEMY1:
-				$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_STOP
-			#if character.m_currentPosition == Globals.target.ENEMY2:
-				$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_STOP
-			#if character.m_currentPosition == Globals.target.ENEMY3:
-				$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_STOP
-			#if character.m_currentPosition == Globals.target.ENEMY4:
-				$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP
+		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_STOP
+		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_STOP
+		$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_STOP
+		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
 		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -129,6 +127,16 @@ func getTargetType() -> Globals.cardTarget:
 		return m_cardHovered.getTargetType()
 	return Globals.cardTarget.NONE
 
+func setPlayMode(_playMode:cardPlayMode)->void:
+	m_cardPlayMode = _playMode
+	if _playMode == cardPlayMode.TARGET:
+		for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
+			if canControlZoneBeTargeted(index):
+				getControlFromPosition(index).get_child(0).get_child(0).visible = true
+	else:
+		for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
+			getControlFromPosition(index).get_child(0).get_child(0).visible = false
+
 func playCard():
 	cardShouldBePlayed.emit(m_cardToPlay,m_currentTarget)
 	if m_currentObject:
@@ -139,7 +147,7 @@ func playCard():
 	m_cardHovered = null
 	$Arrow.visible = false
 	setDragMode(dragMod.NONE)
-	m_cardPlayMode = cardPlayMode.DEFAULT
+	setPlayMode(cardPlayMode.DEFAULT)
 	
 func _process(_delta: float) -> void:
 	reorganizeHandPositions()		
@@ -153,7 +161,7 @@ func _process(_delta: float) -> void:
 			if m_cardPlayable:
 				m_cardToPlay = m_cardHovered
 				if getTargetType() != Globals.cardTarget.NONE:
-					m_cardPlayMode = cardPlayMode.TARGET
+					setPlayMode(cardPlayMode.TARGET)
 				else:
 					playCard()
 
@@ -246,9 +254,9 @@ func isTargetControlZoneEmpty(_target:Globals.target)->bool:
 func canControlZoneBeTargeted(_target:Globals.target) -> bool:
 	match getTargetType():
 		Globals.cardTarget.ENEMY:
-			return isTargetControlZoneEmpty(_target)
-		Globals.cardTarget.EMPTY:
 			return !isTargetControlZoneEmpty(_target)
+		Globals.cardTarget.EMPTY:
+			return isTargetControlZoneEmpty(_target)
 		Globals.cardTarget.ANY:
 			return true
 		_:
@@ -256,7 +264,7 @@ func canControlZoneBeTargeted(_target:Globals.target) -> bool:
 			
 			
 func setEnteredTargetControlZone(_target:Globals.target)->void:
-	if canControlZoneBeTargeted(_target):
+	if !canControlZoneBeTargeted(_target):
 		return
 	m_currentTarget = _target
 	m_mouseOnControl = true

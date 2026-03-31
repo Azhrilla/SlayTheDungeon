@@ -17,7 +17,7 @@ func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	attack.m_baseDmg = _baseDmg
 	attack.m_target = _target
 	m_player.processPowersWhenAttacking(attack)
-	print ("Card {card} will attack target {target} for {dmg} dmg".format({"dmg":str(attack.m_baseDmg),"card":str(self),"target":str(_target)}))
+	print ("Card {card} will attack target {target} for {dmg} dmg".format({"dmg":str(attack.m_baseDmg),"card":str(m_name),"target":str(_target.m_name)}))
 	return _target.takeDmg(attack.m_baseDmg,_hero)
 
 func getTargetType() -> Globals.cardTarget:

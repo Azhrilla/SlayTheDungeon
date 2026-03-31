@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dkp18phvnttpn"]
+
+[ext_resource type="Texture2D" uid="uid://di2n417edgm7f" path="res://Graphics/UI/selection.png" id="1_rkv46"]
+
+[sub_resource type="Animation" id="Animation_06kvo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_jtt2w"]
+resource_name = "blue"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [11, 12, 13, 14, 15, 16, 17, 18, 19]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e317w"]
+_data = {
+&"RESET": SubResource("Animation_06kvo"),
+&"blue": SubResource("Animation_jtt2w")
+}
+
+[node name="SelectionHelper" type="Node2D" unique_id=2071654310]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=206356298]
+scale = Vector2(2, 2)
+texture = ExtResource("1_rkv46")
+hframes = 40
+vframes = 2
+frame = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=935170918]
+libraries/ = SubResource("AnimationLibrary_e317w")
+autoplay = &"blue"

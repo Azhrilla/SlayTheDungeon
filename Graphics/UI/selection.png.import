@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc718sjmo8r0t"
-path="res://.godot/imported/spr_RoninIdle_strip.png-151355d2c5a4376600e1cca79da77ea3.ctex"
+uid="uid://di2n417edgm7f"
+path="res://.godot/imported/selection.png-539a2a084c746a96625e997a592f00d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/Hero/spr_RoninIdle_strip.png"
-dest_files=["res://.godot/imported/spr_RoninIdle_strip.png-151355d2c5a4376600e1cca79da77ea3.ctex"]
+source_file="res://Graphics/UI/selection.png"
+dest_files=["res://.godot/imported/selection.png-539a2a084c746a96625e997a592f00d7.ctex"]
 
 [params]
 

@@ -79,10 +79,12 @@ func playCard(_card:Card,_targets:Array[Character],_targetPosition:Globals.targe
 		discardCard(_card)
 		m_hero.useObject(_targets,objectUsed,_targetPosition)
 		return
+
+	var copyVectorTarget = _targets
 	
 	m_hero.cardPlayed(_card)
 	
-	_card.doWork(_targets,m_hero,_targetPosition)
+	_card.doWork(copyVectorTarget,m_hero,_targetPosition)
 	if _card.m_cardType != Globals.cardType.POWER:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)
 	elif _card.m_cardType == Globals.cardType.POWER:

@@ -19,6 +19,7 @@ signal onStatusChanged
 
 #Attributes
 var m_level = null
+var m_name = "noname"
 var m_maximumHealth = 40
 var m_currentHealth = 0:
 	set = setHealth
@@ -83,11 +84,13 @@ func useArmorAndGetDmg(_dmg:int) -> int:
 	return effectiveDmg
 
 func moveTo(_target:Globals.target)->void:
-	m_level.moveTo(self,_target)
 	if findMonsterInSlot(_target) == null:
 		m_currentPosition = _target
+		m_level.moveTo(self,_target)
 	else:
 		push_error("Trying to move a monster to an occupied slot")
+
+
 
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	if _attacker:
@@ -114,6 +117,7 @@ func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true,_goe
 		
 	m_currentHealth -= effectiveDmg
 	if m_currentHealth<=0:
+		print("Character" + m_name + " is Dead.")
 		OnDeath.emit(self)
 		return true
 	return false

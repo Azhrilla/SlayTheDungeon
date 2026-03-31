@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://df5slpovx00bd" path="res://Graphics/UI/Buttons/Button Active.png" id="5_pini3"]
 [ext_resource type="Theme" uid="uid://cd80bws3txap5" path="res://UI/ui_theme.tres" id="6_6x1on"]
 [ext_resource type="Texture2D" uid="uid://c6j5ii3ul2ok6" path="res://Graphics/Bordel/Card X1.png" id="8_fyvf8"]
+[ext_resource type="PackedScene" uid="uid://dkp18phvnttpn" path="res://UI/selection_helper.tscn" id="9_l2aja"]
 [ext_resource type="PackedScene" uid="uid://blo23ccf67sfg" path="res://UI/combat_ui_character.tscn" id="9_xmnc4"]
 
 [sub_resource type="Theme" id="Theme_4dia8"]
@@ -220,17 +221,69 @@ offset_bottom = 40.0
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control" unique_id=843030555]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control/PositionHelper" unique_id=2071654310 instance=ExtResource("9_l2aja")]
+visible = false
+
 [node name="Control2" type="Control" parent="Enemies/MonsterBox" unique_id=1199680406]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control2" unique_id=1431471732]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control2/PositionHelper" unique_id=1702896795 instance=ExtResource("9_l2aja")]
+visible = false
 
 [node name="Control3" type="Control" parent="Enemies/MonsterBox" unique_id=760265241]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control3" unique_id=212353986]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control3/PositionHelper" unique_id=1032793754 instance=ExtResource("9_l2aja")]
+visible = false
+
 [node name="Control4" type="Control" parent="Enemies/MonsterBox" unique_id=996917767]
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
+
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control4" unique_id=1848826256]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control4/PositionHelper" unique_id=1984370627 instance=ExtResource("9_l2aja")]
+visible = false
 
 [node name="ShowDeck" type="Control" parent="." unique_id=1226751642]
 visible = false

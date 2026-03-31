@@ -4,6 +4,7 @@ extends Node2D
 class_name GameLevel
 
 var m_enemies:Array[Character] = []
+var m_deadEnemies:Array[Character] = []
 var m_traps:Array[TrapBase] = []
 var m_turnOver:bool = false
 enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE,END_COMBAT}
@@ -33,6 +34,7 @@ func moveTo(_character:Character,_target:Globals.target):
 	if trap:
 		trap.DoWork(_character)
 		m_traps.erase(trap)
+		cleanEnemies()
 
 func createEnemies():
 	for enemyName in GpState.getCurrentEnemy():
@@ -90,8 +92,19 @@ func playerEndRound():
 	m_currentTurnState = turnState.PLAYER_END
 	m_player.endRound(m_player.getHero(),m_enemies)
 	m_nextTurnState = turnState.MONSTER_START
-	
+
+func cleanEnemies()->void:
+	for enemy in m_deadEnemies:
+		m_enemies.erase(enemy)
+		$Enemies.remove_child(enemy)
+		$UI_Level.removeCharacter(enemy)
+		if m_enemies.is_empty():
+			m_nextTurnState = turnState.END_COMBAT
+	m_deadEnemies.clear()
+
 func monsterStartRound():
+	cleanEnemies()
+	
 	m_currentTurnState = turnState.MONSTER_START
 	for enemy:Enemy in m_enemies:
 		enemy.startRound(m_player.getHero(),m_enemies)
@@ -135,11 +148,7 @@ func _ready() -> void:
 	m_nextTurnState = turnState.START_COMBAT
 
 func onEnemyDeath(_enemy:Character):
-	m_enemies.erase(_enemy)
-	$Enemies.remove_child(_enemy)
-	$UI_Level.removeCharacter(_enemy)
-	if m_enemies.is_empty():
-		m_nextTurnState = turnState.END_COMBAT
+	m_deadEnemies.append(_enemy)
 
 func _process(_delta: float) -> void:
 	if !m_player or !m_player.getHero():
@@ -176,3 +185,4 @@ func _on_ui_level_end_turn_pressed() -> void:
 
 func _on_ui_level_card_should_be_played(_card:Card,_target:Globals.target) -> void:
 	m_player.playCard(_card,m_enemies,_target)
+	cleanEnemies()
