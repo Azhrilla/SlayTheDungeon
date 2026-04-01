@@ -3,6 +3,8 @@ class_name Hero
 
 const objectScene:PackedScene = preload("res://Ojects/object_techno_canon.tscn")
 
+signal onTechnoChartreuseUsed 
+
 var m_chips: Array[Chip]
 var m_objects:Array[ObjectBase]
 var m_technoChartreuse:int = 3
@@ -30,6 +32,7 @@ func canObjectBeUsed(_object:ObjectBase)->bool:
 func useObject(_targets:Array[Character],_objectUsed:ObjectBase,_targetPosition:Globals.target):
 	_objectUsed.doWork(_targets,self,_targetPosition)
 	m_technoChartreuse -= _objectUsed.getCost()
+	onTechnoChartreuseUsed.emit(m_technoChartreuse)
 
 func startCombat():
 	for chip in m_chips:

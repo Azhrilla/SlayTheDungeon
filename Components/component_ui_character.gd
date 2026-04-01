@@ -13,6 +13,7 @@ func init(_char:Character):
 	m_healthValue.text = "PVs:{current}/{max}".format({"current":str(_char.m_currentHealth),"max":str(_char.m_maximumHealth)})
 	_char.onLifeChanged.connect(onLifeChanged)
 	_char.onStatusChanged.connect(onStatusChanged)
+	updateStatusGUI(_char)
 
 func onLifeChanged(_char:Character):
 	m_healthBar.value = _char.m_currentHealth

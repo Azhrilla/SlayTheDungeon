@@ -152,6 +152,9 @@ func playCard():
 func _process(_delta: float) -> void:
 	reorganizeHandPositions()		
 	refreshUI()
+	if !m_cardHovered:
+		setPlayMode(cardPlayMode.DEFAULT)
+	
 	
 	if m_cardPlayMode == cardPlayMode.DEFAULT:
 		if (Input.is_action_pressed("click")) and m_cardHovered:

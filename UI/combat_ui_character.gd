@@ -12,7 +12,8 @@ func init(_hero:Hero)->void:
 		$BackGround/ChipContainer.add_child(myChip)
 	$BackGround/DollarsLabel.text=str(GpState.m_currentDollars)
 	GpState.onDollarChanged.connect(onDollarChanged)
-
+	_hero.onTechnoChartreuseUsed.connect(onTechnoChanged)
+	$BackGround/ChartreuseCount.frame = _hero.getCurrentTechnoChartreuseCount()
 	m_characterUI.init(_hero)
 
 func release(_hero:Hero)->void:
@@ -20,8 +21,10 @@ func release(_hero:Hero)->void:
 		if myChip.get_parent():
 			myChip.get_parent().remove_child(myChip)
 		_hero.add_child(myChip)
-		
-		
+
+func onTechnoChanged(_count:int)->void:
+	$BackGround/ChartreuseCount.frame = _count
+
 func mouseEnteredChip(_chip:Chip):
 	$ChipInfo.visible = true
 	$ChipInfo/ChipInfoText.text = _chip.getInfoText()

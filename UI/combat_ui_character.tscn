@@ -3,7 +3,59 @@
 [ext_resource type="Texture2D" uid="uid://133yw1hkh1he" path="res://Graphics/Hero/captureTete.JPG" id="1_85ug5"]
 [ext_resource type="Script" uid="uid://cky72dufkt4y3" path="res://UI/combat_ui_character.gd" id="1_ygvue"]
 [ext_resource type="Texture2D" uid="uid://unk678wwkvuo" path="res://Graphics/UI/Card X1.png" id="2_ygvue"]
+[ext_resource type="Texture2D" uid="uid://d2dwoyvo5xolj" path="res://Graphics/UI/ManaBar/emptyCellMeter.png" id="3_vokc5"]
 [ext_resource type="PackedScene" uid="uid://du1twjc8uk54m" path="res://Components/component_ui_character.tscn" id="4_ethkx"]
+[ext_resource type="Texture2D" uid="uid://he4egq6bnvna" path="res://Graphics/UI/ManaBar/blueMeter01.png" id="4_j1524"]
+[ext_resource type="Texture2D" uid="uid://cdkseqbp10lei" path="res://Graphics/UI/ManaBar/blueMeter02.png" id="5_bty53"]
+[ext_resource type="Texture2D" uid="uid://dn0an1txnoolf" path="res://Graphics/UI/ManaBar/blueMeter03.png" id="6_3mnhv"]
+[ext_resource type="Texture2D" uid="uid://bchox5tls3sd0" path="res://Graphics/UI/ManaBar/blueMeter04.png" id="7_yomqs"]
+[ext_resource type="Texture2D" uid="uid://d38wk16udr7qd" path="res://Graphics/UI/ManaBar/blueMeter05.png" id="8_72ahp"]
+[ext_resource type="Texture2D" uid="uid://bytjla7xquv4y" path="res://Graphics/UI/ManaBar/blueMeter06.png" id="9_v4ca5"]
+[ext_resource type="Texture2D" uid="uid://dd2df6h24aeih" path="res://Graphics/UI/ManaBar/blueMeter07.png" id="10_epjdg"]
+[ext_resource type="Texture2D" uid="uid://rhu2qmsbyf4j" path="res://Graphics/UI/ManaBar/blueMeter08.png" id="11_baipd"]
+[ext_resource type="Texture2D" uid="uid://bllw3l4b3nih3" path="res://Graphics/UI/ManaBar/blueMeter09.png" id="12_1ylwn"]
+[ext_resource type="Texture2D" uid="uid://dxcqj4l1p3eyx" path="res://Graphics/UI/ManaBar/blueMeter10.png" id="13_qjqo7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b7xxp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vokc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j1524")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bty53")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_3mnhv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_yomqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_72ahp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_v4ca5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_epjdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_baipd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_1ylwn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_qjqo7")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="CombatUICharacter" type="Control" unique_id=705920300]
 layout_mode = 3
@@ -14,25 +66,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ygvue")
 
-[node name="BackGround" type="ColorRect" parent="." unique_id=1601840508]
+[node name="BackGround" type="TextureRect" parent="." unique_id=399369438]
 layout_mode = 0
 offset_left = 21.0
 offset_top = 178.0
 offset_right = 220.0
 offset_bottom = 477.0
-color = Color(0.2784314, 1, 1, 1)
+texture = ExtResource("2_ygvue")
+expand_mode = 3
 
 [node name="DollarsLabel" type="Label" parent="BackGround" unique_id=561975037]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -25.5
-offset_top = 17.0
-offset_right = 29.5
-offset_bottom = 40.0
+offset_left = -73.5
+offset_top = 14.0
+offset_right = -18.5
+offset_bottom = 37.0
 grow_horizontal = 2
 text = "Dollars"
+
+[node name="ChartreuseCount" type="AnimatedSprite2D" parent="BackGround" unique_id=1140324242]
+position = Vector2(97, 67)
+sprite_frames = SubResource("SpriteFrames_b7xxp")
 
 [node name="ChipContainer" type="VBoxContainer" parent="BackGround" unique_id=2040874774]
 layout_mode = 1
