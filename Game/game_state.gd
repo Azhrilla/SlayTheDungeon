@@ -1,6 +1,6 @@
 extends Node
 
-var m_starterCards:Array[String] = ["WindStrike","QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Slash","Grab","Grab","Grab","Defense","Defense","Defense","Defense","Defense"]
+var m_starterCards:Array[String] = ["QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Slash","Grab","Grab","Grab","Defense","Defense","Defense","Defense","Defense"]
 var m_hero:Hero = null
 var m_cards:Array[String] = []
 var m_currentDollars:int:
