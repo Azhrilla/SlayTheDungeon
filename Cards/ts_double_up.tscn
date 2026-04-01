@@ -6,7 +6,7 @@
 [node name="TS_DoubleUp" unique_id=1116141428 instance=ExtResource("1_gxvxl")]
 script = ExtResource("2_e2x6p")
 m_damage = 5
-m_critDmg = 10
+m_critDmg = 20
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Double Up"
