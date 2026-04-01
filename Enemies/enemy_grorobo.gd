@@ -24,8 +24,8 @@ func moveTo(_target:Globals.target):
 	if !m_currentIntention is Intention_DroneSpawn:
 		choseIntention(false)
 
-func startRound(_heroes:Array[Character],_monsters:Array[Character]):
-	super.startRound(_heroes,_monsters)
+func startRound(_hero:Character,_monsters:Array[Character]):
+	super.startRound(_hero,_monsters)
 	var rng = RandomNumberGenerator.new()
 	m_currentRNG = rng.randf_range(0.0, 1.0)
 
@@ -33,9 +33,9 @@ func startRound(_heroes:Array[Character],_monsters:Array[Character]):
 func choseIntention(_canChangeToDrone:bool = true):
 	var allies = getMonsters()
 	if allies.size() == 1 and _canChangeToDrone:
-		setIntention(bossAttacks["DroneSpawn"])
+		setIntention(bossAttacks["Drone"])
 	elif allies.size() == 2 and m_currentRNG > 0.5 and _canChangeToDrone:
-		setIntention(bossAttacks["DroneSpawn"])
+		setIntention(bossAttacks["Drone"])
 	elif m_currentPosition > Globals.target.ENEMY1:
 		setIntention(bossAttacks["Shoot"])
 	elif m_currentRNG > 0.5 && m_level.findTargetInSlot(Globals.target.ENEMY2) == null:
