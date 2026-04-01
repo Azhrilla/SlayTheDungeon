@@ -1,7 +1,7 @@
 extends Card
 
 @export var m_damage:int = 5
-@export var m_critDmg:int = 10
+@export var m_critDmg:int = 20
 
 func _ready() -> void:
 	var cardText = $cardText.text
