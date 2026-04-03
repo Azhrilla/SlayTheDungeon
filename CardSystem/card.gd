@@ -69,11 +69,9 @@ func updateVisibility():
 		$cardText.visible = true
 
 func startParticles():
-	$CPUParticles2D.emitting = true
 	$GlowAuraCard.enabled = true
 
 func stopParticles():
-	$CPUParticles2D.emitting = false
 	$GlowAuraCard.enabled = false
 
 func doWork(_enemies:Array[Character],_hero:Character,_targetPosition:Globals.target):
