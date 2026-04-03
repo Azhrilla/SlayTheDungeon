@@ -11,7 +11,8 @@ func _ready() -> void:
 	m_type = Globals.type.MONSTER
 
 func doWork(_hero:Character,_allies:Array[Character]) -> void:
-	m_currentIntention.doWork(self,_hero,_allies,m_level)
+	if m_currentIntention:
+		m_currentIntention.doWork(self,_hero,_allies,m_level)
 
 func setIntention(_intent:Intention)->void:
 	m_currentIntention = _intent
