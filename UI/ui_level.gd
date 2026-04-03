@@ -16,7 +16,6 @@ var m_mouseOnControl  = false
 var m_dragMode:dragMod = dragMod.NONE
 var m_currentTarget:Globals.target = Globals.target.NONE
 var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
-
 var m_currentObject = null
 
 func _ready() -> void:
@@ -148,9 +147,9 @@ func playCard():
 	$Arrow.visible = false
 	setDragMode(dragMod.NONE)
 	setPlayMode(cardPlayMode.DEFAULT)
+	reorganizeHandPositions()
 	
 func _process(_delta: float) -> void:
-	reorganizeHandPositions()		
 	refreshUI()
 	if !m_cardHovered:
 		setPlayMode(cardPlayMode.DEFAULT)
@@ -186,6 +185,7 @@ func addCard(_card:Card)->void:
 	_card.connect("mouseHoveredEnter",cardHoveredEnter)
 	_card.connect("mouseHoveredExit",cardHoveredExit)
 	_card.connect("cardNeedUIRefresh",cardNeedUIRefresh)
+	
 	if m_cards.size() > $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_child_count():
 		var newControl = Control.new()
 		newControl.custom_minimum_size = Vector2(150,220)
@@ -217,8 +217,8 @@ func reorganizeHandPositions(_processHovered:bool=false):
 			if currentCard == m_cardHovered:
 				modifiedIndex+=1
 				hoveredCardSeen = true
-
-		currentCard.position = leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3))
+		if currentCard != m_cardHovered:
+			currentCard.setGlobalPosition(leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3)))
 
 func cardHoveredEnter(_card:Card):
 	var cardsInHand = getCardsInPosition(Globals.cardPosition.HAND)
@@ -228,15 +228,19 @@ func cardHoveredEnter(_card:Card):
 	if m_cardHovered == null:
 		m_cardHovered = _card
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
+		
+	reorganizeHandPositions()
 
 func cardHoveredExit(_card:Card):
 	if _card == m_cardHovered and !Input.is_action_pressed("click"):
 		m_cardHovered.setCardState(Globals.cardState.DEFAULT)
 		m_cardHovered = null
+	reorganizeHandPositions()
 
 func cardNeedUIRefresh(_card:Card):
 	_card.setCardState(Globals.cardState.DEFAULT)
 	setVisibilityAndPosition(_card)
+	reorganizeHandPositions()
 
 func _on_end_turn_button_pressed() -> void:
 	endTurnPressed.emit()

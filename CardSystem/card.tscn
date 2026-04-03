@@ -2,10 +2,22 @@
 
 [ext_resource type="Script" uid="uid://ctyhe7npsh5gi" path="res://CardSystem/card.gd" id="1_ostlh"]
 [ext_resource type="Texture2D" uid="uid://b20bruawalp7s" path="res://Graphics/Bordel/pngtree-sci-fi-trading-card-game-template-minimalistic-bright-theme-white-background-png-image_17761343.webp" id="2_2abnw"]
+[ext_resource type="Texture2D" uid="uid://e8r3ilusnknc" path="res://Graphics/Bordel/whole_card_part.png" id="3_bt581"]
+[ext_resource type="Texture2D" uid="uid://crujqpp6oyyue" path="res://Graphics/Bordel/card_glow.png" id="4_wsn3x"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_m7g5d"]
 font_size = 12
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wsn3x"]
+particle_flag_disable_z = true
+angle_min = 45.00001
+angle_max = 45.00001
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.2351742e-06
+radial_accel_max = -2.2351742e-06
+scale_min = 1.4
+scale_max = 2.5
 
 [node name="Card" type="Control" unique_id=1116141428]
 custom_minimum_size = Vector2(150, 220)
@@ -66,20 +78,23 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=2074076407]
-position = Vector2(74, 113)
-emitting = false
-amount = 20
-emission_shape = 3
-emission_rect_extents = Vector2(80, 120)
-direction = Vector2(0, 0)
-spread = 180.0
-gravity = Vector2(0, 0)
-initial_velocity_max = 37.04
-radial_accel_min = 67.59
-radial_accel_max = 67.59
-scale_amount_max = 5.63
-color = Color(1, 1, 0.439216, 1)
+[node name="CPUParticles2D" type="GPUParticles2D" parent="." unique_id=1621544918]
+visible = false
+modulate = Color(0.5614225, 0.6646818, 0.9474607, 1)
+show_behind_parent = true
+position = Vector2(77, 108)
+amount = 50
+texture = ExtResource("3_bt581")
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_wsn3x")
+
+[node name="GlowAuraCard" type="PointLight2D" parent="." unique_id=607525857]
+position = Vector2(74, 111.00001)
+scale = Vector2(1.2, 1.2)
+enabled = false
+color = Color(0.24705882, 1, 1, 1)
+energy = 2.86
+texture = ExtResource("4_wsn3x")
 
 [connection signal="mouse_entered" from="CardAppearance" to="." method="_on_card_appearance_mouse_entered"]
 [connection signal="mouse_exited" from="CardAppearance" to="." method="_on_card_appearance_mouse_exited"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnprjmvrhxb73"
-path="res://.godot/imported/loading_bar.png-3ffd51690ec45b978e4e2e24497f94ef.ctex"
+uid="uid://crujqpp6oyyue"
+path="res://.godot/imported/card_glow.png-f3926a5a4624fd0f33ad2f77e7393554.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/UI/loading_bar.png"
-dest_files=["res://.godot/imported/loading_bar.png-3ffd51690ec45b978e4e2e24497f94ef.ctex"]
+source_file="res://Graphics/Bordel/card_glow.png"
+dest_files=["res://.godot/imported/card_glow.png-f3926a5a4624fd0f33ad2f77e7393554.ctex"]
 
 [params]
 

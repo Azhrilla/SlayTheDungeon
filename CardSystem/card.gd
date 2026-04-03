@@ -10,6 +10,7 @@ var m_currentPosition:Globals.cardPosition = Globals.cardPosition.NONE
 var m_player = null
 var m_cardType = Globals.cardType.NORMAL
 var m_targetType:Globals.cardTarget = Globals.cardTarget.NONE
+var tweenPosition = null
 
 func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	var attack = atkObject.new()
@@ -43,6 +44,13 @@ func setPosition(_position:Globals.cardPosition)->void:
 	m_currentPosition = _position
 	cardNeedUIRefresh.emit(self)
 
+func setGlobalPosition(_position:Vector2)->void:
+	if tweenPosition:
+		tweenPosition.kill() # Avorter l'animation précédente.
+	tweenPosition = create_tween()
+	tweenPosition.tween_property(self, "position", _position, 0.1)
+
+
 func setCardState(_state:Globals.cardState)->void:
 	match _state:
 		Globals.cardState.PLAYABLE:
@@ -62,9 +70,11 @@ func updateVisibility():
 
 func startParticles():
 	$CPUParticles2D.emitting = true
+	$GlowAuraCard.enabled = true
 
 func stopParticles():
 	$CPUParticles2D.emitting = false
+	$GlowAuraCard.enabled = false
 
 func doWork(_enemies:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	push_error("Card does not have a doWork function")
