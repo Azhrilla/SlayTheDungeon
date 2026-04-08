@@ -14,7 +14,7 @@ var m_cardToPlay:Card = null
 var m_cardPlayable = false
 var m_mouseOnPlayZone = false
 var m_mouseOnControl  = false
-
+var m_savedTarget = null
 var m_currentObject = null
 
 func _ready() -> void:
@@ -43,11 +43,8 @@ func removeCharacter(_char:Character)->void:
 	
 func refreshUI() -> void:
 	for card in m_cardVisiblityComponent.m_cards:
-		setVisibilityAndPosition(card)
+		m_cardVisiblityComponent.refreshCardVisibility(card)
 	m_characterUIComponent.refreshPositions()
-
-func setVisibilityAndPosition(_card:Card)->void:
-	m_cardVisiblityComponent.setVisibilityAndPosition(_card)
 
 func setArrowToTarget(_origin,_target) -> void:
 	$Arrow.position = (_origin + _target)/2
@@ -85,7 +82,7 @@ func setPlayMode(_playMode:cardPlayMode)->void:
 			m_characterUIComponent.hideTargetingHelpers()
 			
 func playCardInternal():
-	cardShouldBePlayed.emit(m_cardToPlay,getCurrentTarget())
+	cardShouldBePlayed.emit(m_cardToPlay,m_savedTarget)
 	if m_currentObject:
 		onObjectToggled(m_currentObject, false)
 	m_cardToPlay.stopParticles()
@@ -98,14 +95,14 @@ func playCardInternal():
 	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func playCard():
+	m_savedTarget = getCurrentTarget()
 	m_cardToPlay.playCardAnim($PlayedCardPosed.position,playCardInternal)
 
 func _process(_delta: float) -> void:
 	refreshUI()
 	if !m_cardHovered:
 		setPlayMode(cardPlayMode.DEFAULT)
-	
-	
+
 	if m_cardPlayMode == cardPlayMode.DEFAULT:
 		if (Input.is_action_pressed("click")) and m_cardHovered:
 			handleDrag()
@@ -141,7 +138,6 @@ func cardHoveredEnter(_card:Card):
 	if m_cardHovered == null:
 		m_cardHovered = _card
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
-		
 	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func cardHoveredExit(_card:Card):
@@ -152,7 +148,7 @@ func cardHoveredExit(_card:Card):
 
 func cardNeedUIRefresh(_card:Card):
 	_card.setCardState(Globals.cardState.DEFAULT)
-	setVisibilityAndPosition(_card)
+	m_cardVisiblityComponent.refreshCardVisibility(_card)
 	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func _on_end_turn_button_pressed() -> void:
@@ -177,12 +173,12 @@ func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 		_object.setToggle(false)
 
 func hideDeck(_zoneType:Globals.cardPosition)->void:
-	m_characterUIComponent.hideCharacters()
+	m_characterUIComponent.showCharacters()
 	$EndTurnButton.disabled = false
 	m_cardVisiblityComponent.hideDeck(_zoneType)
 
 func showDeck(_zoneType:Globals.cardPosition)->void:
-	m_characterUIComponent.showCharacters()
+	m_characterUIComponent.hideCharacters()
 	$EndTurnButton.disabled = true
 	m_cardVisiblityComponent.showDeck(_zoneType)
 

@@ -1,7 +1,6 @@
 extends Control
 class_name CardsVisibilityComponent
 
-enum dragMod{NONE,TARGET,PLAY}
 var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
 var m_cards:Array[Card] = []
 
@@ -26,6 +25,13 @@ func reorganizeHandPositions(_cardHovered:Card):
 		if currentCard != _cardHovered:
 			currentCard.setGlobalPosition(leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3)))
 
+func _process(delta: float) -> void:
+	if m_currentlyShownDeck != Globals.cardPosition.HAND:
+		var cards = getCardsInPosition(m_currentlyShownDeck)
+		var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
+		for index in range(cards.size()):
+			cards[index].visible = true
+			cards[index].global_position = controlNodes[index].global_position
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -34,18 +40,11 @@ func _ready() -> void:
 	$ShowDeck/TextureRect/ScrollContainer/GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$ShowDeck/TextureRect/ScrollContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-func setVisibilityAndPosition(_card:Card)->void:
-	if m_currentlyShownDeck == Globals.cardPosition.NONE:
-		if (_card.m_currentPosition == Globals.cardPosition.HAND):
-			_card.visible = true
-		else:
-			_card.visible = false
-	
-	var cards = getCardsInPosition(m_currentlyShownDeck)
-	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
-	for index in range(cards.size()):
-		cards[index].visible = true
-		cards[index].global_position = controlNodes[index].global_position
+func refreshCardVisibility(_card:Card)->void:
+	if (_card.m_currentPosition == Globals.cardPosition.HAND):
+		_card.visible = true
+	else:
+		_card.visible = false
 
 func getCardsInPosition(_position:Globals.cardPosition) -> Array[Card]:
 	var output:Array[Card] = []

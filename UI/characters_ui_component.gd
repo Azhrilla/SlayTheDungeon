@@ -69,16 +69,12 @@ func setDragMode(_dragMod:Globals.dragMod):
 	m_dragMode = _dragMod
 	$Enemies.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$Enemies/MonsterBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if m_dragMode == Globals.dragMod.TARGET:
-		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_STOP
-		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_STOP
-		$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_STOP
-		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP
-	else:
-		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_IGNORE	
+	for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
+		var controlBox = getControlFromPosition(index)
+		if m_dragMode == Globals.dragMod.TARGET:
+			controlBox.mouse_filter = Control.MOUSE_FILTER_STOP
+		else:
+			controlBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func getControlFromPosition(_pos:Globals.target)->Control:
 	var currentBox = $Enemies/MonsterBox/Control
