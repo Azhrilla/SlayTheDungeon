@@ -1,0 +1,129 @@
+[gd_scene format=3 uid="uid://dtwlbhrkptwmn"]
+
+[ext_resource type="Script" uid="uid://bycqh788mmx5l" path="res://UI/characters_ui_component.gd" id="1_1fmsp"]
+[ext_resource type="PackedScene" uid="uid://dkp18phvnttpn" path="res://UI/selection_helper.tscn" id="1_88hdl"]
+
+[node name="CharactersUIComponent" type="Control" unique_id=1590902156]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1fmsp")
+
+[node name="ObjectContainer" type="VBoxContainer" parent="." unique_id=1082411418]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.042
+anchor_top = 0.938
+anchor_right = 1.0
+anchor_bottom = 0.943
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="PlayerPos" type="Control" parent="." unique_id=1887774609]
+layout_mode = 1
+anchor_left = 0.29
+anchor_top = 0.763
+anchor_right = 0.295
+anchor_bottom = 0.763
+offset_top = -20.0
+offset_right = 40.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Enemies" type="Control" parent="." unique_id=298796694]
+layout_mode = 1
+anchor_left = 0.601
+anchor_top = 0.649
+anchor_right = 0.73
+anchor_bottom = 0.649
+offset_left = -40.0
+offset_top = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MonsterBox" type="HBoxContainer" parent="Enemies" unique_id=1921201099]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="Enemies/MonsterBox" unique_id=822635787]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control" unique_id=570785625]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control/PositionHelper" unique_id=2071654310 instance=ExtResource("1_88hdl")]
+visible = false
+
+[node name="Control2" type="Control" parent="Enemies/MonsterBox" unique_id=314968289]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control2" unique_id=1690165606]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control2/PositionHelper" unique_id=971107320 instance=ExtResource("1_88hdl")]
+visible = false
+
+[node name="Control3" type="Control" parent="Enemies/MonsterBox" unique_id=850201007]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control3" unique_id=32850474]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control3/PositionHelper" unique_id=925943890 instance=ExtResource("1_88hdl")]
+visible = false
+
+[node name="Control4" type="Control" parent="Enemies/MonsterBox" unique_id=392755201]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="PositionHelper" type="Control" parent="Enemies/MonsterBox/Control4" unique_id=1915682797]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="SelectionHelper" parent="Enemies/MonsterBox/Control4/PositionHelper" unique_id=2013531669 instance=ExtResource("1_88hdl")]
+visible = false
+
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control" to="." method="onMouseExitTargetControlZone"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control2" to="." method="_on_control_2_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control2" to="." method="onMouseExitTargetControlZone"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control3" to="." method="_on_control_3_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control3" to="." method="onMouseExitTargetControlZone"]
+[connection signal="mouse_entered" from="Enemies/MonsterBox/Control4" to="." method="_on_control_4_mouse_entered"]
+[connection signal="mouse_exited" from="Enemies/MonsterBox/Control4" to="." method="onMouseExitTargetControlZone"]

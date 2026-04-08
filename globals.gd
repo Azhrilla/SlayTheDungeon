@@ -8,6 +8,7 @@ enum target{NONE,ALLY1,ALLY2,ALLY3,ENEMY1,ENEMY2,ENEMY3,ENEMY4}
 enum cardState{DEFAULT,PLAYABLE,HOVERED}
 enum statusType{NONE,ARMOR,SPIKE,DMG,STR,INTERRO,JUMP,BARRIER,POISON}
 enum cardQuality{NONE,NORMAL,RARE,EPIC}
+enum dragMod{NONE,TARGET,PLAY}
 
 const m_playLevel = "res://Game/play_level.tscn"
 const m_lootLevel = "res://UI/add_card_menu.tscn"

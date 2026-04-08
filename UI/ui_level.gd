@@ -2,29 +2,25 @@ extends CanvasLayer
 signal endTurnPressed
 signal cardShouldBePlayed(_card:Card,_target:Globals.target)
 
-enum dragMod{NONE,TARGET,PLAY}
+
 enum cardPlayMode{DEFAULT,PLAY,TARGET}
 
+@onready var m_cardVisiblityComponent:CardsVisibilityComponent = $CardsVisibilityComponent
+@onready var m_characterUIComponent:CharacterUIComponent = $CharactersUIComponent
+
 var m_cardPlayMode = cardPlayMode.DEFAULT
-var m_cards:Array[Card] = []
 var m_cardHovered:Card = null
 var m_cardToPlay:Card = null
 var m_cardPlayable = false
-var m_characters:Array[Character] = []
 var m_mouseOnPlayZone = false
 var m_mouseOnControl  = false
-var m_dragMode:dragMod = dragMod.NONE
-var m_currentTarget:Globals.target = Globals.target.NONE
-var m_currentlyShownDeck:Globals.cardPosition = Globals.cardPosition.NONE
+
 var m_currentObject = null
 
 func _ready() -> void:
-	$ShowDeck/TextureRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	$ShowDeck/TextureRect/ScrollContainer/GridContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	$ShowDeck/TextureRect/ScrollContainer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	get_viewport().size_changed.connect(refreshUI)
 	refreshUI()
-	setDragMode(dragMod.NONE)
+	m_characterUIComponent.setDragMode(Globals.dragMod.NONE)
 	$CombatUICharacter.init(GpState.m_hero)
 
 	for object:ObjectBase in GpState.m_hero.getObjects():
@@ -36,78 +32,28 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	$CombatUICharacter.release(GpState.m_hero)
 
-func setCharacters(_chars:Array[Character]) -> void:
-	m_characters = _chars
-
-func removeCharacter(_chars:Character)->void:
-	m_characters.erase(_chars)
-
-func getControlFromPosition(_pos:Globals.target)->Control:
-	var currentBox = $Enemies/MonsterBox/Control
-	match _pos:
-		Globals.target.ENEMY1:
-			currentBox = $Enemies/MonsterBox/Control
-		Globals.target.ENEMY2:
-			currentBox = $Enemies/MonsterBox/Control2
-		Globals.target.ENEMY3:
-			currentBox = $Enemies/MonsterBox/Control3
-		Globals.target.ENEMY4:
-			currentBox = $Enemies/MonsterBox/Control4
-		_:
-			push_error("Trying to get position of a monster with non valid position")
-	return currentBox
-	
 func addTrap(_trap:TrapBase)->void:
-	var controlBox = getControlFromPosition(_trap.m_position)
-	controlBox.add_child(_trap)
+	m_characterUIComponent.addTrap(_trap)
 
-func getMonsterPosition(_pos:Globals.target)->Vector2:
-	var currentBox = getControlFromPosition(_pos)
-	return currentBox.global_position + currentBox.custom_minimum_size/2
+func setCharacters(_chars:Array[Character]) -> void:
+	m_characterUIComponent.setCharacters(_chars)
+
+func removeCharacter(_char:Character)->void:
+	m_characterUIComponent.removeCharacter(_char)
 	
 func refreshUI() -> void:
-	for card in m_cards:
+	for card in m_cardVisiblityComponent.m_cards:
 		setVisibilityAndPosition(card)
-	for character in m_characters:
-		if character.m_type == Globals.type.HERO:
-			character.position = $PlayerPos.position
-		if character.m_type == Globals.type.MONSTER:
-			character.position = getMonsterPosition(character.m_currentPosition)
+	m_characterUIComponent.refreshPositions()
 
 func setVisibilityAndPosition(_card:Card)->void:
-	if m_currentlyShownDeck == Globals.cardPosition.NONE:
-		if (_card.m_currentPosition == Globals.cardPosition.HAND):
-			_card.visible = true
-		else:
-			_card.visible = false
-	
-	var cards = getCardsInPosition(m_currentlyShownDeck)
-	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
-	for index in range(cards.size()):
-		cards[index].visible = true
-		cards[index].global_position = controlNodes[index].global_position
-	
+	m_cardVisiblityComponent.setVisibilityAndPosition(_card)
 
 func setArrowToTarget(_origin,_target) -> void:
 	$Arrow.position = (_origin + _target)/2
 	$Arrow.look_at(_target)
 	$Arrow.scale.x = (_target - _origin).length()/30
 
-func setDragMode(_dragMod:dragMod):
-	m_dragMode = _dragMod
-	$Enemies.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	$Enemies/MonsterBox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if m_dragMode == dragMod.TARGET:
-		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_STOP
-		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_STOP
-		$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_STOP
-		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_STOP
-	else:
-		$Enemies/MonsterBox/Control.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$Enemies/MonsterBox/Control2.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$Enemies/MonsterBox/Control3.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		$Enemies/MonsterBox/Control4.mouse_filter = Control.MOUSE_FILTER_IGNORE	
-		
 func handleDrag():
 	var currentPosMouse:Vector2 = get_viewport().get_mouse_position() - m_cardHovered.custom_minimum_size/2
 	m_cardHovered.position = currentPosMouse
@@ -119,6 +65,9 @@ func handleDrag():
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
 		m_cardPlayable = false
 
+func getCurrentTarget():
+	return m_characterUIComponent.m_currentTarget
+
 func getTargetType() -> Globals.cardTarget:
 	if m_currentObject:
 		return m_currentObject.getTargetType()
@@ -128,16 +77,15 @@ func getTargetType() -> Globals.cardTarget:
 
 func setPlayMode(_playMode:cardPlayMode)->void:
 	m_cardPlayMode = _playMode
+	m_characterUIComponent.setCurrentTargetType(getTargetType())
 	if _playMode == cardPlayMode.TARGET:
-		for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
-			if canControlZoneBeTargeted(index):
-				getControlFromPosition(index).get_child(0).get_child(0).visible = true
+		m_characterUIComponent.showTargetingHelpers()
 	else:
 		for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):
-			getControlFromPosition(index).get_child(0).get_child(0).visible = false
-
-func playCard():
-	cardShouldBePlayed.emit(m_cardToPlay,m_currentTarget)
+			m_characterUIComponent.hideTargetingHelpers()
+			
+func playCardInternal():
+	cardShouldBePlayed.emit(m_cardToPlay,getCurrentTarget())
 	if m_currentObject:
 		onObjectToggled(m_currentObject, false)
 	m_cardToPlay.stopParticles()
@@ -145,10 +93,13 @@ func playCard():
 	m_cardToPlay = null
 	m_cardHovered = null
 	$Arrow.visible = false
-	setDragMode(dragMod.NONE)
+	m_characterUIComponent.setDragMode(Globals.dragMod.NONE)
 	setPlayMode(cardPlayMode.DEFAULT)
-	reorganizeHandPositions()
-	
+	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
+
+func playCard():
+	m_cardToPlay.playCardAnim($PlayedCardPosed.position,playCardInternal)
+
 func _process(_delta: float) -> void:
 	refreshUI()
 	if !m_cardHovered:
@@ -163,84 +114,46 @@ func _process(_delta: float) -> void:
 			if m_cardPlayable:
 				m_cardToPlay = m_cardHovered
 				if getTargetType() != Globals.cardTarget.NONE:
+					m_cardHovered.setGlobalPosition($PlayedCardPosed.position)
 					setPlayMode(cardPlayMode.TARGET)
 				else:
 					playCard()
 
 	if m_cardPlayMode == cardPlayMode.TARGET:
-		setDragMode(dragMod.TARGET)
+		m_characterUIComponent.setDragMode(Globals.dragMod.TARGET)
 		var currentPosMouse:Vector2 = get_viewport().get_mouse_position() 
 		var targetArrow = currentPosMouse
-		if m_currentTarget:
-			targetArrow = getMonsterPosition(m_currentTarget)
-		setArrowToTarget($PlayerPos.position,targetArrow)
+		if getCurrentTarget():
+			targetArrow = m_characterUIComponent.getMonsterPosition(getCurrentTarget())
+		setArrowToTarget(m_characterUIComponent.getPlayerPosition(),targetArrow)
 		$Arrow.visible = true
 		
-		if (Input.is_action_pressed("click")) and m_currentTarget:
+		if (Input.is_action_pressed("click")) and getCurrentTarget():
 			playCard()
 	
 func addCard(_card:Card)->void:
-	$Cards.add_child(_card)
-	m_cards.append(_card)
+	m_cardVisiblityComponent.addCard(_card)
 	_card.connect("mouseHoveredEnter",cardHoveredEnter)
 	_card.connect("mouseHoveredExit",cardHoveredExit)
 	_card.connect("cardNeedUIRefresh",cardNeedUIRefresh)
-	
-	if m_cards.size() > $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_child_count():
-		var newControl = Control.new()
-		newControl.custom_minimum_size = Vector2(150,220)
-		$ShowDeck/TextureRect/ScrollContainer/GridContainer.add_child(newControl)
-		newControl.mouse_filter = 2
-
-func getCardsInPosition(_position:Globals.cardPosition) -> Array[Card]:
-	var output:Array[Card] = []
-	for card in m_cards:
-		if card.m_currentPosition == _position:
-			output.append(card)
-	return output
-
-func reorganizeHandPositions(_processHovered:bool=false):	
-	var cardsInHand = getCardsInPosition(Globals.cardPosition.HAND)	
-	var cardCount = cardsInHand.size()
-	var leftCardMarkerPos = $HandLeft.position
-	var rightCardMarkerPos = $HandRight.position
-	var hoveredCardSeen = false
-	for indexCard in range(cardCount):
-		var modifiedIndex:int = indexCard+1
-		var currentCard:Card = cardsInHand[indexCard]
-		
-		if m_cardHovered:
-			if hoveredCardSeen:
-				modifiedIndex+=1
-			else:
-				modifiedIndex-=1
-			if currentCard == m_cardHovered:
-				modifiedIndex+=1
-				hoveredCardSeen = true
-		if currentCard != m_cardHovered:
-			currentCard.setGlobalPosition(leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3)))
 
 func cardHoveredEnter(_card:Card):
-	var cardsInHand = getCardsInPosition(Globals.cardPosition.HAND)
-	var indexCardInHand:int = cardsInHand.find(_card)
-	if indexCardInHand < 0:
-		return	
 	if m_cardHovered == null:
 		m_cardHovered = _card
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
 		
-	reorganizeHandPositions()
+	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func cardHoveredExit(_card:Card):
 	if _card == m_cardHovered and !Input.is_action_pressed("click"):
 		m_cardHovered.setCardState(Globals.cardState.DEFAULT)
 		m_cardHovered = null
-	reorganizeHandPositions()
+	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func cardNeedUIRefresh(_card:Card):
 	_card.setCardState(Globals.cardState.DEFAULT)
 	setVisibilityAndPosition(_card)
-	reorganizeHandPositions()
+	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func _on_end_turn_button_pressed() -> void:
 	endTurnPressed.emit()
@@ -251,102 +164,6 @@ func _on_play_zone_mouse_exited() -> void:
 
 func _on_play_zone_mouse_entered() -> void:
 	m_mouseOnPlayZone = true
-
-func isTargetControlZoneEmpty(_target:Globals.target)->bool:
-	for character in m_characters:
-		if character.m_currentPosition == _target:
-			return false
-	return true
-
-func canControlZoneBeTargeted(_target:Globals.target) -> bool:
-	match getTargetType():
-		Globals.cardTarget.ENEMY:
-			return !isTargetControlZoneEmpty(_target)
-		Globals.cardTarget.EMPTY:
-			return isTargetControlZoneEmpty(_target)
-		Globals.cardTarget.ANY:
-			return true
-		_:
-			return false
-			
-			
-func setEnteredTargetControlZone(_target:Globals.target)->void:
-	if !canControlZoneBeTargeted(_target):
-		return
-	m_currentTarget = _target
-	m_mouseOnControl = true
-	m_mouseOnPlayZone = true
-
-func exitControlZone() -> void:
-	m_currentTarget = Globals.target.NONE
-	m_mouseOnControl = false
-
-func _on_control_mouse_entered() -> void:
-	setEnteredTargetControlZone(Globals.target.ENEMY1)
-
-func _on_control_2_mouse_entered() -> void:
-	setEnteredTargetControlZone(Globals.target.ENEMY2)
-
-func _on_control_3_mouse_entered() -> void:
-	setEnteredTargetControlZone(Globals.target.ENEMY3)
-
-func _on_control_4_mouse_entered() -> void:
-	setEnteredTargetControlZone(Globals.target.ENEMY4)
-
-func _on_control_mouse_exited() -> void:
-	exitControlZone()
-
-func _on_control_2_mouse_exited() -> void:
-	exitControlZone()
-
-func _on_control_3_mouse_exited() -> void:
-	exitControlZone()
-
-func _on_control_4_mouse_exited() -> void:
-	exitControlZone()
-
-func hideDeck(_zoneType:Globals.cardPosition)->void:
-	for character in m_characters:
-		character.visible = true
-	for card in getCardsInPosition(Globals.cardPosition.HAND):
-		card.visible = true
-	
-	$EndTurnButton.disabled = false
-	$ShowDeck.visible = false
-	
-	for card in getCardsInPosition(_zoneType):
-		card.visible = false
-		card.get_parent().remove_child(card)
-		$Cards.add_child(card)
-		card.mouse_filter = Control.MOUSE_FILTER_PASS
-	
-	var cardsArray = getCardsInPosition(_zoneType)
-	var cardCount:int = cardsArray.size()
-	for index in range(cardCount):
-		cardsArray[index].visible = false
-	m_currentlyShownDeck = Globals.cardPosition.NONE
-
-func showDeck(_zoneType:Globals.cardPosition)->void:
-	if m_currentlyShownDeck != Globals.cardPosition.NONE:
-		hideDeck(m_currentlyShownDeck)
-	
-	m_currentlyShownDeck = _zoneType
-	
-	$ShowDeck.visible = true
-	for character in m_characters:
-		character.visible = false	
-	for card in getCardsInPosition(Globals.cardPosition.HAND):
-		card.visible = false
-	
-	$EndTurnButton.disabled = true
-	
-	var index = 0
-	var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
-	for card in getCardsInPosition(_zoneType):
-		card.visible = false
-		card.get_parent().remove_child(card)
-		controlNodes[index].add_child(card)
-		index +=1
 
 func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 	if _toggle == false:
@@ -359,14 +176,24 @@ func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 	else:
 		_object.setToggle(false)
 
+func hideDeck(_zoneType:Globals.cardPosition)->void:
+	m_characterUIComponent.hideCharacters()
+	$EndTurnButton.disabled = false
+	m_cardVisiblityComponent.hideDeck(_zoneType)
+
+func showDeck(_zoneType:Globals.cardPosition)->void:
+	m_characterUIComponent.showCharacters()
+	$EndTurnButton.disabled = true
+	m_cardVisiblityComponent.showDeck(_zoneType)
+
 func _on_draw_button_pressed() -> void:
-	if m_currentlyShownDeck == Globals.cardPosition.DECK:
+	if m_cardVisiblityComponent.m_currentlyShownDeck == Globals.cardPosition.DECK:
 		hideDeck(Globals.cardPosition.DECK)
 	else:
 		showDeck(Globals.cardPosition.DECK)
 
 func _on_discard_button_pressed() -> void:
-	if m_currentlyShownDeck == Globals.cardPosition.DISCARD:
+	if m_cardVisiblityComponent.m_currentlyShownDeck == Globals.cardPosition.DISCARD:
 		hideDeck(Globals.cardPosition.DISCARD)
 	else:
 		showDeck(Globals.cardPosition.DISCARD)

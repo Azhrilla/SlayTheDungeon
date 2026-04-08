@@ -50,6 +50,15 @@ func setGlobalPosition(_position:Vector2)->void:
 	tweenPosition = create_tween()
 	tweenPosition.tween_property(self, "position", _position, 0.1)
 
+func playCardAnim(_position:Vector2,_callback):
+	if tweenPosition:
+		tweenPosition.kill() # Avorter l'animation précédente.
+	tweenPosition = create_tween()
+	var timeScaleUp = 0.3
+	var timeScaleDown = 0.1
+	tweenPosition.tween_property(self, "scale", Vector2(1.4,1.4), timeScaleUp)
+	tweenPosition.tween_property(self, "scale", Vector2(0.8,0.8), timeScaleDown)
+	tweenPosition.tween_callback(_callback)
 
 func setCardState(_state:Globals.cardState)->void:
 	match _state:
