@@ -154,6 +154,9 @@ func _process(_delta: float) -> void:
 	if !m_player or !m_player.getHero():
 		return
 		
+	if m_enemies.is_empty():
+			m_nextTurnState = turnState.END_COMBAT
+	
 	match m_nextTurnState:
 		turnState.START_COMBAT:
 			startCombat()
