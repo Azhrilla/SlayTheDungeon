@@ -31,13 +31,11 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="CombatUICharacter" parent="." unique_id=705920300 instance=ExtResource("9_xmnc4")]
-anchors_preset = 0
+anchors_preset = -1
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 3.0
-offset_top = -3.0
-offset_right = 3.0
-offset_bottom = -3.0
+offset_left = 10.0
+offset_top = 10.0
 grow_horizontal = 1
 grow_vertical = 1
 

@@ -1,7 +1,12 @@
 extends Control
 
 
-@onready var m_characterUI = $ComponentUICharacter
+@onready var m_characterUI = $VBoxForInfos/ComponentUICharacter
+@onready var m_chartreuseCount = $VBoxForInfos/BackGround/VBoxContainer/Control/ChartreuseCount
+@onready var m_dollarLabel = $VBoxForInfos/BackGround/VBoxContainer/DollarsLabel
+@onready var m_chipsContainer = $VBoxForInfos/BackGround/VBoxContainer/ChipContainer
+@onready var m_chipInfo = $VBoxForInfos/ControlForChips/ChipInfo
+@onready var m_chipInfoText = $VBoxForInfos/ControlForChips/ChipInfo/ChipInfoText
 
 func init(_hero:Hero)->void:
 	for myChip:Chip in _hero.m_chips:
@@ -9,11 +14,11 @@ func init(_hero:Hero)->void:
 		myChip.mouseExited.connect(mouseExitedChip)
 		if myChip.get_parent():
 			myChip.get_parent().remove_child(myChip)
-		$BackGround/ChipContainer.add_child(myChip)
-	$BackGround/DollarsLabel.text=str(GpState.m_currentDollars)
+		m_chipsContainer.add_child(myChip)
+	m_dollarLabel.text=str(GpState.m_currentDollars)
 	GpState.onDollarChanged.connect(onDollarChanged)
 	_hero.onTechnoChartreuseUsed.connect(onTechnoChanged)
-	$BackGround/ChartreuseCount.frame = _hero.getCurrentTechnoChartreuseCount()
+	m_chartreuseCount.frame = _hero.getCurrentTechnoChartreuseCount()
 	m_characterUI.init(_hero)
 
 func release(_hero:Hero)->void:
@@ -23,14 +28,14 @@ func release(_hero:Hero)->void:
 		_hero.add_child(myChip)
 
 func onTechnoChanged(_count:int)->void:
-	$BackGround/ChartreuseCount.frame = _count
+	m_chartreuseCount.frame = _count
 
 func mouseEnteredChip(_chip:Chip):
-	$ChipInfo.visible = true
-	$ChipInfo/ChipInfoText.text = _chip.getInfoText()
+	m_chipInfo.visible = true
+	m_chipInfoText.text = _chip.getInfoText()
 
 func mouseExitedChip(_chip:Chip):
-	$ChipInfo.visible = false
+	m_chipInfo.visible = false
 
 func onDollarChanged():
-	$BackGround/DollarsLabel.value=GpState.m_currentDollars
+	m_dollarLabel.value=GpState.m_currentDollars
