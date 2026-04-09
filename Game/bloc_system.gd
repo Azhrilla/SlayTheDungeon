@@ -12,6 +12,8 @@ func getCurrentEnemies()->Array[String]:
 
 func preloadNextEnemies():
 	var nextLevel = m_currentLevel.m_nextLevel
+	if !nextLevel:
+		return
 	var enemies = m_currentLevel.m_nextLevel.m_enemies
 	while enemies.is_empty() and nextLevel != null:
 		enemies = nextLevel.m_enemies
