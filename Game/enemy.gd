@@ -9,6 +9,8 @@ func _ready() -> void:
 	super._ready()
 	$AnimationPlayer.play("Idle")
 	m_type = Globals.type.MONSTER
+	if Globals.m_godMode:
+		m_currentHealth = 1
 
 func doWork(_hero:Character,_allies:Array[Character]) -> void:
 	if m_currentIntention:
