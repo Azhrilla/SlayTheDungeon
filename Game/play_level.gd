@@ -10,7 +10,7 @@ var m_turnOver:bool = false
 enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MONSTER_PLAY,MONSTER_END,ROUND_END,NONE,END_COMBAT}
 var m_currentTurnState = turnState.START_COMBAT
 var m_nextTurnState
-@onready var m_player = $Player
+@onready var m_player:Player = $Player
 
 func getHeroes()->Array[Character]:
 	return m_player.getHeroes()
