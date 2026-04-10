@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://dmoiukgdhv7f7"]
 
 [ext_resource type="Script" uid="uid://d3juiyvdhk62o" path="res://Game/play_level.gd" id="1_x1jox"]
-[ext_resource type="Texture2D" uid="uid://0i6fuaoei75o" path="res://Graphics/fond_rough.png" id="2_4udto"]
+[ext_resource type="Texture2D" uid="uid://b8ub7t0llxla2" path="res://Graphics/back_ground_0904.png" id="2_4udto"]
 [ext_resource type="PackedScene" uid="uid://catd2nw28jgxi" path="res://UI/ui_level.tscn" id="3_2slge"]
 [ext_resource type="PackedScene" uid="uid://bxg7554iequp8" path="res://Game/player.tscn" id="4_lcbj5"]
 [ext_resource type="TileSet" uid="uid://ce22gsyr1i1cv" path="res://Graphics/UI/tilemap.tres" id="4_u13sh"]
