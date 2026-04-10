@@ -21,14 +21,14 @@ script = ExtResource("1_ntn5l")
 
 [node name="CardsVisibilityComponent" parent="." unique_id=1999269347 instance=ExtResource("11_qvnby")]
 
-[node name="CharactersUIComponent" parent="." unique_id=1590902156 instance=ExtResource("3_l2aja")]
-
 [node name="PlayZone" type="Control" parent="." unique_id=1539928477]
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 0.7
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="CharactersUIComponent" parent="." unique_id=1590902156 instance=ExtResource("3_l2aja")]
 
 [node name="CombatUICharacter" parent="." unique_id=705920300 instance=ExtResource("9_xmnc4")]
 anchors_preset = -1
