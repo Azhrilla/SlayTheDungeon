@@ -8,6 +8,7 @@ signal onTechnoChartreuseUsed
 var m_chips: Array[Chip]
 var m_objects:Array[ObjectBase]
 var m_technoChartreuse:int = 3
+var m_maxTechnoChartreuse:int = 3
 
 func processAttacks(_attack:atkObject) -> void:
 	_attack.m_baseDmg += getStatusVariable(Globals.statusType.STR)
@@ -22,6 +23,11 @@ func getObjects()->Array[ObjectBase]:
 	
 func getCurrentTechnoChartreuseCount():
 	return m_technoChartreuse
+
+func gainTechnoChartreuse(_amount:int):
+	m_technoChartreuse += _amount
+	m_technoChartreuse = clamp(m_technoChartreuse,0,m_maxTechnoChartreuse)
+	onTechnoChartreuseUsed.emit(m_technoChartreuse)
 
 func canObjectBeUsed(_object:ObjectBase)->bool:
 	if _object.getCost() > m_technoChartreuse:
@@ -50,7 +56,7 @@ func endRound(_hero:Character,_monsters:Array[Character]):
 
 func endCombat():
 	m_armorIsPermanent = false
-	
+	gainTechnoChartreuse(1)
 	for statusType in Globals.statusType.values():
 		setStatusVariable(statusType,0)
 
