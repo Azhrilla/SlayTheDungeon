@@ -19,6 +19,7 @@ _data = {
 script = ExtResource("2_0c66c")
 
 [node name="Sprite2D" parent="." index="1" unique_id=1713517992]
+position = Vector2(-1, 88)
 scale = Vector2(1.5, 1.616)
 texture = ExtResource("2_2syjg")
 flip_h = true
@@ -29,5 +30,5 @@ vframes = 6
 libraries/ = SubResource("AnimationLibrary_k1lh2")
 
 [node name="ShieldComponent" parent="." index="4" unique_id=526406930 instance=ExtResource("7_o3sbt")]
-position = Vector2(6, -8.000001)
+position = Vector2(-1, 88)
 scale = Vector2(0.4, 0.3)
