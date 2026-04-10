@@ -76,8 +76,8 @@ func _init():
 	m_objects.append(newObject)
 	
 func _ready() -> void:
-	m_currentHealth = 40
-	m_maximumHealth = 40
+	m_currentHealth = 50
+	m_maximumHealth = 50
 	super._ready()
 	m_type = Globals.type.HERO
 	

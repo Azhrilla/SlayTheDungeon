@@ -39,10 +39,9 @@ anchor_bottom = 0.85
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-current_tab = 1
+current_tab = 0
 
 [node name="Cards" type="Control" parent="TextureRect/TabContainer" unique_id=1274860644]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 metadata/_tab_index = 0
@@ -59,6 +58,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="Chips" type="Control" parent="TextureRect/TabContainer" unique_id=835722404]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
