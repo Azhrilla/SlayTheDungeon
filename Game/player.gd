@@ -17,12 +17,12 @@ func addCard(_card:Card)->void:
 	_card.m_player = self
 
 func attachHero():
-	$Heroes.add_child(GpState.m_hero)
+	$Heroes.add_child(GpState.getHero())
 	m_hero = GpState.m_hero
-	GpState.m_hero.connect("OnDeath", onHeroDeath)
+	GpState.getHero().connect("OnDeath", onHeroDeath)
 
 func detachHeroes():
-	$Heroes.remove_child(GpState.m_hero)
+	$Heroes.remove_child(GpState.getHero())
 	
 	var objects = m_hero.getObjects()
 	for object in objects:

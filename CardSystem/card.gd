@@ -11,6 +11,9 @@ var m_player = null
 var m_cardType = Globals.cardType.NORMAL
 var m_targetType:Globals.cardTarget = Globals.cardTarget.NONE
 var tweenPosition = null
+var m_buyCost:int = 0
+var m_canBeUpgraded = false
+var m_isUpgraded = false
 
 func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	var attack = atkObject.new()
@@ -78,10 +81,10 @@ func updateVisibility():
 		$cardText.visible = true
 
 func startParticles():
-	$GlowAuraCard.enabled = true
+	$CardAppearance/Control/GlowAuraCard.enabled = true
 
 func stopParticles():
-	$GlowAuraCard.enabled = false
+	$CardAppearance/Control/GlowAuraCard.enabled = false
 
 func doWork(_enemies:Array[Character],_hero:Character,_targetPosition:Globals.target):
 	push_error("Card does not have a doWork function")

@@ -3,6 +3,12 @@ class_name BlocSystem
 
 var m_levels:Array[levelInfos]
 var m_currentLevel:levelInfos = null
+var rng = null
+
+func getRngNumber():
+	if !rng:
+		rng = RandomNumberGenerator.new()
+	return rng.randf_range(0.0, 1.0)
 
 func getEnemy(_enemyLevel:int)->Array[String]:
 	return []

@@ -4,22 +4,19 @@ class_name Act1_Bloc1
 func getEnemy(_enemyLevel:int)->Array[String]:
 	match _enemyLevel:
 		1:
-			var rng = RandomNumberGenerator.new()
-			var currentRNG = rng.randf_range(0.0, 1.0)
+			var currentRNG = getRngNumber()
 			if currentRNG > 0.5:
 				return ["Drone","Drone","Drone"]
 			else:
 				return ["GiantRat","GiantRat"]
 		2:
-			var rng = RandomNumberGenerator.new()
-			var currentRNG = rng.randf_range(0.0, 1.0)
+			var currentRNG = getRngNumber()
 			if currentRNG > 0.5:
 				return ["Drone","Drone","Drone","Drone"]
 			else:
 				return ["GiantRat","GiantRat","GiantRat"]
 		3: 
-			var rng = RandomNumberGenerator.new()
-			var currentRNG = rng.randf_range(0.0, 1.0)
+			var currentRNG = getRngNumber()
 			if currentRNG > 0.5:
 				return ["Caillou","Caillou"]
 			else:
@@ -44,5 +41,8 @@ func _init():
 	addLevel("res://Interludes/act_1_bloc_1_scene_5.tscn")
 	addLevel("",5,Globals.cardQuality.NORMAL,100)
 	addLevel("res://Interludes/act_1_bloc_1_scene_6.tscn")
+	addLevel("res://UI/Armory.tscn")
+	addLevel("",3,Globals.cardQuality.NORMAL,50)
+	addLevel("",3,Globals.cardQuality.NORMAL,50)
 	addLevel(Globals.m_victoryLevel)
 	

@@ -2,6 +2,7 @@ extends Control
 class_name Chip
 
 var m_hero:Hero = null
+var m_buyCost:int = 0
 signal mouseEntered()
 signal mouseExited()
 

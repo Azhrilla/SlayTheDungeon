@@ -38,4 +38,4 @@ func mouseExitedChip(_chip:Chip):
 	m_chipInfo.visible = false
 
 func onDollarChanged():
-	m_dollarLabel.value=GpState.m_currentDollars
+	m_dollarLabel.text=str(GpState.m_currentDollars)

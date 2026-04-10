@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://d20y2frfvcjdj"]
+[gd_scene format=3 uid="uid://d20y2frfvcjdj"]
 
 [ext_resource type="Script" uid="uid://cpcsnwhknqar7" path="res://Chips/chip.gd" id="1_aq8x0"]
 [ext_resource type="Texture2D" uid="uid://donxbu345vi4" path="res://Graphics/UI/Chips/chip.JPG" id="2_t1vjw"]
 
-[node name="Chip" type="Control"]
+[node name="Chip" type="Control" unique_id=1745229689]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 3
 anchors_preset = 0
@@ -11,7 +11,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 script = ExtResource("1_aq8x0")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1700038973]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -35,6 +35,24 @@ expand_mode = 1
 stretch_mode = 4
 flip_v = true
 
+[node name="Control" type="CenterContainer" parent="CardAppearance" unique_id=521654400]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GlowAuraCard" type="PointLight2D" parent="CardAppearance/Control" unique_id=607525857]
+position = Vector2(-0.5, -3.9999924)
+scale = Vector2(1.2, 1.2)
+enabled = false
+color = Color(0.24705882, 1, 1, 1)
+energy = 2.86
+texture = ExtResource("4_wsn3x")
+
 [node name="cardName" type="Label" parent="." unique_id=952563157]
 layout_mode = 1
 anchors_preset = -1
@@ -68,14 +86,6 @@ label_settings = SubResource("LabelSettings_m7g5d")
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
-
-[node name="GlowAuraCard" type="PointLight2D" parent="." unique_id=607525857]
-position = Vector2(74, 111.00001)
-scale = Vector2(1.2, 1.2)
-enabled = false
-color = Color(0.24705882, 1, 1, 1)
-energy = 2.86
-texture = ExtResource("4_wsn3x")
 
 [connection signal="mouse_entered" from="CardAppearance" to="." method="_on_card_appearance_mouse_entered"]
 [connection signal="mouse_exited" from="CardAppearance" to="." method="_on_card_appearance_mouse_exited"]

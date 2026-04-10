@@ -14,7 +14,6 @@ func _ready() -> void:
 	GpState.getCurrentLevel().m_goToLoot = false	
 	m_cardNames = Globals.getCardsLoot()
 
-	
 func setUpLevel():
 	if !m_UIReady:
 			var boxSet = $BackGround/TextureRect/VBoxContainer/HBoxContainer.get_children()

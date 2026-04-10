@@ -21,16 +21,16 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(refreshUI)
 	refreshUI()
 	m_characterUIComponent.setDragMode(Globals.dragMod.NONE)
-	$CombatUICharacter.init(GpState.m_hero)
+	$CombatUICharacter.init(GpState.getHero())
 
-	for object:ObjectBase in GpState.m_hero.getObjects():
+	for object:ObjectBase in GpState.getHero().getObjects():
 		if object.get_parent():
 			object.get_parent().remove_child(object)
 		$ObjectContainer.add_child(object)
 		object.isObjectToggled.connect(onObjectToggled)
 
 func _exit_tree() -> void:
-	$CombatUICharacter.release(GpState.m_hero)
+	$CombatUICharacter.release(GpState.getHero())
 
 func addTrap(_trap:TrapBase)->void:
 	m_characterUIComponent.addTrap(_trap)
@@ -168,7 +168,7 @@ func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 		_object.setToggle(_toggle)
 		return
 	
-	if GpState.m_hero.canObjectBeUsed(_object):
+	if GpState.getHero().canObjectBeUsed(_object):
 		m_currentObject = _object
 	else:
 		_object.setToggle(false)

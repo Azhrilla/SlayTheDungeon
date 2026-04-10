@@ -17,8 +17,18 @@ const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
 const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
 const m_godMode = false
 
+static var m_availableChips = {
+	Globals.cardQuality.NORMAL : {"Price":[50,100],"Chips":["Ramp","HealthPack","FirstStrike"]},
+}
+
 static var m_availableCards = {
-	Globals.cardQuality.NORMAL : ["BasicTrap","WindStrike","HugeStrike","SwiftAsTheWind","Barrier","DoubleUp","Laser","Prepare","DurableArmor","DrawBasic","Scrambler"],
+	Globals.cardQuality.NORMAL : ["BasicTrap","WindStrike","HugeStrike","SwiftAsTheWind","DoubleUp","Laser","Prepare","DurableArmor","Scrambler"],
+	Globals.cardQuality.RARE : ["Barrier","DrawBasic"],
+}
+
+static var m_buyCost = {
+	Globals.cardQuality.NORMAL : [50,100],
+	Globals.cardQuality.RARE : [150,200],
 }
 
 func getCardsLoot() -> Array[String]:
