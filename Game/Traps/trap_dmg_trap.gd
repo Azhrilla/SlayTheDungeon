@@ -7,4 +7,5 @@ func DoWork(_target:Enemy):
 		push_error("Trap triggered while the monster is not on the correct position")
 
 	_target.takeDmg(m_dmg,null)
+	super.DoWork(_target)
 	queue_free()

@@ -5,10 +5,16 @@ var m_dragMode:Globals.dragMod = Globals.dragMod.NONE
 var m_characters:Array[Character] = []
 var m_currentTarget:Globals.target = Globals.target.NONE
 var m_targetType:Globals.cardTarget = Globals.cardTarget.NONE
+var m_traps:Array[TrapBase] = []
+
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
-
+	$Enemies/MonsterBox/Control/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$Enemies/MonsterBox/Control2/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$Enemies/MonsterBox/Control3/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$Enemies/MonsterBox/Control4/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 func setCharacters(_chars:Array[Character]) -> void:
 	m_characters = _chars
 
@@ -24,6 +30,14 @@ func isTargetControlZoneEmpty(_target:Globals.target)->bool:
 			return false
 	return true
 
+func isTargetControlZoneEmptyAndUntrapped(_target:Globals.target)->bool:
+	if !isTargetControlZoneEmpty(_target):
+		return false
+	for trap in m_traps:
+		if trap.m_position == _target:
+			return false
+	return true
+
 func setCurrentTargetType(_targetType:Globals.cardTarget):
 	m_targetType = _targetType
 
@@ -32,7 +46,7 @@ func canControlZoneBeTargeted(_target:Globals.target) -> bool:
 		Globals.cardTarget.ENEMY:
 			return !isTargetControlZoneEmpty(_target)
 		Globals.cardTarget.EMPTY:
-			return isTargetControlZoneEmpty(_target)
+			return isTargetControlZoneEmptyAndUntrapped(_target)
 		Globals.cardTarget.ANY:
 			return true
 		_:
@@ -57,7 +71,7 @@ func _on_control_4_mouse_entered() -> void:
 
 func onMouseExitTargetControlZone() -> void:
 	m_currentTarget = Globals.target.NONE
-	
+
 func refreshPositions():
 	for character in m_characters:
 		if character.m_type == Globals.type.HERO:
@@ -94,10 +108,22 @@ func getControlFromPosition(_pos:Globals.target)->Control:
 func addTrap(_trap:TrapBase)->void:
 	var controlBox = getControlFromPosition(_trap.m_position)
 	controlBox.add_child(_trap)
+	m_traps.append(_trap)
+	_trap.global_position = getMonsterPosition(_trap.m_position)
+	_trap.trapUsed.connect(removeTrap)
 
+func removeTrap(_trap:TrapBase):
+	m_traps.erase(_trap)
+	
 func getMonsterPosition(_pos:Globals.target)->Vector2:
 	var currentBox = getControlFromPosition(_pos)
-	return currentBox.global_position + currentBox.custom_minimum_size/2
+	return currentBox.global_position + currentBox.size/2
+
+func getCharacterFromPosition(_pos:Globals.target):
+	for character in m_characters:
+		if character.m_currentPosition == _pos:
+			return character
+	return null
 
 func showTargetingHelpers():
 	for index in range(Globals.target.ENEMY1,Globals.target.ENEMY4+1):

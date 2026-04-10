@@ -9,7 +9,6 @@
 script = ExtResource("2_3lea4")
 
 [node name="CharUI" parent="." index="2" unique_id=821363990]
-visible = true
 offset_top = -130.0
 offset_bottom = 20.0
 
@@ -24,12 +23,6 @@ offset_left = -12.5
 offset_top = -15.0
 offset_right = 12.5
 offset_bottom = 15.0
-
-[node name="HealthBar" parent="CharUI/UIContainer" parent_id_path=PackedInt32Array(97881623) index="1" unique_id=1449422509]
-visible = false
-
-[node name="StatusContainer" parent="CharUI/UIContainer" parent_id_path=PackedInt32Array(97881623) index="2" unique_id=1549505276]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3" unique_id=1750095605]
 

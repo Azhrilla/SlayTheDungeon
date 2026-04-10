@@ -144,7 +144,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ygvue")
-expand_mode = 3
+expand_mode = 1
 
 [node name="ChipInfoText" type="Label" parent="VBoxForInfos/ControlForChips/ChipInfo" unique_id=1509106537]
 layout_mode = 1
