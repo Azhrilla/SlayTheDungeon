@@ -74,5 +74,4 @@ func _ready() -> void:
 	m_maximumHealth = 40
 	super._ready()
 	m_type = Globals.type.HERO
-	$Sprite2D2/AnimationPlayer.play("idle")
 	
