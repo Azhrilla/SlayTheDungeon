@@ -11,7 +11,7 @@ m_poison = 2
 m_armor = 3
 m_baseDmg = 3
 
-[node name="Sprite2D" parent="." index="1"]
-position = Vector2(9, 30)
+[node name="Sprite2D" parent="." index="1" unique_id=1713517992]
+position = Vector2(-7, 98)
 texture = ExtResource("3_xsutx")
 flip_h = true
