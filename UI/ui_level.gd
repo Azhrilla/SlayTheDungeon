@@ -138,13 +138,14 @@ func cardHoveredEnter(_card:Card):
 	if m_cardHovered == null:
 		m_cardHovered = _card
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
-	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
+	if !Input.is_action_pressed("click"):
+		m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func cardHoveredExit(_card:Card):
 	if _card == m_cardHovered and !Input.is_action_pressed("click"):
 		m_cardHovered.setCardState(Globals.cardState.DEFAULT)
 		m_cardHovered = null
-	m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
+		m_cardVisiblityComponent.reorganizeHandPositions(m_cardHovered)
 
 func cardNeedUIRefresh(_card:Card):
 	_card.setCardState(Globals.cardState.DEFAULT)

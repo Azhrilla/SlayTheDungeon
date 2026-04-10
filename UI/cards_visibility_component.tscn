@@ -20,17 +20,25 @@ offset_bottom = 40.0
 [node name="HandLeft" type="Control" parent="." unique_id=183743549]
 layout_mode = 1
 anchor_left = 0.25
-anchor_top = 0.8
+anchor_top = 0.9
 anchor_right = 0.25
-anchor_bottom = 0.812
+anchor_bottom = 0.959
+grow_vertical = 0
+
+[node name="HandTop" type="Control" parent="." unique_id=1843932794]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.799
+anchor_right = 0.5
+anchor_bottom = 0.799
 grow_vertical = 0
 
 [node name="HandRight" type="Control" parent="." unique_id=1921388360]
 layout_mode = 1
 anchor_left = 0.75
-anchor_top = 0.8
+anchor_top = 0.9
 anchor_right = 0.75
-anchor_bottom = 0.8
+anchor_bottom = 0.9
 grow_horizontal = 2
 grow_vertical = 0
 

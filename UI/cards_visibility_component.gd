@@ -24,8 +24,12 @@ func reorganizeHandPositions(_cardHovered:Card):
 				hoveredCardSeen = true
 		if currentCard != _cardHovered:
 			currentCard.setGlobalPosition(leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3)))
-
-func _process(delta: float) -> void:
+		else:
+			var globaPos = leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3))
+			globaPos.y = $HandTop.global_position.y
+			currentCard.setGlobalPosition(globaPos)
+			
+func _process(_delta: float) -> void:
 	if m_currentlyShownDeck != Globals.cardPosition.HAND:
 		var cards = getCardsInPosition(m_currentlyShownDeck)
 		var controlNodes = $ShowDeck/TextureRect/ScrollContainer/GridContainer.get_children()
