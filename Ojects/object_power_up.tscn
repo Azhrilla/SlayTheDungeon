@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://33oadnlo8a7n"]
+
+[ext_resource type="PackedScene" uid="uid://cusxby04duf2c" path="res://Ojects/Object_Base.tscn" id="1_sj6id"]
+[ext_resource type="Script" uid="uid://ckhqfw2x1wkd8" path="res://Ojects/object_power_up.gd" id="2_76x7j"]
+
+[node name="Object_PowerUp" unique_id=123012207 instance=ExtResource("1_sj6id")]
+script = ExtResource("2_76x7j")
+
+[node name="Label" parent="TextureButton" parent_id_path=PackedInt32Array(851938798) index="0" unique_id=225533877]
+text = "PowerUp"

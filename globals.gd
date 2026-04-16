@@ -1,6 +1,6 @@
 extends Node
 
-enum cardTarget{ENEMY, NONE, EMPTY, ANY}
+enum cardTarget{ENEMY, NONE, EMPTY, ANY, CARD}
 enum cardType{NORMAL,POWER, TRAP}
 enum cardPosition{DECK,HAND,DISCARD,NONE,POWER} 
 enum type{HERO,MONSTER,NONE}

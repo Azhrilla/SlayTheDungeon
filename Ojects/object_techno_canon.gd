@@ -8,7 +8,7 @@ func getCost() -> int:
 func _ready() -> void:
 	m_targetType = Globals.cardTarget.ENEMY
 
-func doWork(_enemies:Array[Character],_hero:Hero,_targetPosition:Globals.target) -> void:
+func doWork(_enemies:Array[Character],_hero:Hero,_targetPosition:Globals.target,_card:Card) -> void:
 	if _targetPosition == Globals.target.NONE:
 		push_error("More than on target for attack_one")
 	

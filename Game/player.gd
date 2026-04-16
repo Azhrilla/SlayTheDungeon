@@ -76,14 +76,12 @@ func getObjectInUse() -> ObjectBase:
 func playCard(_card:Card,_targets:Array[Character],_targetPosition:Globals.target):
 	var objectUsed:ObjectBase = getObjectInUse()
 	if objectUsed:
+		m_hero.useObject(_targets,objectUsed,_targetPosition,_card)
 		discardCard(_card)
-		m_hero.useObject(_targets,objectUsed,_targetPosition)
 		return
 
 	var copyVectorTarget = _targets
-	
 	m_hero.cardPlayed(_card)
-	
 	_card.doWork(copyVectorTarget,m_hero,_targetPosition)
 	if _card.m_cardType != Globals.cardType.POWER:
 		$CardHolder.moveCard(_card,Globals.cardPosition.HAND,Globals.cardPosition.DISCARD)

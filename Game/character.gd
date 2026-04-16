@@ -18,7 +18,7 @@ signal onLifeChanged
 signal onStatusChanged
 
 #Attributes
-var m_level = null
+var m_level:GameLevel = null
 var m_name = "noname"
 var m_maximumHealth = 40
 var m_currentHealth = 0:

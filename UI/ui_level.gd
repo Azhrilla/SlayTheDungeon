@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name UILevel
 signal endTurnPressed
 signal cardShouldBePlayed(_card:Card,_target:Globals.target)
 
@@ -11,11 +12,12 @@ enum cardPlayMode{DEFAULT,PLAY,TARGET}
 var m_cardPlayMode = cardPlayMode.DEFAULT
 var m_cardHovered:Card = null
 var m_cardToPlay:Card = null
-var m_cardPlayable = false
-var m_mouseOnPlayZone = false
-var m_mouseOnControl  = false
+var m_cardPlayable:bool = false
+var m_mouseOnPlayZone:bool = false
+var m_mouseOnControl:bool  = false
 var m_savedTarget = null
-var m_currentObject = null
+var m_currentObject:ObjectBase = null
+var m_powerUpActive:bool = false
 
 func _ready() -> void:
 	get_viewport().size_changed.connect(refreshUI)
@@ -27,7 +29,13 @@ func _ready() -> void:
 		if object.get_parent():
 			object.get_parent().remove_child(object)
 		$ObjectContainer.add_child(object)
+		object.custom_minimum_size = Vector2(150,50)
 		object.isObjectToggled.connect(onObjectToggled)
+		if object.isPowerUp():
+			object.visible = false
+
+func isPowerUp():
+	pass
 
 func _exit_tree() -> void:
 	$CombatUICharacter.release(GpState.getHero())
@@ -67,7 +75,13 @@ func getCurrentTarget():
 
 func getTargetType() -> Globals.cardTarget:
 	if m_currentObject:
-		return m_currentObject.getTargetType()
+		var objectTarget = m_currentObject.getTargetType()
+		if objectTarget == Globals.cardTarget.CARD:
+			if m_cardHovered:
+				return m_cardHovered.getUpgradedTargetType()
+			else:
+				return Globals.cardTarget.NONE
+		return objectTarget
 	if m_cardHovered:
 		return m_cardHovered.getTargetType()
 	return Globals.cardTarget.NONE
@@ -133,9 +147,14 @@ func addCard(_card:Card)->void:
 	_card.connect("mouseHoveredEnter",cardHoveredEnter)
 	_card.connect("mouseHoveredExit",cardHoveredExit)
 	_card.connect("cardNeedUIRefresh",cardNeedUIRefresh)
+	if _card.isUpgraded():
+		for object:ObjectBase in GpState.getHero().getObjects():	
+			object.visible = true
 
 func cardHoveredEnter(_card:Card):
 	if m_cardHovered == null:
+		if !_card.isUpgraded() && m_powerUpActive:
+			return		
 		m_cardHovered = _card
 		m_cardHovered.setCardState(Globals.cardState.HOVERED)
 	if !Input.is_action_pressed("click"):
@@ -162,16 +181,23 @@ func _on_play_zone_mouse_exited() -> void:
 func _on_play_zone_mouse_entered() -> void:
 	m_mouseOnPlayZone = true
 
+func setPowerUpActive(_isActive:bool):
+	m_powerUpActive = _isActive
+
 func onObjectToggled(_object:ObjectBase, _toggle:bool)->void:
 	if _toggle == false:
 		m_currentObject = null
+		setPowerUpActive(false)
 		_object.setToggle(_toggle)
 		return
 	
 	if GpState.getHero().canObjectBeUsed(_object):
+		if _object.isPowerUp():
+			setPowerUpActive(true)
 		m_currentObject = _object
 	else:
 		_object.setToggle(false)
+		setPowerUpActive(false)
 
 func hideDeck(_zoneType:Globals.cardPosition)->void:
 	m_characterUIComponent.showCharacters()

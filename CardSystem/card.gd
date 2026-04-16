@@ -24,6 +24,16 @@ func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
 	print ("Card {card} will attack target {target} for {dmg} dmg".format({"dmg":str(attack.m_baseDmg),"card":str(m_name),"target":str(_target.m_name)}))
 	return _target.takeDmg(attack.m_baseDmg,_hero)
 
+func getUpgradedTargetType():
+	return getTargetType()
+
+func setUpgraded(_isUpgraded:bool):
+	if m_canBeUpgraded:
+		m_isUpgraded = _isUpgraded
+
+func isUpgraded():
+	return m_isUpgraded
+
 func getTargetType() -> Globals.cardTarget:
 	return m_targetType
 

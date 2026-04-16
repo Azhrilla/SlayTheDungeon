@@ -11,6 +11,7 @@ enum turnState{START_COMBAT,ROUND_START,PLAYER_START,PLAYER_END,MONSTER_START,MO
 var m_currentTurnState = turnState.START_COMBAT
 var m_nextTurnState
 @onready var m_player:Player = $Player
+@onready var m_UILevel:UILevel = $UI_Level
 
 func getHeroes()->Array[Character]:
 	return m_player.getHeroes()

@@ -22,13 +22,18 @@ const cardsScene = {
 }
 
 static func createCard(_id:String)->Card:
+	var upgraded = false
+	if _id.contains("+"):
+		_id = _id.replace("+","")
+		upgraded = true
+	
 	var newCard:Card = null
 	if !cardsScene.has(_id):
 		push_error ("Error: the card with name {} was not implemented".format(_id))
 		newCard = cardsScene["Card"].instantiate()
 	else:
 		newCard = cardsScene[_id].instantiate()
-
+	newCard.setUpgraded(upgraded)
 	newCard.m_name = _id
 	return newCard
 	

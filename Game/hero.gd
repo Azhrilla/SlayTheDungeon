@@ -2,6 +2,7 @@ extends Character
 class_name Hero
 
 const objectScene:PackedScene = preload("res://Ojects/object_techno_canon.tscn")
+const upgradeObject:PackedScene = preload("res://Ojects/object_power_up.tscn")
 
 signal onTechnoChartreuseUsed 
 
@@ -35,8 +36,8 @@ func canObjectBeUsed(_object:ObjectBase)->bool:
 	else:
 		return true
 
-func useObject(_targets:Array[Character],_objectUsed:ObjectBase,_targetPosition:Globals.target):
-	_objectUsed.doWork(_targets,self,_targetPosition)
+func useObject(_targets:Array[Character],_objectUsed:ObjectBase,_targetPosition:Globals.target,_card:Card):
+	_objectUsed.doWork(_targets,self,_targetPosition,_card)
 	m_technoChartreuse -= _objectUsed.getCost()
 	onTechnoChartreuseUsed.emit(m_technoChartreuse)
 
@@ -72,6 +73,8 @@ func addChip(_chip:Chip)->void:
 	m_chips.append(_chip)
 
 func _init():
+	var upgrade:ObjectBase = upgradeObject.instantiate()
+	m_objects.append(upgrade)
 	var newObject:ObjectBase = objectScene.instantiate()
 	m_objects.append(newObject)
 	

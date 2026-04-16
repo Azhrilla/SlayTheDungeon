@@ -2,7 +2,7 @@ extends Node
 
 const heroScene:PackedScene = preload("res://Game/hero.tscn")
 
-var m_starterCards:Array[String] = ["BasicTrap","QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Slash","Grab","Grab","Grab","Defense","Defense","Defense","Defense","Defense"]
+var m_starterCards:Array[String] = ["BasicTrap+","QuickSlash","QuickSlash","QuickSlash","Slash","Slash","Slash","Grab","Grab","Grab","Defense","Defense","Defense","Defense","Defense"]
 var m_hero:Hero = null
 var m_cards:Array[String] = []
 var m_currentDollars:int:

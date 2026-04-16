@@ -5,6 +5,7 @@
 
 [node name="Card_BasicTrap" unique_id=1116141428 instance=ExtResource("1_hh5i8")]
 script = ExtResource("2_xep8o")
+m_dmg = 10
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "ExploTrap"

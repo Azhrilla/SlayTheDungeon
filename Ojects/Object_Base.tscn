@@ -6,10 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://cucvqy18cqvf3" path="res://Graphics/UI/Buttons/Button Hover.png" id="3_4ysmk"]
 [ext_resource type="Texture2D" uid="uid://btejq1114ow7w" path="res://Graphics/UI/Buttons/Button Disable.png" id="4_8ltsh"]
 
-[node name="ObjectBase" type="Node2D" unique_id=2120614027]
+[node name="ObjectBase" type="Control" unique_id=123012207]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_gxygk")
 
 [node name="TextureButton" type="TextureButton" parent="." unique_id=851938798]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 toggle_mode = true
