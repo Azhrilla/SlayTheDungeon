@@ -29,6 +29,8 @@ func getEnemy(_enemyLevel:int)->Array[String]:
 			
 func _init():
 	addLevel()
+	if Globals.m_godMode:
+		addLevel("res://UI/Armory.tscn")
 	addLevel("res://Interludes/act_1_bloc_1_scene_1.tscn")
 	addLevel("res://Interludes/act_1_bloc_1_scene_2.tscn")
 	addLevel("",1,Globals.cardQuality.NORMAL,50)

@@ -37,6 +37,8 @@ func resetGPState() -> void:
 	m_cards.append_array(m_starterCards)
 	m_hero = null
 	m_currentDollars = 100
+	if Globals.m_godMode:
+		m_currentDollars = 1000
 
 func getCurrentEnemy()->Array[String]:
 	return m_currentBloc.getCurrentEnemies()
