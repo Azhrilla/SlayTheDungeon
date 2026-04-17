@@ -69,7 +69,7 @@ func cardPlayed(_card:Card):
 		chip.cardPlayed(_card)
 
 func addChip(_chip:Chip)->void:
-	_chip.m_hero = self
+	_chip.setHero(self)
 	m_chips.append(_chip)
 
 func _init():

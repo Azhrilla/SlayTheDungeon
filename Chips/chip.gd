@@ -9,6 +9,9 @@ signal mouseExited()
 func processChipsWhileAttacking(_attack:atkObject) -> void:
 	pass
 
+func setHero(_hero:Hero):
+	m_hero = _hero
+	
 func startCombat():
 	pass
 	

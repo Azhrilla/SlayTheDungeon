@@ -4,7 +4,7 @@ enum cardTarget{ENEMY, NONE, EMPTY, ANY, CARD}
 enum cardType{NORMAL,POWER, TRAP}
 enum cardPosition{DECK,HAND,DISCARD,NONE,POWER} 
 enum type{HERO,MONSTER,NONE}
-enum target{NONE,ALLY1,ALLY2,ALLY3,ENEMY1,ENEMY2,ENEMY3,ENEMY4}
+enum target{NONE,ALLY1,ALLY2,ALLY3,ENEMY1,ENEMY2,ENEMY3,ENEMY4,MAX}
 enum cardState{DEFAULT,PLAYABLE,HOVERED}
 enum statusType{NONE,ARMOR,SPIKE,DMG,STR,INTERRO,JUMP,BARRIER,POISON}
 enum cardQuality{NONE,NORMAL,RARE,EPIC}
@@ -18,7 +18,7 @@ const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
 const m_godMode = false
 
 static var m_availableChips = {
-	Globals.cardQuality.NORMAL : {"Price":[50,100],"Chips":["Ramp","HealthPack","FirstStrike"]},
+	Globals.cardQuality.NORMAL : {"Price":[50,100],"Chips":["Ramp","HealthPack","FirstStrike","MaxMana","ManaRegen"]},
 }
 
 static var m_availableCards = {
