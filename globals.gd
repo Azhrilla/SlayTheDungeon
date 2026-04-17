@@ -15,7 +15,7 @@ const m_lootLevel = "res://UI/add_card_menu.tscn"
 const m_victoryLevel = "res://UI/victory.tscn"
 const m_removeCardLevel = "res://UI/remove_card_scene.tscn"
 const m_basicChipList = ["Ramp","HealthPack","FirstStrike"]
-const m_godMode = false
+var m_godMode = false
 
 static var m_availableChips = {
 	Globals.cardQuality.NORMAL : {"Price":[50,100],"Chips":["Ramp","HealthPack","FirstStrike","MaxMana","ManaRegen"]},
