@@ -41,10 +41,18 @@ func initCardPanel()->void:
 			newCard.connect("mouseHoveredEnter",cardHoveredEnter)
 			newCard.connect("mouseHoveredExit",cardHoveredExit)
 
+
 func initChipPanel()->void:
 	var chipContainer = $TextureRect/TabContainer/Chips/ChipContainer
+	
 	for quality in Globals.m_availableChips.keys():
+		var availableChips = GpState.getAvailableChips(quality)
 		for index in range(0,m_availableChips[quality]):
+			if availableChips.is_empty():
+				break
+				
+			var chipName = availableChips.pick_random()
+			availableChips.erase(chipName)
 			var buyCost = rng.randi_range(Globals.m_availableChips[quality]["Price"][0],Globals.m_availableChips[quality]["Price"][1])
 			
 			var newChipControl = VBoxContainer.new()
@@ -57,7 +65,6 @@ func initChipPanel()->void:
 			bufferStoreChip.custom_minimum_size = Vector2(200,200)
 			newChipControl.add_child(bufferStoreChip)
 
-			var chipName = Globals.m_availableChips[quality]["Chips"].pick_random()
 			var newChip:Chip = ChipFactory.createChip(chipName)
 			newChip.m_buyCost = buyCost
 			bufferStoreChip.add_child(newChip)

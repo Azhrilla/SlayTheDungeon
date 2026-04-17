@@ -72,6 +72,9 @@ func addChip(_chip:Chip)->void:
 	_chip.setHero(self)
 	m_chips.append(_chip)
 
+func getChips()->Array[Chip]:
+	return m_chips
+
 func _init():
 	var upgrade:ObjectBase = upgradeObject.instantiate()
 	m_objects.append(upgrade)

@@ -19,5 +19,6 @@ static func createChip(_id:String)->Chip:
 		return newChip
 
 	newChip.set_script(chipScripts[_id])
+	newChip.m_name = _id
 	print("new chip :{chip}".format({"chip":_id}))
 	return newChip

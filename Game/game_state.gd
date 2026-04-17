@@ -12,6 +12,20 @@ signal onDollarChanged
 
 var m_currentBloc:BlocSystem = null
 
+func getAvailableChips(_quality:Globals.cardQuality):
+	var returnVector:Array[String] = []
+	var currentChips:Array[Chip] = getHero().getChips()
+	var currentChipsName:Array[String] = []
+	for chip:Chip in currentChips:
+		currentChipsName.append(chip.m_name)
+		
+	for chipData in Globals.m_availableChips[_quality]["Chips"]:
+		var name:String = chipData
+		if !currentChipsName.count(name):
+			returnVector.append(name)
+			currentChipsName.append(name)
+	return returnVector
+
 func getHero():
 	if !m_hero:
 		resetGPState()

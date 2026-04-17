@@ -18,6 +18,6 @@ func _on_remove_card_button_pressed() -> void:
 
 func _on_chip_button_pressed() -> void:
 	GpState.m_currentDollars-=m_costChip
-	var newChip = ChipFactory.createChip(Globals.m_basicChipList.pick_random())
+	var newChip = ChipFactory.createChip(GpState.getAvailableChips(Globals.cardQuality.NORMAL).pick_random())
 	GpState.getHero().addChip(newChip)
 	MainUI.goToNextLevel()

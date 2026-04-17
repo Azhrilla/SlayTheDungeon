@@ -3,6 +3,7 @@ class_name Chip
 
 var m_hero:Hero = null
 var m_buyCost:int = 0
+var m_name:String = "NameNotSet"
 signal mouseEntered()
 signal mouseExited()
 
