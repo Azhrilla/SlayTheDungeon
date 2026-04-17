@@ -6,8 +6,9 @@ class_name Character
 @onready var m_statusContainer = $CharUI/UIContainer/StatusContainer
 @onready var m_healthBar = $CharUI/UIContainer/HealthBar
 @onready var m_healthValue = $CharUI/UIContainer/HealthBar/HealthValue
+@onready var m_appearance = $Sprite2D
 var m_componentUICharacter:ComponentUICharacter = null 
-
+var m_rngGenerator = RandomNumberGenerator.new()
 
 #Scenes
 const  iconStatusScene:PackedScene = preload("res://UI/Icons/icon_status.tscn")

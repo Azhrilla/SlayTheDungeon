@@ -78,6 +78,7 @@ func refreshPositions():
 			character.position = $PlayerPos.position
 		if character.m_type == Globals.type.MONSTER:
 			character.position = getMonsterPosition(character.m_currentPosition)
+			character.m_appearance.z_index = (character.m_currentPosition+1)%2
 
 func setDragMode(_dragMod:Globals.dragMod):
 	m_dragMode = _dragMod
@@ -117,7 +118,7 @@ func removeTrap(_trap:TrapBase):
 	
 func getMonsterPosition(_pos:Globals.target)->Vector2:
 	var currentBox = getControlFromPosition(_pos)
-	return currentBox.global_position + currentBox.size/2
+	return currentBox.global_position + currentBox.size/2 + _pos%2 * Vector2(0,-30)
 
 func getCharacterFromPosition(_pos:Globals.target):
 	for character in m_characters:
