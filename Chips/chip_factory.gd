@@ -4,7 +4,7 @@ const chipScene:PackedScene = preload("res://Chips/chip.tscn")
 
 
 const chipScripts = {
-	"RegenMana": preload("uid://c8dh55avtk42y"),
+	"ManaRegen": preload("uid://c8dh55avtk42y"),
 	"MaxMana": preload("uid://d2087jph6srtw"),
 	"FirstStrike": preload("uid://dmf6cufg2sgdl"),
 	"HealthPack": preload("uid://ds7gsnna5op5o"),
