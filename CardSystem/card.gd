@@ -12,7 +12,7 @@ var m_cardType = Globals.cardType.NORMAL
 var m_targetType:Globals.cardTarget = Globals.cardTarget.NONE
 var tweenPosition = null
 var m_buyCost:int = 0
-var m_canBeUpgraded = false
+@export var m_canBeUpgraded = false
 var m_isUpgraded = false
 
 func attackTarget(_baseDmg:int,_target:Character,_hero:Character) -> bool:
@@ -41,8 +41,7 @@ func getTargetType() -> Globals.cardTarget:
 
 func _ready() -> void:
 	updateVisibility()
-	$cardText.label_settings.font_color=Color(0,0,0,1)
-	$cardText.label_settings.font_size=12
+
 
 func findTargetInSlot(_targets:Array[Character],_slot:Globals.target) -> Character:
 	for target in _targets:

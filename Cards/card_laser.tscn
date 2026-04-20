@@ -7,9 +7,13 @@
 script = ExtResource("2_swbtf")
 m_damage = 10
 m_diminution = 3
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Laser"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Deal {dmg} to all targets, diminshed by {minus} after each enemy"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "No diminution"

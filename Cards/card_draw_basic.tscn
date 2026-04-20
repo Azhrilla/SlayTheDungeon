@@ -5,9 +5,13 @@
 
 [node name="Card_DrawBasic" unique_id=1116141428 instance=ExtResource("1_yq1qk")]
 script = ExtResource("2_o0xfn")
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Draw"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Draw 2 cards"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "Draw 3"

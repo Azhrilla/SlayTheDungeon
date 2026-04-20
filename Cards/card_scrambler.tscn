@@ -5,9 +5,13 @@
 
 [node name="Card_Scrambler" unique_id=1116141428 instance=ExtResource("1_kedit")]
 script = ExtResource("2_i1anc")
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Scrambler"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Halves one random buff on the enemy"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "Do the same thing again"

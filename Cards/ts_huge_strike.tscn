@@ -6,6 +6,8 @@
 [node name="TS_HugeStrike" unique_id=1702126963 instance=ExtResource("1_mtlm7")]
 script = ExtResource("2_o8mvr")
 m_damage = 10
+m_damageUpgrade = 10
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Huge Strike"
@@ -14,3 +16,6 @@ text = "Huge Strike"
 text = "Deal {dmg} dmg to
 the enemies in 
 position 1 & 2"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "Dmg is up to to {dmg}"

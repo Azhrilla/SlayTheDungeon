@@ -3,6 +3,10 @@ extends Card
 @export var m_damage:int = 10
 @export var m_diminution:int = 2
 
+func doWorkUpgraded(_enemies:Array[Character],_hero:Character,_targetPosition:Globals.target):
+	for target in _enemies:
+		attackTarget(m_damage,target,_hero)
+
 func _ready() -> void:
 	var cardText = $cardText.text
 	$cardText.text = cardText.format({"dmg":str(m_damage),"minus":str(m_diminution)})

@@ -1,15 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://ditra7q8mmtqu"]
+[gd_scene format=3 uid="uid://ditra7q8mmtqu"]
 
 [ext_resource type="PackedScene" uid="uid://baptagnhcl77s" path="res://CardSystem/card.tscn" id="1_766vy"]
-[ext_resource type="Script" path="res://Cards/ts_wind_strike.gd" id="2_tfrej"]
+[ext_resource type="Script" uid="uid://csnwrnof82bcb" path="res://Cards/ts_wind_strike.gd" id="2_tfrej"]
 
-[node name="TS_WindStrike" instance=ExtResource("1_766vy")]
+[node name="TS_WindStrike" unique_id=2060558556 instance=ExtResource("1_766vy")]
 script = ExtResource("2_tfrej")
 m_damage = 5
+m_damageUpgraded = 10
+m_canBeUpgraded = true
 
-[node name="cardName" parent="." index="3"]
+[node name="cardName" parent="." index="1" unique_id=952563157]
 text = "WindStrike"
 
-[node name="cardText" parent="." index="4"]
+[node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Deal 5 dmg 
 to all enemies"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "Deal 10 dmg"

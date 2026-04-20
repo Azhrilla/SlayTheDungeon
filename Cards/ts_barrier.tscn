@@ -5,9 +5,13 @@
 
 [node name="TS_Barrier" unique_id=1262097703 instance=ExtResource("1_b3jvm")]
 script = ExtResource("2_e3yyt")
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Barrier"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Prevent the next damage received"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "Gain an extra barrier"

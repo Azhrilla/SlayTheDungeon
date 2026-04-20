@@ -6,9 +6,14 @@
 [node name="Card_BasicTrap" unique_id=1116141428 instance=ExtResource("1_hh5i8")]
 script = ExtResource("2_xep8o")
 m_dmg = 10
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "ExploTrap"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
-text = "Pose un piège sur le sol qui fait 15 de dmg "
+text = "Pose un piège sur le sol qui fait {dmg} de dmg "
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+visible = true
+text = "Setup a trap on all possibles spaces"

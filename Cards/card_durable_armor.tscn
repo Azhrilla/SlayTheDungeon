@@ -5,9 +5,14 @@
 
 [node name="Card_DurableArmor" unique_id=1116141428 instance=ExtResource("1_5hevf")]
 script = ExtResource("2_8cvma")
+m_upgradedArmor = 10
+m_canBeUpgraded = true
 
 [node name="cardName" parent="." index="1" unique_id=952563157]
 text = "Durable Armor"
 
 [node name="cardText" parent="." index="2" unique_id=1102009803]
 text = "Keep armor between rounds"
+
+[node name="textUpgrade" parent="." index="4" unique_id=1993354722]
+text = "Gain {value} armor when using it"

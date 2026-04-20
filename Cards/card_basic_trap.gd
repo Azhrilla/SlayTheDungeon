@@ -3,14 +3,13 @@ class_name BasicTrap
 
 const trapScene:PackedScene = preload("res://Game/Traps/trap_dmg_trap.tscn")
 @export var m_dmg = 10
-
-func _init() -> void:
-	m_canBeUpgraded = true
 	
 func _ready() -> void:
 	super._ready()
 	m_cardType = Globals.cardType.TRAP
 	m_targetType = Globals.cardTarget.EMPTY
+	var cardText = $cardText.text
+	$cardText.text = cardText.format({"dmg":str(m_dmg)})
 	
 func getUpgradedTargetType():
 	return Globals.cardTarget.NONE
