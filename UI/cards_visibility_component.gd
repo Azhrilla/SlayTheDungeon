@@ -10,6 +10,7 @@ func reorganizeHandPositions(_cardHovered:Card):
 	var leftCardMarkerPos = $HandLeft.position
 	var rightCardMarkerPos = $HandRight.position
 	var hoveredCardSeen = false
+	var zIndex = 0
 	for indexCard in range(cardCount):
 		var modifiedIndex:int = indexCard+1
 		var currentCard:Card = cardsInHand[indexCard]
@@ -22,6 +23,11 @@ func reorganizeHandPositions(_cardHovered:Card):
 			if currentCard == _cardHovered:
 				modifiedIndex+=1
 				hoveredCardSeen = true
+
+		if indexCard < cardCount /2:
+			currentCard.z_index = indexCard
+		else:
+			currentCard.z_index = cardCount - indexCard
 		if currentCard != _cardHovered:
 			currentCard.setGlobalPosition(leftCardMarkerPos + (modifiedIndex+0.5)* ((rightCardMarkerPos-leftCardMarkerPos)/ (cardCount+3)))
 		else:
