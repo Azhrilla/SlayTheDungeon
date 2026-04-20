@@ -18,6 +18,37 @@ static var m_availableChips = {
 	Globals.cardQuality.RARE : 0,
 }
 
+func refreshUpgradePanel():
+	var cardContainer = $TextureRect/TabContainer/Upgrades/CardsContainer
+	for cardControl in cardContainer.get_children():
+		cardControl.queue_free()
+	initUpgradePanel()
+
+func initUpgradePanel()->void:
+	var cardContainer = $TextureRect/TabContainer/Upgrades/CardsContainer
+	var upgradeCost = 100
+	for cardName:String in GpState.m_cards:
+		var newCard:Card = CardFactory.createCard(cardName)
+		if newCard.m_canBeUpgraded && !newCard.isUpgraded():
+			var newCardControl = VBoxContainer.new()
+			newCard.setUpgraded(true)
+			newCardControl.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			cardContainer.add_child(newCardControl)
+			newCardControl.custom_minimum_size = Vector2(200,250)
+			newCard.m_buyCost = upgradeCost
+			newCardControl.add_child(newCard)
+			var buffer = Control.new()
+			buffer.custom_minimum_size = Vector2(1,30)
+			newCardControl.add_child(buffer)
+			var newLabel = Label.new()
+			newLabel.text ="Cost: "+ str(upgradeCost)
+			newLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			newCardControl.add_child(newLabel)
+			newCard.connect("mouseHoveredEnter",cardHoveredEnter)
+			newCard.connect("mouseHoveredExit",cardHoveredExit)
+		else:
+			newCard.queue_free()
+
 func initCardPanel()->void:
 	var cardContainer = $TextureRect/TabContainer/Cards/CardsContainer
 	for quality in Globals.m_availableCards.keys():
@@ -44,7 +75,6 @@ func initCardPanel()->void:
 
 func initChipPanel()->void:
 	var chipContainer = $TextureRect/TabContainer/Chips/ChipContainer
-	
 	for quality in Globals.m_availableChips.keys():
 		var availableChips = GpState.getAvailableChips(quality)
 		for index in range(0,m_availableChips[quality]):
@@ -86,13 +116,14 @@ func initChipPanel()->void:
 			newLabel.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 			newChipControl.add_child(newLabel)
 
-			
+
 func _exit_tree() -> void:
 	$CombatUICharacter.release(GpState.getHero())
 
 func _ready() -> void:
 	initCardPanel()
 	initChipPanel()
+	initUpgradePanel()
 	$CombatUICharacter.init(GpState.getHero())
 	
 func _process(_delta: float) -> void:
@@ -148,6 +179,7 @@ func _on_buy_card_pressed() -> void:
 			GpState.m_cards.append(m_cardChosen.m_name)
 			GpState.m_currentDollars -= m_cardChosen.m_buyCost
 			m_cardChosen.get_parent().queue_free()
+			refreshUpgradePanel()
 			
 	if $TextureRect/TabContainer.current_tab == 1:
 		if GpState.m_currentDollars >= m_chipChosen.m_buyCost:
@@ -156,6 +188,13 @@ func _on_buy_card_pressed() -> void:
 			m_chipChosen.get_parent().get_parent().queue_free()
 			m_chipChosen.custom_minimum_size = Vector2(30,30)
 			$CombatUICharacter.init(GpState.getHero())
+			
+	if $TextureRect/TabContainer.current_tab == 2:
+		if GpState.m_currentDollars >= m_cardChosen.m_buyCost:
+			var cardUpgraded:int = GpState.m_cards.find(m_cardChosen.m_name)
+			GpState.m_cards[cardUpgraded] += "+"
+			GpState.m_currentDollars -= m_cardChosen.m_buyCost
+			m_cardChosen.get_parent().queue_free()
 
 func _on_leave_pressed() -> void:
 	MainUI.goToNextLevel()
