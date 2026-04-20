@@ -28,7 +28,9 @@ func getUpgradedTargetType():
 	return getTargetType()
 
 func setUpgraded(_isUpgraded:bool):
-	if m_canBeUpgraded:
+	if m_canBeUpgraded && _isUpgraded:
+		$textUpgrade.visible = true
+		$upgradeLabel.visible = true
 		m_isUpgraded = _isUpgraded
 
 func isUpgraded():
