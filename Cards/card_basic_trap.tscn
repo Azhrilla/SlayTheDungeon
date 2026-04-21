@@ -15,5 +15,4 @@ text = "ExploTrap"
 text = "Pose un piège sur le sol qui fait {dmg} de dmg "
 
 [node name="textUpgrade" parent="." index="4" unique_id=1993354722]
-visible = true
 text = "Setup a trap on all possibles spaces"
