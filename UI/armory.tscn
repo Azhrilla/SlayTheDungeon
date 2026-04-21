@@ -77,7 +77,7 @@ visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="CardsContainer" type="HBoxContainer" parent="TextureRect/TabContainer/Upgrades" unique_id=899364803]
+[node name="CardsContainer" type="GridContainer" parent="TextureRect/TabContainer/Upgrades" unique_id=1710630539]
 layout_mode = 0
 anchor_left = 0.05
 anchor_top = 0.05
@@ -90,6 +90,7 @@ offset_bottom = 69.95001
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+columns = 5
 
 [node name="Objects" type="Control" parent="TextureRect/TabContainer" unique_id=1611297197]
 visible = false
