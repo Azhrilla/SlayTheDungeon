@@ -33,7 +33,9 @@ var m_statusVariables = {
 	Globals.statusType.STR : 0,
 	Globals.statusType.ARMOR : 0,
 	Globals.statusType.BARRIER : 0,
-	Globals.statusType.POISON : 0
+	Globals.statusType.POISON : 0,
+	Globals.statusType.WEAK : 0,
+	Globals.statusType.VULNERABLE : 0,
 }
 
 const m_buffList = [Globals.statusType.STR,Globals.statusType.ARMOR,Globals.statusType.BARRIER,Globals.statusType.SPIKE]
@@ -77,6 +79,10 @@ func endRound(_hero:Character,_monsters:Array[Character]):
 	if poisonCount > 0:
 		takeDmg(poisonCount,null,false,true)
 		addToStatusVariable(Globals.statusType.POISON,-1)
+		
+	var weakCount = getStatusVariable(Globals.statusType.WEAK)	
+	if weakCount > 0:
+		addToStatusVariable(Globals.statusType.WEAK,-1)
 
 func useArmorAndGetDmg(_dmg:int) -> int:
 	var absorbedDmg = min(m_statusVariables[Globals.statusType.ARMOR],_dmg)
@@ -91,8 +97,6 @@ func moveTo(_target:Globals.target)->void:
 	else:
 		push_error("Trying to move a monster to an occupied slot")
 
-
-
 func onDamageTaken(_effectiveDmg:int,_attacker:Character):
 	if _attacker:
 		_attacker.takeDmg(m_statusVariables[Globals.statusType.SPIKE],self,false)
@@ -104,6 +108,10 @@ func heal(_value:int)->void:
 
 func takeDmg(_dmg:int,_attacker:Character,_isAttackFirstTrigger:bool = true,_goesThroughArmor:bool = false) -> bool :
 	var effectiveDmg:int = _dmg
+	
+	if _attacker.getStatusVariable(Globals.statusType.WEAK) > 0:
+		_dmg =  _dmg /2
+	
 	if !_goesThroughArmor:
 		effectiveDmg = useArmorAndGetDmg(_dmg)
 	if effectiveDmg == 0:

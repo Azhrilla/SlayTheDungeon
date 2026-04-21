@@ -47,3 +47,11 @@ func setStatus(_value:int,_statusType:Globals.statusType):
 			var texturePath= "res://Graphics/UI/Icons/poison.png"
 			var texture2d = load(texturePath)
 			statusTexture.texture = texture2d;
+		Globals.statusType.WEAK:
+			var texturePath= "res://Graphics/UI/Icons/thrash.png"
+			var texture2d = load(texturePath)
+			statusTexture.texture = texture2d;
+		Globals.statusType.VULNERABLE:
+			var texturePath= "res://Graphics/UI/Icons/thrash.png"
+			var texture2d = load(texturePath)
+			statusTexture.texture = texture2d;
