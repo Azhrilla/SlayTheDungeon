@@ -20,7 +20,7 @@ func getEnemy(_enemyLevel:int)->Array[String]:
 			if currentRNG > 0.5:
 				return ["Caillou","Caillou"]
 			else:
-				return ["Flame","Flame","Flame"]
+				return ["Enforcer","Enforcer","Enforcer"]
 		5: 
 			return ["Drone","Grorobo","Drone"]
 		_:
