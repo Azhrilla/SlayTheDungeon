@@ -12,5 +12,5 @@ func updateIntentionStatus(_intentionNode:Control)->void:
 	
 func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel) -> void:
 	_actor.increasePosition()
-	_target.takeDmg(m_dmg,_actor)
+	attack(_actor,_target,m_dmg)
 	_actor.playAnim(m_animName)

@@ -11,5 +11,5 @@ func updateIntentionStatus(_intentionNode:Control)->void:
 	_intentionNode.setStatus(m_dmg,Globals.statusType.DMG)
 	
 func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel) -> void:
-	_target.takeDmg(m_dmg,_actor)
+	attack(_actor,_target,m_dmg)
 	_actor.playAnim(m_animName)

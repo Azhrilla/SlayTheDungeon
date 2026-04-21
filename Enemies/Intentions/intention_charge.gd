@@ -22,5 +22,5 @@ func doWork(_actor:Enemy,_target:Hero,_allies:Array[Character],_level:GameLevel)
 		if !findMonsterInSlot(position,_allies):
 			_actor.moveTo(position)
 			break
-	_target.takeDmg(m_dmg,_actor)
+	attack(_actor,_target,m_dmg)
 	_actor.playAnim(m_animName)
