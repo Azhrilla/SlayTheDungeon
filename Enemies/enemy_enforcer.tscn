@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://b8etvas50wu5s"]
+
+[ext_resource type="PackedScene" uid="uid://dsjhyxievg8pq" path="res://Game/enemy.tscn" id="1_6267v"]
+[ext_resource type="Script" uid="uid://ik3jwlws3hg6" path="res://Enemies/enemy_enforcer.gd" id="2_3vvog"]
+[ext_resource type="Texture2D" uid="uid://bvi0sl07uph0m" path="res://Graphics/Enemies/Enforcer/enforcer_placeholder.png" id="2_qj83q"]
+
+[node name="Enemy_Enforcer" unique_id=1407420441 instance=ExtResource("1_6267v")]
+position = Vector2(0, -16)
+script = ExtResource("2_3vvog")
+m_maxHealth = 30
+m_shootDmg = 5
+m_bashDmg = 3
+m_armorProtect = 10
+m_strengthGain = 1
+m_weakApplied = 1
+
+[node name="Sprite2D" parent="." index="1" unique_id=1713517992]
+position = Vector2(0.99999994, 61)
+scale = Vector2(0.09, 0.097)
+texture = ExtResource("2_qj83q")
+
+[node name="CharUI" parent="." index="2" unique_id=821363990]
+offset_left = -76.0
+offset_top = -143.0
+offset_right = 74.0
+offset_bottom = 7.0
+
+[node name="ComponentUICharacter" parent="." index="4" unique_id=529866760]
+offset_top = -87.0
+offset_bottom = -87.0

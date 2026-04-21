@@ -498,10 +498,10 @@ m_punch = 8
 m_whip = 7
 m_shoot = 6
 
-[node name="CollisionShape2D" parent="." index="0"]
+[node name="CollisionShape2D" parent="." index="0" unique_id=494224734]
 position = Vector2(-1.625, -96.125)
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="1" unique_id=1713517992]
 visible = false
 position = Vector2(-2.0000005, -96.99999)
 scale = Vector2(0.2, 0.2)
@@ -510,17 +510,17 @@ flip_h = true
 hframes = 3
 vframes = 5
 
-[node name="CharUI" parent="." index="2"]
+[node name="CharUI" parent="." index="2" unique_id=821363990]
 offset_left = -78.625
 offset_top = -218.625
 offset_right = 71.375
 offset_bottom = -68.625
 
-[node name="AnimationPlayer" parent="." index="3"]
+[node name="AnimationPlayer" parent="." index="3" unique_id=1750095605]
 libraries/ = SubResource("AnimationLibrary_jetni")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="4" unique_id=333119450]
-position = Vector2(1, -88)
+position = Vector2(-3, 2.000002)
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_4foii")
 animation = &"Idle"
